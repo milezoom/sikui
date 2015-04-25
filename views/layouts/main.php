@@ -37,8 +37,13 @@ use yii\widgets\Menu;
         ]);
     ?>
     </div>
-    <div>
-        <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">(keluar)</a>
+    <div>        
+        <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">
+            <?php 
+                try {echo Yii::$app->user->identity->username; echo '(keluar)';}
+                catch(Exception $e){echo 'belum login';}                
+            ?>
+        </a>
     </div>
 
     <div class="content">
