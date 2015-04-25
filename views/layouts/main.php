@@ -37,7 +37,7 @@ use yii\widgets\Menu;
         ]);
     ?>
     </div>
-    <div>        
+    <div>
         <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">(keluar)</a>
     </div>
 
