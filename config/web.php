@@ -6,6 +6,7 @@ $config = [
     'id' => 'minimal',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/site/login',
     'components' => [
         'urlManager' => [
             'enablePrettyUrl' => true,

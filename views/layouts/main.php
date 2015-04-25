@@ -27,25 +27,15 @@ use yii\widgets\Menu;
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
-                [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                ],
-            ],
-        ]);
+        ]]);
     ?>
-    </div>
-    <div>        
-        <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">
-            <?php 
-                try {echo Yii::$app->user->identity->username; echo '(keluar)';}
-                catch(Exception $e){echo 'belum login';}                
-            ?>
-        </a>
-    </div>
-
+    </div>        
+    <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">
+        <?php 
+            try {echo Yii::$app->user->identity->username; echo '(keluar)';}
+            catch(Exception $e){}                
+        ?>
+    </a>
     <div class="content">
         <?= $content ?>
     </div>
