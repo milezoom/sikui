@@ -32,7 +32,7 @@ use Yii;
  * read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @since  2.0
+ * @since 2.0
  */
 class Action extends Component
 {
@@ -41,9 +41,10 @@ class Action extends Component
      */
     public $id;
     /**
-     * @var Controller the controller that owns this action
+     * @var Controller|\yii\web\Controller the controller that owns this action
      */
     public $controller;
+
 
     /**
      * Constructor.
