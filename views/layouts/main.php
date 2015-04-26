@@ -32,7 +32,7 @@ use yii\widgets\Menu;
     </div>        
     <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">
         <?php 
-            try {echo Yii::$app->user->identity->username; echo '(keluar)';}
+            try {echo Yii::$app->user->identity->username; echo '(keluar)'; echo Yii::$app->user->identity->password;}
             catch(Exception $e){}                
         ?>
     </a>
