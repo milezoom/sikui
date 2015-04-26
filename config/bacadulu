@@ -1,0 +1,15 @@
+# ini file template buat db.php
+# silahkan ganti dbname, username dan password sesuai
+# database di komputer masing-masing
+# trus hapus semua baris yang diawali dengan "#"
+# trus rename file ini jadi db.php
+#
+<?php
+
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'pgsql:host=localhost;dbname=test',
+    'username' => 'muslim',
+    'password' => '',
+    'charset' => 'utf8',
+];
