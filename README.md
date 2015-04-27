@@ -1,3 +1,5 @@
 #sikui
 
-repo for my student task, using [yii2-minimal](https://github.com/samdark/yii2-minimal)
+repo for my student task
+
+___setelah clone, tolong baca file "bacadulu" di folder config___
