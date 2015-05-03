@@ -22,10 +22,10 @@ use Yii;
  * @property integer $total_simpanan
  * @property integer $total_pinjaman
  *
- * @property User[] $users
  * @property Unit $kodeUnit
  * @property TransaksiSimpanan[] $transaksiSimpanans
  * @property TransaksiPinjaman[] $transaksiPinjamen
+ * @property User[] $users
  */
 class Anggota extends \yii\db\ActiveRecord
 {
@@ -82,14 +82,6 @@ class Anggota extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsers()
-    {
-        return $this->hasMany(User::className(), ['no_anggota' => 'no_anggota']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getKodeUnit()
     {
         return $this->hasOne(Unit::className(), ['kode' => 'kode_unit']);
@@ -109,5 +101,13 @@ class Anggota extends \yii\db\ActiveRecord
     public function getTransaksiPinjamen()
     {
         return $this->hasMany(TransaksiPinjaman::className(), ['no_anggota' => 'no_anggota']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['no_anggota' => 'no_anggota']);
     }
 }
