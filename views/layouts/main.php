@@ -96,11 +96,15 @@ use yii\widgets\Menu;
             </div>
             <div class="text-right">
                 <?php
-    try {
-    echo Yii::$app->user->identity->username;
-} catch (Exception $e) {}
-                ?>
-                <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/logout" data-method="post">(Keluar)</a>
+                    if(!Yii::$app->user->isGuest){
+                        echo Yii::$app->user->identity->username;
+                        echo ' ';
+                        echo '<a href="';
+                        echo Yii::$app->request->getBaseUrl();
+                        echo '/site/logout';
+                        echo '" data-method="post">(keluar)</a>';
+                    }
+                ?>                
             </div>
             <div class="content">
                 <?= $content ?>
