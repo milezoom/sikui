@@ -14,9 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>Please fill out the following fields to login:</p>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-    ]); ?>
+    <?php 
+        $form = ActiveForm::begin([
+            'id' => 'login-form',
+        ]);
+    ?>
 
     <?= $form->field($model, 'username') ?>
 
@@ -25,12 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
 
-    <?= Html::submitButton('Login') ?>
+    <?= Html::submitButton('Login',['class'=>'btn btn-success']) ?>
 
     <?php ActiveForm::end(); ?>
-
-    <p>
-    You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-    To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </p>
 </div>
