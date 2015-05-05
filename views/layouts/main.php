@@ -19,9 +19,31 @@ use yii\widgets\Menu;
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>
-    <body class="col-md-10 col-md-offset-1">
-        <div class="page-row page-row-expanded">
-            <?php $this->beginBody() ?>
+    <body>        
+        <?php $this->beginBody() ?>
+        <div class="container">
+            <div class="header">
+                <table>
+                    <tr><td></td></tr>
+                    <tr>
+                        <td class="header-left">
+                            <img class="img-responsive logo-header" 
+                                 src="<?= Yii::$app->request->getBaseUrl()?>/logos/sikui.png" alt="logo-sikui">
+                        </td>  
+                        <td class="header-center">
+                            <h2>
+                                SIKUI<br/>
+                                <small>Sistem Informasi Koperasi UI</small>
+                            </h2>
+                        </td>
+                        <td class="header-right">
+                            <img class="img-responsive logo-header" 
+                                 src="<?= Yii::$app->request->getBaseUrl()?>/logos/koperasi.png" alt="logo-koperasi">
+                        </td>
+                    </tr>
+                    <tr><td></td></tr>
+                </table>
+            </div>
             <div class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -108,11 +130,11 @@ use yii\widgets\Menu;
             </div>
             <div class="content">
                 <?= $content ?>
+                <div class="footer">
+                    <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
+                </div>
             </div>
         </div>
-        <div class="footer page-row">
-            <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
-        </div>        
         <?php $this->endBody() ?>
 
         <script src="<?= Yii::$app->request->getBaseUrl()?>/js/jquery-1.11.2.min.js"></script>

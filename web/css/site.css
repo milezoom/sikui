@@ -7,13 +7,38 @@ body {
     width: 100%;
 }
 
-.page-row {
-    display: table-row;
-    height: 1px;
+.logo-header {
+    max-height: 100px;
+    max-width:100px;
 }
 
-.page-row-expanded {
-    height: 100%; 
+img {
+    margin: 0 auto;
+}
+
+.header table {
+    background: #fdf862;
+    min-width: 100%;
+}
+
+.header table td {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.header-left {
+    padding-left: 2em;
+    float: left;
+}
+
+.header-center {
+    padding-left: 2em;
+    float: left;
+}
+
+.header-right {
+    padding-right: 2em;
+    float: right;
 }
 
 .footer {
