@@ -3,3 +3,4 @@
 !/web/assets/lock
 /runtime/*
 !/runtime/lock
+.brackets.json
