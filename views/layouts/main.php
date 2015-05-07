@@ -130,9 +130,11 @@ use yii\widgets\Menu;
             </div>
             <div class="content">
                 <?= $content ?>
-                <div class="footer">
-                    <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
-                </div>
+                <footer class="footer">
+					<div class="container">
+						<p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
+					</div>
+                </footer>
             </div>
         </div>
         <?php $this->endBody() ?>

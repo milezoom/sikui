@@ -42,9 +42,10 @@ img {
 }
 
 .footer {
-    margin: 0;
-    padding: 0;
-    background: black;
-    color: white;
-    vertical-align: middle;
+    position: absolute;
+	bottom: 0;
+	color:	white;
+	background: black;
+	font-size: 1.05em;
+	height: 2em;
 }

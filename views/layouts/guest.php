@@ -19,16 +19,40 @@ use yii\widgets\Menu;
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>
-    <body class="col-md-10 col-md-offset-1">
-        <div class="page-row page-row-expanded">
-        <?php $this->beginBody() ?>
-        <div class="content">
-            <?= $content ?>
-        </div>
-        </div>
-        <div class="footer page-row">
-            <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
-        </div>
+    <body>
+		<?php $this->beginBody() ?>
+			<div class="container">			
+				<div class="header">
+					<table>
+						<tr><td></td></tr>
+						<tr>
+							<td class="header-left">
+								<img class="img-responsive logo-header" 
+									 src="<?= Yii::$app->request->getBaseUrl()?>/logos/sikui.png" alt="logo-sikui">
+							</td>  
+							<td class="header-center">
+								<h2>
+									SIKUI<br/>
+									<small>Sistem Informasi Koperasi UI</small>
+								</h2>
+							</td>
+							<td class="header-right">
+								<img class="img-responsive logo-header" 
+									 src="<?= Yii::$app->request->getBaseUrl()?>/logos/koperasi.png" alt="logo-koperasi">
+							</td>
+						</tr>
+						<tr><td></td></tr>
+					</table>
+				</div>
+				<div class="content">
+					<?= $content ?>
+				</div>
+			<footer class="footer">
+				<div class="container">
+					<p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
+				</div>
+			</footer>
+		</div>
         <?php $this->endBody() ?>
 
         <script src="<?= Yii::$app->request->getBaseUrl()?>/js/jquery-1.11.2.min.js"></script>
