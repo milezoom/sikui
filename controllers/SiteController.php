@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use kartik\mpdf\Pdf;
 
 class SiteController extends Controller
 {
@@ -72,5 +73,17 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+    
+    public function actionPrint(){
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('index'),
+            'options' => [
+                'title' => 'Homepage',
+                'subject' => 'generate pdf using mpdf library'
+            ],
+        ]);
+        
+        return $pdf->render();
     }
 }
