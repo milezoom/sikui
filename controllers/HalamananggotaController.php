@@ -9,22 +9,11 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use kartik\mpdf\Pdf;
 
-class SiteController extends Controller
+class halamanAnggotaController extends Controller
 {
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -33,7 +22,7 @@ class SiteController extends Controller
             ],
         ];
     }
-
+/**
     public function actions()
     {
         return [
@@ -44,13 +33,13 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
             ],
         ];
-    }
+    }*/
 
     public function actionIndex()
     {
         return $this->render('index');
     }
-
+/**
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -68,7 +57,7 @@ class SiteController extends Controller
             return $this::actionIndex();
 			/**render('view', [
                 'model' => $model,
-            ]);*/
+            ]);
 			}
             
         } else {
@@ -96,5 +85,5 @@ class SiteController extends Controller
         ]);
         
         return $pdf->render();
-    }
+    }*/
 }
