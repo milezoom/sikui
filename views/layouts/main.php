@@ -118,24 +118,24 @@ use yii\widgets\Menu;
             </div>
             <div class="text-right">
                 <?php
-                    if(!Yii::$app->user->isGuest){
-                        echo Yii::$app->user->identity->username;
-                        echo ' ';
-                        echo '<a href="';
-                        echo Yii::$app->request->getBaseUrl();
-                        echo '/site/logout';
-                        echo '" data-method="post">(keluar)</a>';
-                    }
+                if(!Yii::$app->user->isGuest){
+                    echo Yii::$app->user->identity->username;
+                    echo ' ';
+                    echo '<a href="';
+                    echo Yii::$app->request->getBaseUrl();
+                    echo '/site/logout';
+                    echo '" data-method="post">(keluar)</a>';
+                }
                 ?>                
             </div>
             <div class="content">
-                <?= $content ?>
-                <footer class="footer">
-					<div class="container">
-						<p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
-					</div>
-                </footer>
+                <?= $content ?>                
             </div>
+            <footer class="footer text-center">
+                <div class="container">
+                    &copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?>
+                </div>
+            </footer>
         </div>
         <?php $this->endBody() ?>
 

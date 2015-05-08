@@ -3,7 +3,5 @@
 $this->title = 'SIKUI';
 ?>
 <div class="site-index">
-    <h1>Congratulations!</h1>
-
-    <p>You have successfully created your Yii-powered application.</p>
+    <h1>Selamat Datang</h1>
 </div>
