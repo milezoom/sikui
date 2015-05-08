@@ -1,3 +1,12 @@
+@font-face {
+    font-family: Signika;
+    src: url(../fonts/Signika-Regular.ttf);
+}
+@font-face {
+    font-family: "Patua One";
+    src: url(../fonts/PatuaOne-Regular.ttf);
+}
+
 html, body { 
     height: 100%; 
 }
@@ -19,33 +28,71 @@ img {
 .header table {
     background: #fdf862;
     min-width: 100%;
+    font-family: Signika, sans-serif;
 }
 
 .header table td {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .header-left {
-    padding-left: 2em;
+    padding-left: 20px;
     float: left;
 }
 
 .header-center {
-    padding-left: 2em;
+    padding-left: 20px;
     float: left;
 }
 
+.header-center h2 {
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #66a570;
+}
+
+.header-center h2 small {
+    font-size: 0.6em;
+}
+
 .header-right {
-    padding-right: 2em;
+    padding-right: 20px;
     float: right;
+}
+.nav li a {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.navbar {
+    min-height: 35px;
+    background: black;
+    font-family: "Patua One", sans-serif;
+}
+
+.navbar-default .navbar-nav li a {
+    color: white;
+}
+
+.navbar-default .navbar-nav li a:hover {
+    color: white;
+}
+
+.navbar-default .navbar-nav li a:focus {
+    color: white;
+}
+
+.navbar-default .navbar-nav .dropdown-menu li a {
+    color: black;
 }
 
 .footer {
     position: absolute;
+    height: 2em;
 	bottom: 0;
 	color:	white;
 	background: black;
 	font-size: 1.05em;
-	height: 2em;
+    font-family: Signika, sans-serif;
 }
