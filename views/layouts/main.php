@@ -112,6 +112,9 @@ use yii\widgets\Menu;
                                     <li><a href="#">Lihat Daftar Barang</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print">Cetak</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

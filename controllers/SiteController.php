@@ -77,7 +77,7 @@ class SiteController extends Controller
     
     public function actionPrint(){
         $pdf = new Pdf([
-            'content' => $this->renderPartial('index'),
+            'content' => $this->renderPartial('print'),
             'options' => [
                 'title' => 'Homepage',
                 'subject' => 'generate pdf using mpdf library'
