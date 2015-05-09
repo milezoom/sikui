@@ -22,7 +22,6 @@ use yii\widgets\Menu;
     <body>        
         <?php $this->beginBody() ?>
         <div class="container wrapper">
-            <div class="wrapper"></div>
             <div class="header">
                 <table>
                     <tr><td></td></tr>
