@@ -87,7 +87,7 @@ use yii\widgets\Menu;
                                     Transaksi<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Lihat Daftar Transaksi</a></li>
+                                    <li><a href="transaksi-simpanan/index">Lihat Daftar Transaksi</a></li>
                                     <li><a href="#">Cetak Transaksi per Bulan</a></li>
                                 </ul>
                             </li>
@@ -97,8 +97,8 @@ use yii\widgets\Menu;
                                     Anggota<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Tambah Anggota</a></li>
-                                    <li><a href="#">Lihat Daftar Anggota</a></li>
+                                    <li><a href="anggota/create">Tambah Anggota</a></li>
+                                    <li><a href="anggota/index">Lihat Daftar Anggota</a></li>
                                     <li><a href="#">Lihat Daftar Penunggak</a></li>
                                 </ul>
                             </li>
@@ -108,8 +108,8 @@ use yii\widgets\Menu;
                                     Barang<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Tambah Barang</a></li>
-                                    <li><a href="#">Lihat Daftar Barang</a></li>
+                                    <li><a href="barang/create">Tambah Barang</a></li>
+                                    <li><a href="barang/index">Lihat Daftar Barang</a></li>
                                 </ul>
                             </li>
                             <li>
