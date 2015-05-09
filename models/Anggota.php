@@ -21,9 +21,11 @@ use Yii;
  * @property string $tgl_masuk
  * @property integer $total_simpanan
  * @property integer $total_pinjaman
+ * @property integer $total_simpanan_wajib
+ * @property integer $total_simpanan_sukarela
  *
- * @property Unit $kodeUnit
  * @property TransaksiSimpanan[] $transaksiSimpanans
+ * @property Unit $kodeUnit
  * @property TransaksiPinjaman[] $transaksiPinjamen
  * @property User[] $users
  */
@@ -46,7 +48,7 @@ class Anggota extends \yii\db\ActiveRecord
             [['no_anggota', 'nama', 'kode_unit', 'alamat', 'tgl_lahir', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns', 'tgl_masuk'], 'required'],
             [['tgl_lahir', 'tgl_masuk'], 'safe'],
             [['jenis_kelamin', 'status', 'is_pns'], 'boolean'],
-            [['thn_pensiun', 'total_simpanan', 'total_pinjaman'], 'integer'],
+            [['thn_pensiun', 'total_simpanan', 'total_pinjaman', 'total_simpanan_wajib', 'total_simpanan_sukarela'], 'integer'],
             [['no_anggota'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 30],
             [['kode_unit'], 'string', 'max' => 10],
@@ -76,15 +78,9 @@ class Anggota extends \yii\db\ActiveRecord
             'tgl_masuk' => 'Tgl Masuk',
             'total_simpanan' => 'Total Simpanan',
             'total_pinjaman' => 'Total Pinjaman',
+            'total_simpanan_wajib' => 'Total Simpanan Wajib',
+            'total_simpanan_sukarela' => 'Total Simpanan Sukarela',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKodeUnit()
-    {
-        return $this->hasOne(Unit::className(), ['kode' => 'kode_unit']);
     }
 
     /**
@@ -93,6 +89,14 @@ class Anggota extends \yii\db\ActiveRecord
     public function getTransaksiSimpanans()
     {
         return $this->hasMany(TransaksiSimpanan::className(), ['no_anggota' => 'no_anggota']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKodeUnit()
+    {
+        return $this->hasOne(Unit::className(), ['kode' => 'kode_unit']);
     }
 
     /**
