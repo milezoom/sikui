@@ -10,11 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="transaksi-simpanan-form">
 	
-	
-	
     <?php $form = ActiveForm::begin(); ?>
-	
-	
 	
     <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
 	

@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30]) ?>
 
-    <?= $form->field($model, 'kode_unit')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'kode_unit')->dropDownList(['0000000001'=> 'Fasilkom', '0000000002' => 'Rektorat']) ?>
 
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => 150]) ?>
 
@@ -24,13 +24,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15]) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->checkbox() ?>
+    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 
     <?= $form->field($model, 'thn_pensiun')->textInput() ?>
 
-    <?= $form->field($model, 'status')->checkbox() ?>
+    <?= $form->field($model, 'status')->radioList(array('0' => 'Anggota','1' => 'Admin'))?>
 
-    <?= $form->field($model, 'is_pns')->checkbox() ?>
+    <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
 
     <?= $form->field($model, 'no_ktp')->textInput(['maxlength' => 16]) ?>
 

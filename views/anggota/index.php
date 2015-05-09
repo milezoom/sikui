@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\AnggotaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Anggotas';
+$this->title = 'Daftar Anggota';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-index">
@@ -27,18 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'no_anggota',
             'nama',
-            'kode_unit',
+            //'kode_unit',
             'alamat',
-            'tgl_lahir',
-            // 'no_telepon',
-            // 'jenis_kelamin:boolean',
-            // 'thn_pensiun',
-            // 'status:boolean',
-            // 'is_pns:boolean',
-            // 'no_ktp',
-            // 'tgl_masuk',
-            // 'total_simpanan',
-            // 'total_pinjaman',
+            //'tgl_lahir',
+            'total_simpanan',
+            'total_pinjaman',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
