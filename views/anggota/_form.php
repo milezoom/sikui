@@ -38,8 +38,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'total_simpanan')->textInput() ?>
 
-    <?= $form->field($model, 'total_pinjaman')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

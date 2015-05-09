@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 
-$this->title = 'Create Anggota';
-$this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];
+$this->title = 'Tambah Anggota';
+$this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-create">

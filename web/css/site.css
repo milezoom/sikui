@@ -103,3 +103,17 @@ img {
 	font-size: 1.05em;
     font-family: Signika, sans-serif;
 }
+
+.kotaklog{
+	width:540px;
+	height:350px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	border:8px solid #646464;
+	background-color:#FDF862;
+	padding : 2em;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
