@@ -7,13 +7,12 @@
     src: url(../fonts/PatuaOne-Regular.ttf);
 }
 
-html, body { 
-    height: 100%; 
+* {
+    margin: 0;
 }
 
-body {
-    display: table;
-    width: 100%;
+html, body { 
+    height: 100%; 
 }
 
 .logo-header {
@@ -87,10 +86,18 @@ img {
     color: black;
 }
 
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -1.75em;
+}
+
+.footer, .push {
+    height: 1.75em;
+}
+
 .footer {
-    position: absolute;
-    height: 2em;
-	bottom: 0;
 	color:	white;
 	background: black;
 	font-size: 1.05em;
