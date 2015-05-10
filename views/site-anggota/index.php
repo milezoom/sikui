@@ -3,5 +3,5 @@
 $this->title = 'SIKUI';
 ?>
 <div class="site-index">
-    <h1>Ini halaman yang dicetak menggunakan menu print</h1>
+    <h1>Selamat Datang</h1>
 </div>
