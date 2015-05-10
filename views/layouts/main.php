@@ -89,7 +89,11 @@ use yii\widgets\Menu;
                                     Transaksi<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl(); ?> transaksi-simpanan/index">Lihat Daftar Transaksi</a></li>
+                                    <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+											Lihat Daftar Transaksi
+											</a>
+										</li>
                                     <li><a href="#">Cetak Transaksi per Bulan</a></li>
                                 </ul>
                             </li>
