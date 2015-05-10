@@ -71,31 +71,34 @@ CREATE FUNCTION update_total_simpanan() RETURNS trigger
     LANGUAGE plpgsql
     AS $$                   
 begin
-    if(new.kode_simpanan like 'SPSKRL') then
+    if(new.kode_simpanan like '%SPSKRL%') then
     update anggota 
     set total_simpanan = total_simpanan + new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
     set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
     where no_anggota = new.no_anggota;
+    return new;
     
-    elsif(new.kode_simpanan like 'SPWJB') then
+    elsif(new.kode_simpanan like '%SPWJB%') then
     update anggota 
     set total_simpanan = total_simpanan + new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
-    set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
+    set total_simpanan_wajib = total_simpanan_wajib + new.jumlah
     where no_anggota = new.no_anggota;
+    return new;
     
-    elsif(new.kode_simpanan like 'AMSP') then
+    elsif(new.kode_simpanan like '%AMSP%') then
     update anggota 
     set total_simpanan = total_simpanan - new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
     set total_simpanan_sukarela = total_simpanan_sukarela - new.jumlah
     where no_anggota = new.no_anggota;
-    end if;
-    return new; 
+    return new;
+
+    end if; 
 end;
 $$;
 
@@ -183,7 +186,7 @@ CREATE TABLE transaksi_pinjaman (
     denda integer NOT NULL,
     bunga double precision NOT NULL,
     kode_barang character(10),
-    keterangan character varying(50) NOT NULL
+    keterangan character varying(50)
 );
 
 --
@@ -196,7 +199,7 @@ CREATE TABLE transaksi_simpanan (
     tanggal date NOT NULL,
     no_anggota character varying(20) NOT NULL,
     jumlah integer NOT NULL,
-    keterangan character varying(50) NOT NULL
+    keterangan character varying(50)
 );
 
 --
@@ -535,4 +538,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
