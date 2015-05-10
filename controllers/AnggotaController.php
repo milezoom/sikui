@@ -82,7 +82,7 @@ class AnggotaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->no_anggota]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,11 +96,15 @@ class AnggotaController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionStatus($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+       if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('status', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

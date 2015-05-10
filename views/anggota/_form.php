@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'thn_pensiun')->textInput() ?>
 
-    <?= $form->field($model, 'status')->radioList(array('0' => 'Anggota','1' => 'Admin'))?>
+    <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
 
     <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
 
