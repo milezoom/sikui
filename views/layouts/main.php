@@ -79,6 +79,8 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Lihat Daftar Pinjaman</a></li>
+                                    <li><a href="#">Buat Pinjaman</a></li>
+                                    <li><a href="#">Bayar Pinjaman</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
