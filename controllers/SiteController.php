@@ -65,10 +65,7 @@ class SiteController extends Controller
 			}
 			else if($peran == 'anggota'){
 				$this->layout = 'indexAnggota';
-            return $this::actionIndex();
-			/**render('view', [
-                'model' => $model,
-            ]);*/
+				return $this::actionIndex();
 			}
             
         } else {
