@@ -7,10 +7,10 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use kartik\mpdf\Pdf;
 
-class SiteController extends Controller
+class SiteAnggotaController extends Controller
 {
+    public $layout = "anggota";
     public function behaviors()
     {
         return [
@@ -51,44 +51,10 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionLogin()
-    {
-        if (!\Yii::$app->user->isGuest) {
-            return $this::actionIndex();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (Yii::$app->user->identity->role == 'admin'){
-                return $this::actionIndex();
-            } elseif (Yii::$app->user->identity->role == 'anggota') {                
-                return $this->redirect(['/site-anggota/index']);
-            }            
-        } else {
-            $this->layout = 'guest';
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-    
-    public function actionPrint(){
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('print'),
-            'format' => Pdf::FORMAT_FOLIO,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
-        
-        return $pdf->render();
     }
 }
