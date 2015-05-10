@@ -71,31 +71,34 @@ CREATE FUNCTION update_total_simpanan() RETURNS trigger
     LANGUAGE plpgsql
     AS $$                   
 begin
-    if(new.kode_simpanan like 'SPSKRL') then
+    if(new.kode_simpanan like '%SPSKRL%') then
     update anggota 
     set total_simpanan = total_simpanan + new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
     set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
     where no_anggota = new.no_anggota;
+    return new;
     
-    elsif(new.kode_simpanan like 'SPWJB') then
+    elsif(new.kode_simpanan like '%SPWJB%') then
     update anggota 
     set total_simpanan = total_simpanan + new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
     set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
     where no_anggota = new.no_anggota;
+    return new;
     
-    elsif(new.kode_simpanan like 'AMSP') then
+    elsif(new.kode_simpanan like '%AMSP%') then
     update anggota 
     set total_simpanan = total_simpanan - new.jumlah
     where no_anggota = new.no_anggota;
     update anggota
     set total_simpanan_sukarela = total_simpanan_sukarela - new.jumlah
     where no_anggota = new.no_anggota;
-    end if;
-    return new; 
+    return new;
+
+    end if; 
 end;
 $$;
 
