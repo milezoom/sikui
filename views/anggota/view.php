@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Anggota */
 
 $this->title = $model->no_anggota;
-$this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-view">
@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'alamat',
             'tgl_lahir',
             'no_telepon',
-            'jenis_kelamin:boolean',
             'thn_pensiun',
             'status:boolean',
             'is_pns:boolean',

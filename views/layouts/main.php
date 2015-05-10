@@ -97,8 +97,16 @@ use yii\widgets\Menu;
                                     Anggota<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl(); ?> anggota/create">Tambah Anggota</a></li>
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl(); ?> anggota/index">Lihat Daftar Anggota</a></li>
+                                    <li>
+										<a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota/create">
+											Tambah Anggota Baru
+										</a>
+									</li>
+									<li>
+										<a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota">
+										Lihat Daftar Anggota
+									</a>
+                            </li>
                                     <li><a href="#">Lihat Daftar Penunggak</a></li>
                                 </ul>
                             </li>
@@ -108,8 +116,16 @@ use yii\widgets\Menu;
                                     Barang<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl(); ?> barang/create">Tambah Barang</a></li>
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl(); ?>barang/index">Lihat Daftar Barang</a></li>
+										<li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/barang/create">
+											Tambah Barang
+											</a>
+										</li>
+										<li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/barang">
+											List Barang
+											</a>
+										</li>
                                 </ul>
                             </li>
                             <li>
