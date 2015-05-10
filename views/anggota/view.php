@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update Anggota', ['update', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Ubah Status', ['update', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Ubah Status', ['status', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
