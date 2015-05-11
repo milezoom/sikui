@@ -10,15 +10,16 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class  ='row'>
+	
+	<div class ='col-lg-3'>
+	</div>
+	<div class ='col-lg-3 kotaklog'>
+    <p>Silahkan masukkan username dan password anda:</p>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <?php 
-        $form = ActiveForm::begin([
-            'id' => 'login-form',
-        ]);
-    ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'login-form',
+    ]); ?>
 
     <?= $form->field($model, 'username') ?>
 
@@ -27,7 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
 
-    <?= Html::submitButton('Login',['class'=>'btn btn-success']) ?>
+    <?= Html::submitButton('Login') ?>
 
     <?php ActiveForm::end(); ?>
+	</div>
+	<div class ='col-lg-1'>
+	</div>
+	</div>
 </div>

@@ -10,14 +10,9 @@ $this->title = $model->no_anggota;
 $this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anggota-view">
+<div class="anggota-profil">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update Anggota', ['update', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Ubah Status', ['status', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,

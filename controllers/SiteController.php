@@ -59,6 +59,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+<<<<<<< HEAD
 			$peran = Yii::$app->user->identity->role;
 			if($peran == 'admin'){
 				return $this::actionIndex();
@@ -68,6 +69,13 @@ class SiteController extends Controller
 				return $this::actionIndex();
 			}
             
+=======
+            if (Yii::$app->user->identity->role == 'admin'){
+                return $this::actionIndex();
+            } elseif (Yii::$app->user->identity->role == 'anggota') {                
+                return $this->redirect(['/site-anggota/index']);
+            }            
+>>>>>>> master
         } else {
             $this->layout = 'guest';
             return $this->render('login', [
@@ -83,9 +91,25 @@ class SiteController extends Controller
         return $this->goHome();
     }
     
-    public function actionPrint(){
+    public function actionPrintKuitansi(){
         $pdf = new Pdf([
-            'content' => $this->renderPartial('index'),
+            'content' => $this->renderPartial('kuitansi'),
+            'format' => Pdf::FORMAT_FOLIO,
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            'options' => [
+                'title' => 'Homepage',
+                'subject' => 'generate pdf using mpdf library'
+            ],
+        ]);
+        
+        return $pdf->render();
+    }
+    
+    public function actionPrintTransaksi(){
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('transaksi'),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
             'options' => [
                 'title' => 'Homepage',
                 'subject' => 'generate pdf using mpdf library'

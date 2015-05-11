@@ -118,4 +118,15 @@ class BarangController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	 public function actionProduk()
+    {
+        $searchModel = new BarangSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$this->layout = 'anggota';
+        return $this->render('produk', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

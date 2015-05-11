@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Anggota;
-use app\models\AnggotaSearch;
+use app\models\TransaksiSimpanan;
+use app\models\TransaksiSimpananSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AnggotaController implements the CRUD actions for Anggota model.
+ * TransaksiSimpananController implements the CRUD actions for TransaksiSimpanan model.
  */
-class AnggotaController extends Controller
+class TransaksiSimpananController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class AnggotaController extends Controller
     }
 
     /**
-     * Lists all Anggota models.
+     * Lists all TransaksiSimpanan models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AnggotaSearch();
+        $searchModel = new TransaksiSimpananSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -41,84 +41,71 @@ class AnggotaController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Anggota model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+  
 
     /**
-     * Creates a new Anggota model.
+     * Creates a new TransaksiSimpanan model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionWajib()
     {
-        $model = new Anggota();
+        $model = new TransaksiSimpanan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->no_anggota]);
+            return $this->redirect('index');
         } else {
-            return $this->render('create', [
+            return $this->render('Wajib', [
                 'model' => $model,
             ]);
         }
     }
-
-    /**
-     * Updates an existing Anggota model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+   /**
+     * Creates a new TransaksiSimpanan model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionUpdate($id)
+    
+	public function actionSukarela()
     {
-        $model = $this->findModel($id);
+        $model = new TransaksiSimpanan();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect('index');
         } else {
-            return $this->render('update', [
+            return $this->render('Sukarela',[
                 'model' => $model,
             ]);
         }
     }
-
     /**
-     * Deletes an existing Anggota model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * Creates a new TransaksiSimpanan model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionStatus($id)
+    
+	public function actionAmbil()
     {
-		 $model = $this->findModel($id);
-		 
-       if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        $model = new TransaksiSimpanan();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect('index');
         } else {
-            return $this->render('status', [
+            return $this->render('Ambil',[
                 'model' => $model,
             ]);
         }
     }
-
     /**
-     * Finds the Anggota model based on its primary key value.
+     * Finds the TransaksiSimpanan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Anggota the loaded model
+     * @return TransaksiSimpanan the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Anggota::findOne($id)) !== null) {
+        if (($model = TransaksiSimpanan::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
