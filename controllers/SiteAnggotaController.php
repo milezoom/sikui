@@ -7,6 +7,10 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\Anggota;
+use app\models\AnggotaSearch;
+use yii\web\NotFoundHttpException;
+
 
 class SiteAnggotaController extends Controller
 {
@@ -45,7 +49,14 @@ class SiteAnggotaController extends Controller
             ],
         ];
     }
-
+	
+	public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
     public function actionIndex()
     {
         return $this->render('index');
@@ -56,5 +67,14 @@ class SiteAnggotaController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+	
+	protected function findModel($id)
+    {
+        if (($model = Anggota::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }
