@@ -79,10 +79,25 @@ class SiteController extends Controller
         return $this->goHome();
     }
     
-    public function actionPrint(){
+    public function actionPrintKuitansi(){
         $pdf = new Pdf([
-            'content' => $this->renderPartial('print'),
+            'content' => $this->renderPartial('kuitansi'),
             'format' => Pdf::FORMAT_FOLIO,
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            'options' => [
+                'title' => 'Homepage',
+                'subject' => 'generate pdf using mpdf library'
+            ],
+        ]);
+        
+        return $pdf->render();
+    }
+    
+    public function actionPrintTransaksi(){
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('transaksi'),
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
             'options' => [
                 'title' => 'Homepage',
                 'subject' => 'generate pdf using mpdf library'

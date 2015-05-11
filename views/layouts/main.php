@@ -135,7 +135,10 @@ use yii\widgets\Menu;
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print">Cetak</a>
+                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">Cetak Kuitansi</a>
+                            </li>
+                            <li>
+                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-transaksi">Cetak Transaksi</a>
                             </li>
                         </ul>
                     </div>

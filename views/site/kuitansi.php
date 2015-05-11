@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'SIKUI';
+$this->title = 'Kuitansi';
 ?>
 
 <?php $this->beginPage() ?>
