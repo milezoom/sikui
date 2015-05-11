@@ -44,7 +44,41 @@ use yii\widgets\Menu;
                     <tr><td></td></tr>
                 </table>
             </div>
-            <div class="navbar navbar-default"></div>
+			
+			<div class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-data">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-data">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="<?= Yii::$app->request->getBaseUrl(); ?>">Beranda</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                                   role="button" aria-expanded="false">
+                                    Transaksi<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Lihat Simpanan</a></li>
+                                    <li><a href="#">Lihat Pinjaman</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="<?= Yii::$app->request->getBaseUrl()?>/barang/produk">Lihat Produk</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+			
+            
             <div class="text-right">
                 <?php
                     if(!Yii::$app->user->isGuest){
