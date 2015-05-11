@@ -131,3 +131,19 @@ img {
 	font-size: 18px;
 	font-weight: bold;
 }
+
+.anggota-create .form-control{
+width: 50%;
+}
+
+.barang-create .form-control{
+width: 50%;
+}
+
+.transaksi-simpanan-create .form-control{
+width: 50%;
+}
+
+textarea .form-control{
+height: 200px;
+}

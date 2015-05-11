@@ -66,10 +66,26 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
-                                    <li><a href="#">Tambah Simpanan Wajib</a></li>
-                                    <li><a href="#">Tambah Simpanan Sukarela</a></li>
-                                    <li><a href="#">Ambil Simpanan</a></li>
-                                    <li><a href="#">Cetak Simpanan per Anggota</a></li>
+                                    <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/wajib">
+											Tambah Simpanan Wajib
+											</a>
+										</li>
+                                   <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/sukarela">
+											Tambah Simpanan Sukarela
+											</a>
+										</li>
+                                     <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/ambil">
+											Ambil Simpanan
+											</a>
+										</li>
+                                     <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+											Cetak Simpanan Per Anggota
+											</a>
+										</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -78,9 +94,21 @@ use yii\widgets\Menu;
                                     Pinjaman<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Lihat Daftar Pinjaman</a></li>
-                                    <li><a href="#">Buat Pinjaman</a></li>
-                                    <li><a href="#">Bayar Pinjaman</a></li>
+                                   <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman">
+												Lihat Transaksi Pinjaman
+											</a>
+										</li>
+                                  <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/create">
+												Buat Transaksi Pinjaman
+											</a>
+										</li>
+                                   <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/pembayaran-pinjaman/create">
+												Bayar Pinjaman
+											</a>
+										</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -94,7 +122,10 @@ use yii\widgets\Menu;
 											Lihat Daftar Transaksi
 											</a>
 										</li>
-                                    <li><a href="#">Cetak Transaksi per Bulan</a></li>
+                                    <li><a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+										Cetak Transaksi per Bulan
+										</a>
+									</li>
                                 </ul>
                             </li>
                             <li class="dropdown">
