@@ -63,7 +63,7 @@ class SiteController extends Controller
                 return $this::actionIndex();
             } elseif (Yii::$app->user->identity->role == 'anggota') {                
                 return $this->redirect(['/site-anggota/index']);
-            }            
+            }
         } else {
             $this->layout = 'guest';
             return $this->render('login', [

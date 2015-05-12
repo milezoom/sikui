@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\Anggota;
 
 class SiteAnggotaController extends Controller
 {
@@ -48,7 +49,10 @@ class SiteAnggotaController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+        return $this->render('profil', [
+            'model' => $model,
+        ]);
     }
 
     public function actionLogout()
