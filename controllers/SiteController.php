@@ -59,14 +59,21 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
             if (Yii::$app->user->identity->role == 'admin'){
                 return $this::actionIndex();
             } elseif (Yii::$app->user->identity->role == 'anggota') {  
 				$this->layout = 'anggota';
                 return $this->redirect(['/site-anggota/index']);
+<<<<<<< HEAD
             }            
 
+=======
+            }
+>>>>>>> master
         } else {
             $this->layout = 'guest';
             return $this->render('login', [

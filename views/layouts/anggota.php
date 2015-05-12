@@ -58,7 +58,7 @@ use yii\widgets\Menu;
                     <div class="collapse navbar-collapse" id="navbar-data">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl(); ?>">Beranda</a>
+                                <a href="<?= Yii::$app->request->getBaseUrl(); ?>/site-anggota/">Beranda</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
