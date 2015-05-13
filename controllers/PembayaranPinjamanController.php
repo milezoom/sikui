@@ -32,13 +32,19 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PembayaranPinjamanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $searchModel = new PembayaranPinjamanSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
     }
 
     /**
@@ -49,9 +55,15 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionView($kode_trans, $tgl_bayar)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($kode_trans, $tgl_bayar),
-        ]);
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('view', [
+                'model' => $this->findModel($kode_trans, $tgl_bayar),
+            ]);
+        }
     }
 
     /**
@@ -61,15 +73,21 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PembayaranPinjaman();
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $model = new PembayaranPinjaman();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }        
     }
 
     /**
@@ -81,15 +99,21 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionUpdate($kode_trans, $tgl_bayar)
     {
-        $model = $this->findModel($kode_trans, $tgl_bayar);
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $model = $this->findModel($kode_trans, $tgl_bayar);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }        
     }
 
     /**
@@ -101,9 +125,15 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionDelete($kode_trans, $tgl_bayar)
     {
-        $this->findModel($kode_trans, $tgl_bayar)->delete();
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $this->findModel($kode_trans, $tgl_bayar)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }        
     }
 
     /**

@@ -54,7 +54,8 @@ class Anggota extends \yii\db\ActiveRecord
             [['kode_unit'], 'string', 'max' => 10],
             [['alamat'], 'string', 'max' => 150],
             [['no_telepon'], 'string', 'max' => 15],
-            [['no_ktp'], 'string', 'max' => 16]
+            [['no_ktp'], 'string', 'max' => 16],
+            [['tgl_lahir'],'tgl_lahir_validation']
         ];
     }
 
@@ -99,7 +100,7 @@ class Anggota extends \yii\db\ActiveRecord
         return $this->hasOne(Unit::className(), ['kode' => 'kode_unit']);
     }
 
-    /**
+    /*
      * @return \yii\db\ActiveQuery
      */
     public function getTransaksiPinjamen()
@@ -113,5 +114,12 @@ class Anggota extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['no_anggota' => 'no_anggota']);
+    }
+    
+    public function tgl_lahir_validation($attribute)
+    {
+        if ($this->$attribute >= date("Y-m-d"))
+	        $this->addError($attribute,'Input harus lebih kecil dari tanggal saat ini.');
+        
     }
 }

@@ -4,8 +4,6 @@ $this->title = 'SIKUI';
 ?>
 <div class="site-index">
     <h2>Selamat Datang</h2>
-	<br>
-	<br>
 		<div class="homecontent">
         <div class="row">
 			<div class="col-xs-1">
@@ -13,7 +11,7 @@ $this->title = 'SIKUI';
 			<div class="col-lg-4 kotak">
 				<img src="<?= Yii::$app->request->getBaseUrl() ?>/logos/user.png" width = "125" height ="125">
 				<br>
-                <text>756 anggota terdaftar<text>
+                <text>756 anggota terdaftar</text>
             </div>
 			<div class="col-xs-1">
 			</div>
