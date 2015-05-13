@@ -7,22 +7,24 @@ use yii\widgets\DetailView;
 /* @var $model app\models\TransaksiPinjaman */
 
 $this->title = $model->kode_trans;
-$this->params['breadcrumbs'][] = ['label' => 'Transaksi Pinjamen', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Pinjaman Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="transaksi-pinjaman-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->kode_trans], [
+        <?= Html::a('Ubah Pinjaman', ['update', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Hapus Pinjaman', ['delete', 'id' => $model->kode_trans], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
+		<?= Html::a('Pembayaran Pinjaman', ['/pembayaran-pinjaman/create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

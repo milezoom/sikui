@@ -45,10 +45,10 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode_trans' => 'Kode Trans',
-            'tgl_bayar' => 'Tgl Bayar',
-            'no_angsuran' => 'No Angsuran',
-            'jumlah' => 'Jumlah',
+            'kode_trans' => 'Kode Transaksi Pinjaman',
+            'tgl_bayar' => 'Tanggal Bayar Angsuran',
+            'no_angsuran' => 'Angsuran Ke-',
+            'jumlah' => 'Nominal Angsuran',
             'keterangan' => 'Keterangan',
         ];
     }

@@ -63,9 +63,11 @@ class PembayaranPinjamanController extends Controller
     {
         $model = new PembayaranPinjaman();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-        } else {
+        if ($model->load(Yii::$app->request->post()) && $model->no_angsuran <= 15 && $model->save()) {
+			return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+			
+		} 
+		else {
             return $this->render('create', [
                 'model' => $model,
             ]);

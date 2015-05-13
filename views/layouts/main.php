@@ -178,6 +178,7 @@ use yii\widgets\Menu;
             <div class="text-right">
                 <?php
                     if(!Yii::$app->user->isGuest){
+						echo 'Selamat Datang, ';
                         echo Yii::$app->user->identity->username;
                         echo ' ';
                         echo '<a href="';

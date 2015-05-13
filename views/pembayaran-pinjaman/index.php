@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PembayaranPinjamanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pembayaran Pinjamen';
+$this->title = 'Daftar Pembayaran Pinjaman';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pembayaran-pinjaman-index">
