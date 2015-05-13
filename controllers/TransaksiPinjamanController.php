@@ -118,4 +118,55 @@ class TransaksiPinjamanController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	 /**
+     * Creates a new TransaksiPinjaman model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionUang()
+    {
+        $model = new TransaksiPinjaman();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'id' => $model->kode_trans]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+	
+	 /**
+     * Creates a new TransaksiPinjaman model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionBarang()
+    {
+        $model = new TransaksiPinjaman();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'id' => $model->kode_trans]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+	
+	 /**
+     * Lists all TransaksiPinjaman models.
+     * @return mixed
+     */
+    public function actionChoose()
+    {
+        $searchModel = new TransaksiPinjamanSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

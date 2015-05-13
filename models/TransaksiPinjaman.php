@@ -66,9 +66,7 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
             'jatuh_tempo' => 'Jatuh Tempo',
             'banyak_angsuran' => 'Banyak Angsuran',
             'denda' => 'Denda',
-            'bunga' => 'Bunga',
             'kode_barang' => 'Kode Barang',
-            'keterangan' => 'Keterangan',
         ];
     }
 
