@@ -18,7 +18,7 @@ class PembayaranPinjamanSearch extends PembayaranPinjaman
     public function rules()
     {
         return [
-            [['kode_trans', 'tgl_bayar', 'keterangan'], 'safe'],
+            [['kode_trans', 'tgl_bayar'], 'safe'],
             [['no_angsuran', 'jumlah'], 'integer'],
         ];
     }

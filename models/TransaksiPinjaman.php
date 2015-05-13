@@ -41,13 +41,11 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'jumlah', 'sisa_piutang', 'tgl_pinjam', 'jatuh_tempo', 'banyak_angsuran', 'denda', 'bunga'], 'required'],
+            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'jumlah', 'sisa_piutang', 'tgl_pinjam', 'jatuh_tempo', 'banyak_angsuran', 'denda'], 'required'],
             [['jumlah', 'sisa_piutang', 'banyak_angsuran', 'denda'], 'integer'],
             [['tgl_pinjam', 'jatuh_tempo'], 'safe'],
-            [['bunga'], 'number'],
             [['kode_trans', 'kode_pinjaman', 'kode_barang'], 'string', 'max' => 10],
             [['no_anggota'], 'string', 'max' => 20],
-            [['keterangan'], 'string', 'max' => 50]
         ];
     }
 
