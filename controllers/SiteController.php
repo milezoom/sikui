@@ -65,6 +65,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             if (Yii::$app->user->identity->role == 'admin'){
                 return $this::actionIndex();
             } elseif (Yii::$app->user->identity->role == 'anggota') {                

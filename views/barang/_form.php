@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kode')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'kode')->textInput(['maxlength' => 10, 'placeholder' => 'Masukan Kode Barang']) ?>
 
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => 30]) ?>
+    <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Barang']) ?>
 
-    <?= $form->field($model, 'harga')->textInput() ?>
+    <?= $form->field($model, 'harga')->textInput(['placeholder' => 'Harga Barang']) ?>
 
     <?= $form->field($model, 'img_path')->textInput(['maxlength' => 150]) ?>
 

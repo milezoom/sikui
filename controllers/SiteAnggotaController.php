@@ -8,6 +8,12 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\Anggota;
+<<<<<<< HEAD
+use app\models\AnggotaSearch;
+use yii\web\NotFoundHttpException;
+
+=======
+>>>>>>> master
 
 class SiteAnggotaController extends Controller
 {
@@ -46,7 +52,14 @@ class SiteAnggotaController extends Controller
             ],
         ];
     }
-
+	
+	public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
     public function actionIndex()
     {
         $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
@@ -60,5 +73,14 @@ class SiteAnggotaController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+	
+	protected function findModel($id)
+    {
+        if (($model = Anggota::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

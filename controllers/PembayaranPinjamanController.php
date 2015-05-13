@@ -80,14 +80,15 @@ class PembayaranPinjamanController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new PembayaranPinjaman();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        }        
+        if ($model->load(Yii::$app->request->post()) && $model->no_angsuran <= 15 && $model->save()) {
+			return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+			
+		} 
+		else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
