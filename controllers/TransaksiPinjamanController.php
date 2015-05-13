@@ -131,7 +131,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
-            return $this->render('create', [
+            return $this->render('uang', [
                 'model' => $model,
             ]);
         }
@@ -149,7 +149,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
-            return $this->render('create', [
+            return $this->render('barang', [
                 'model' => $model,
             ]);
         }
@@ -159,12 +159,12 @@ class TransaksiPinjamanController extends Controller
      * Lists all TransaksiPinjaman models.
      * @return mixed
      */
-    public function actionChoose()
+   public function actionChoose()
     {
         $searchModel = new TransaksiPinjamanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('choose', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

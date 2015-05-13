@@ -18,9 +18,8 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
     public function rules()
     {
         return [
-            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'tgl_pinjam', 'jatuh_tempo', 'kode_barang', 'keterangan'], 'safe'],
+            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'tgl_pinjam', 'jatuh_tempo', 'kode_barang'], 'safe'],
             [['jumlah', 'sisa_piutang', 'banyak_angsuran', 'denda'], 'integer'],
-            [['bunga'], 'number'],
         ];
     }
 
@@ -63,14 +62,12 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
             'jatuh_tempo' => $this->jatuh_tempo,
             'banyak_angsuran' => $this->banyak_angsuran,
             'denda' => $this->denda,
-            'bunga' => $this->bunga,
         ]);
 
         $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans])
             ->andFilterWhere(['like', 'kode_pinjaman', $this->kode_pinjaman])
             ->andFilterWhere(['like', 'no_anggota', $this->no_anggota])
-            ->andFilterWhere(['like', 'kode_barang', $this->kode_barang])
-            ->andFilterWhere(['like', 'keterangan', $this->keterangan]);
+            ->andFilterWhere(['like', 'kode_barang', $this->kode_barang]);
 
         return $dataProvider;
     }
