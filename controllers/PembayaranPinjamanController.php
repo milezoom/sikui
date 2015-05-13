@@ -32,13 +32,19 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PembayaranPinjamanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $searchModel = new PembayaranPinjamanSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
     }
 
     /**
@@ -49,9 +55,15 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionView($kode_trans, $tgl_bayar)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($kode_trans, $tgl_bayar),
-        ]);
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('view', [
+                'model' => $this->findModel($kode_trans, $tgl_bayar),
+            ]);
+        }
     }
 
     /**
@@ -61,52 +73,72 @@ class PembayaranPinjamanController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PembayaranPinjaman();
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $model = new PembayaranPinjaman();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->no_angsuran <= 15 && $model->save()) {
+                return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+
+            } 
+            else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
     }
 
-    /**
+        /**
      * Updates an existing PembayaranPinjaman model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $kode_trans
      * @param string $tgl_bayar
      * @return mixed
      */
-    public function actionUpdate($kode_trans, $tgl_bayar)
-    {
-        $model = $this->findModel($kode_trans, $tgl_bayar);
+        public function actionUpdate($kode_trans, $tgl_bayar)
+        {
+            if (Yii::$app->user->isGuest) {
+                return SiteController::actionRedirectGuest();
+            } elseif (Yii::$app->user->identity->role == 'anggota') {
+                return SiteController::actionRedirectAnggota();
+            } elseif (Yii::$app->user->identity->role == 'admin') {
+                $model = $this->findModel($kode_trans, $tgl_bayar);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+                if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
+                } else {
+                    return $this->render('update', [
+                        'model' => $model,
+                    ]);
+                }
+            }        
         }
-    }
 
-    /**
+        /**
      * Deletes an existing PembayaranPinjaman model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $kode_trans
      * @param string $tgl_bayar
      * @return mixed
      */
-    public function actionDelete($kode_trans, $tgl_bayar)
-    {
-        $this->findModel($kode_trans, $tgl_bayar)->delete();
+        public function actionDelete($kode_trans, $tgl_bayar)
+        {
+            if (Yii::$app->user->isGuest) {
+                return SiteController::actionRedirectGuest();
+            } elseif (Yii::$app->user->identity->role == 'anggota') {
+                return SiteController::actionRedirectAnggota();
+            } elseif (Yii::$app->user->identity->role == 'admin') {
+                $this->findModel($kode_trans, $tgl_bayar)->delete();
 
-        return $this->redirect(['index']);
-    }
+                return $this->redirect(['index']);
+            }        
+        }
 
-    /**
+        /**
      * Finds the PembayaranPinjaman model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $kode_trans
@@ -114,12 +146,12 @@ class PembayaranPinjamanController extends Controller
      * @return PembayaranPinjaman the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($kode_trans, $tgl_bayar)
-    {
-        if (($model = PembayaranPinjaman::findOne(['kode_trans' => $kode_trans, 'tgl_bayar' => $tgl_bayar])) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        protected function findModel($kode_trans, $tgl_bayar)
+        {
+            if (($model = PembayaranPinjaman::findOne(['kode_trans' => $kode_trans, 'tgl_bayar' => $tgl_bayar])) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         }
     }
-}

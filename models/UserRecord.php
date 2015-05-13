@@ -12,7 +12,7 @@ use Yii;
  * @property string $password
  */
 class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
-{
+{    
     /**
      * @inheritdoc
      */

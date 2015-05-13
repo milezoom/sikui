@@ -59,6 +59,7 @@ img {
     padding-right: 20px;
     float: right;
 }
+
 .nav li a {
     padding-top: 6px;
     padding-bottom: 6px;
@@ -91,6 +92,10 @@ img {
     height: auto !important;
     height: 100%;
     margin: 0 auto -1.75em;
+}
+
+.content {
+    font-family: Signika, sans-serif;
 }
 
 .footer, .push {

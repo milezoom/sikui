@@ -165,8 +165,23 @@ use yii\widgets\Menu;
 										</li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">Cetak Kuitansi</a>
+							<li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button" aria-expanded="false">
+                                    Cetak Kuitansi<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+										<li>
+											<a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">
+											Pembayaran Simpanan
+											</a>
+										</li>
+										<li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/site/print-angsuran">
+											Pembayaran Angsuran
+											</a>
+										</li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-transaksi">Cetak Transaksi</a>
@@ -178,6 +193,7 @@ use yii\widgets\Menu;
             <div class="text-right">
                 <?php
                     if(!Yii::$app->user->isGuest){
+						echo 'Selamat Datang, ';
                         echo Yii::$app->user->identity->username;
                         echo ' ';
                         echo '<a href="';

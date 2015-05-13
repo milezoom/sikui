@@ -6,11 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 
-$this->title = $model->no_anggota;
+$this->title = $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anggota-profil">
+<div class="anggota-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

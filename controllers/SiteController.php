@@ -48,7 +48,13 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('index');
+        }
     }
 
     public function actionLogin()
@@ -59,10 +65,11 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             if (Yii::$app->user->identity->role == 'admin'){
                 return $this::actionIndex();
             } elseif (Yii::$app->user->identity->role == 'anggota') {                
-                return $this->redirect(['/site-anggota/index']);
+                return $this::actionRedirectAnggota();
             }
         } else {
             $this->layout = 'guest';
@@ -78,10 +85,30 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-    
-    public function actionPrintKuitansi(){
+
+    public function actionPrintKuitansi()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('kuitansi'),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }
+    }	
+	public function actionPrintAngsuran(){
         $pdf = new Pdf([
-            'content' => $this->renderPartial('kuitansi'),
+            'content' => $this->renderPartial('print-angsuran'),
             'format' => Pdf::FORMAT_FOLIO,
             'orientation' => Pdf::ORIENT_LANDSCAPE,
             'options' => [
