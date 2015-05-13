@@ -92,6 +92,20 @@ class SiteController extends Controller
         
         return $pdf->render();
     }
+	
+	public function actionPrintAngsuran(){
+        $pdf = new Pdf([
+            'content' => $this->renderPartial('print-angsuran'),
+            'format' => Pdf::FORMAT_FOLIO,
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            'options' => [
+                'title' => 'Homepage',
+                'subject' => 'generate pdf using mpdf library'
+            ],
+        ]);
+        
+        return $pdf->render();
+    }
     
     public function actionPrintTransaksi(){
         $pdf = new Pdf([

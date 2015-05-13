@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'Kuitansi';
+$this->title = 'Angsuran';
 ?>
 
 <?php $this->beginPage() ?>
@@ -17,7 +17,7 @@ $this->title = 'Kuitansi';
 			<div class="row">
 				<div class="col-xs-6">
 					<h1>
-					Kuitansi Pembayaran Simpanan 
+					Kuitansi Pembayaran Pinjaman 
 					</h1>
 				</div>
 			</div>

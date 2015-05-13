@@ -177,7 +177,7 @@ use yii\widgets\Menu;
 											</a>
 										</li>
 										<li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/print-angsuran">
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/site/print-angsuran">
 											Pembayaran Angsuran
 											</a>
 										</li>
