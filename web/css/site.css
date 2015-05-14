@@ -3,12 +3,12 @@
     src: url(../fonts/Signika-Regular.ttf);
 }
 @font-face {
-    font-family: "Patua One";
-    src: url(../fonts/PatuaOne-Regular.ttf);
-}
-@font-face {
     font-family: "Open Sans";
     src: url(../fonts/Open-Sans.ttf);
+}
+@font-face {
+    font-family: "Open Sans Light";
+    src: url(../fonts/Open-Sans-Light.ttf);
 }
 
 * {
@@ -72,7 +72,7 @@ img {
 .navbar {
     min-height: 35px;
     background: black;
-    font-family: "Patua One", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .navbar-default .navbar-nav li a {
