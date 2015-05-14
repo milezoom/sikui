@@ -106,31 +106,51 @@ class SiteController extends Controller
             return $pdf->render();
         }
     }	
-	public function actionPrintAngsuran(){
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('print-angsuran'),
-            'format' => Pdf::FORMAT_FOLIO,
-            'orientation' => Pdf::ORIENT_LANDSCAPE,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
-        
-        return $pdf->render();
+    public function actionPrintAngsuran(){
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('print-angsuran'),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }        
     }
-    
+
     public function actionPrintTransaksi(){
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('transaksi'),
-            'format' => Pdf::FORMAT_A4,
-            'orientation' => Pdf::ORIENT_PORTRAIT,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
-        
-        return $pdf->render();
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('transaksi'),
+                'format' => Pdf::FORMAT_A4,
+                'orientation' => Pdf::ORIENT_PORTRAIT,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }        
+    }
+
+    public function actionRedirectGuest(){
+        return $this->redirect(['site/login']);
+    }
+
+    public function actionRedirectAnggota(){
+        return $this->redirect(['site-anggota/index']);
     }
 }
