@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 
-    <?= $form->field($model, 'banyak_angsuran')->radioList(array('5' => '1 kali','10' => '10 kali', '15' => '15 kali'))?> 
+    <?= $form->field($model, 'banyak_angsuran')->radioList(array('5' => '5 kali','10' => '10 kali', '15' => '15 kali'))?> 
 
     <?= $form->field($model, 'denda')->textInput() ?>
 
