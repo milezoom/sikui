@@ -8,12 +8,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\Anggota;
-<<<<<<< HEAD
 use app\models\AnggotaSearch;
 use yii\web\NotFoundHttpException;
 
-=======
->>>>>>> master
+
 
 class SiteAnggotaController extends Controller
 {
