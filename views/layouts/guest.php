@@ -19,44 +19,11 @@ use yii\widgets\Menu;
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>
-    <body>
+    <body>        
         <?php $this->beginBody() ?>
-        <div class="container wrapper">			
-            <div class="header">
-                <table>
-                    <tr><td></td></tr>
-                    <tr>
-                        <td class="header-left">
-                            <img class="img-responsive logo-header" 
-                                 src="<?= Yii::$app->request->getBaseUrl()?>/logos/sikui.png" alt="logo-sikui">
-                        </td>  
-                        <td class="header-center">
-                            <h2>
-                                SIKUI<br/>
-                                <small>Sistem Informasi Koperasi UI</small>
-                            </h2>
-                        </td>
-                        <td class="header-right">
-                            <img class="img-responsive logo-header" 
-                                 src="<?= Yii::$app->request->getBaseUrl()?>/logos/koperasi.png" alt="logo-koperasi">
-                        </td>
-                    </tr>
-                    <tr><td></td></tr>
-                </table>
-            </div>
-            <div class="navbar navbar-default"></div>
-            <div class="content">
-                <?= $content ?>
-            </div>
-            <div class="push"></div>
+        <div class="content">
+            <?= $content ?>
         </div>
-        <div class="container">
-            <footer class="footer">
-                <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
-            </footer>
-        </div>
-        <?php $this->endBody() ?>
-
         <script src="<?= Yii::$app->request->getBaseUrl()?>/js/jquery-1.11.2.min.js"></script>
         <script src="<?= Yii::$app->request->getBaseUrl()?>/js/bootstrap.js"></script>
     </body>
