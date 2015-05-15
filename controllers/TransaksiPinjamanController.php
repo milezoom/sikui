@@ -172,15 +172,17 @@ class TransaksiPinjamanController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionBarang()
+    public function actionBarang($id)
     {
         $model = new TransaksiPinjaman();
+		$anggota = new Anggota();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($anggota->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
             return $this->render('barang', [
-                'model' => $model,
+               'model' => $model,
+				'anggota' => $anggota,
             ]);
         }
     }

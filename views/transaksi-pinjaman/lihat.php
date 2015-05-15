@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 		<?= Html::a('Tambah Pinjaman Uang', ['uang','id'=> $model->no_anggota], ['class' => 'btn btn-success']) ?>
-		<?= Html::a('Tambah Pinjaman Barang', ['barang', 'id'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Tambah Pinjaman Barang', ['barang', 'id'=> $model->no_anggota], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -29,9 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_lahir',
             'no_telepon',
             'thn_pensiun',
-            'status:boolean',
             'is_pns:boolean',
-            'no_ktp',
             'tgl_masuk',
             'total_pinjaman',
         ],
