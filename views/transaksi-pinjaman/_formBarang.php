@@ -32,7 +32,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kode_barang')->textInput(['maxlength' => 10]) ?>
 
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

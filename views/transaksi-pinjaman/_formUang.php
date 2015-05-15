@@ -26,12 +26,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 
-    <?= $form->field($model, 'banyak_angsuran')->textInput() ?>
+    <?= $form->field($model, 'banyak_angsuran')->radioList(array('5' => '1 kali','10' => '10 kali', '15' => '15 kali'))?> 
 
     <?= $form->field($model, 'denda')->textInput() ?>
-
-    <?= $form->field($model, 'kode_barang')->textInput(['maxlength' => 10]) ?>
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
