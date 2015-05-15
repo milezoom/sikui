@@ -42,7 +42,7 @@ body {
     font-weight: normal;
     background: #76ABDB;
     font-size: 22px;
-    background-color: rgb(118, 171, 219);
+    background-color: #66a570;
     background-position: initial initial;
     background-repeat: initial initial;
 }
@@ -98,7 +98,8 @@ body {
     text-align: left;
 }
 #signupb {
-    background: #f8f8f8;
+    color: white;
+    background: #4090a5;
     border: 1px solid #c6c6c6;
     display: inline-block;
     line-height: 23px;
@@ -117,9 +118,10 @@ body {
     outline: none;
     cursor: pointer;
 }
-#signupb:hover, #signupb:active  {
-    background: #66a570;
-    color: white;
+#signupb:active  {
+    border: 1px solid #66a570;
+    background: white;
+    color: black;
 }
 #credit {
     position: absolute;
@@ -133,7 +135,7 @@ body {
     font-weight: normal;
     background: #76ABDB;
     font-size: 22px;
-    background-color: rgb(118, 171, 219);
+    background-color: #66a570;
     background-position: initial initial;
     background-repeat: initial initial;
     background-repeat: initial initial;
