@@ -48,7 +48,7 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode_trans' => 'Kode Trans',
+            'kode_trans' => 'Kode Transaksi',
             'kode_simpanan' => 'Kode Simpanan',
             'tanggal' => 'Tanggal',
             'no_anggota' => 'No Anggota',

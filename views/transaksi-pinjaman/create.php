@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
 
-$this->title = 'Create Transaksi Pinjaman';
+$this->title = 'Tambah Transaksi Pinjaman';
 $this->params['breadcrumbs'][] = ['label' => 'Transaksi Pinjamen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
