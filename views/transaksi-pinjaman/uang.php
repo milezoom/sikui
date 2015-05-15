@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
 
-$this->title = 'Create Transaksi Pinjaman';
-$this->params['breadcrumbs'][] = ['label' => 'Transaksi Pinjamen', 'url' => ['index']];
+$this->title = 'Tambah Pinjaman Uang';
+$this->params['breadcrumbs'][] = ['label' => 'Tambah Pinjaman Uang', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-pinjaman-create">

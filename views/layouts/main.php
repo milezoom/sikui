@@ -100,7 +100,7 @@ use yii\widgets\Menu;
 											</a>
 										</li>
                                   <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/choose">
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/daftar">
 												Buat Transaksi Pinjaman
 											</a>
 										</li>
