@@ -27,10 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
             //'kode_unit',
             'alamat',
             //'tgl_lahir',
-            'total_simpanan',
+            //'total_simpanan',
             'total_pinjaman',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                          'template'=>'{lihat}',
+                            'buttons'=>[
+                              'lihat' => function ($url, $model) {     
+                                return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                                        'title' => Yii::t('yii', 'Pilih Anggota'),
+                                ]);                                
+            
+                              }
+                          ]                            
+                            ],
         ],
     ]); ?>
 
