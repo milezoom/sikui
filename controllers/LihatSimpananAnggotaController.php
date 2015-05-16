@@ -6,14 +6,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\Anggota;
-use app\models\AnggotaSearch;
+use app\models\TransaksiSimpanan;
+use app\models\TransaksiSimpananSearch;
 use yii\web\NotFoundHttpException;
 
-
-
-class SiteAnggotaController extends Controller
+class LihatSimpananAnggotaController extends Controller
 {
     public $layout = "anggota";
     public function behaviors()
@@ -60,12 +57,12 @@ class SiteAnggotaController extends Controller
 	
     public function actionIndex()
     {
-        $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-        return $this->render('profil', [
+        $model = TransaksiSimpanan::findOne(Yii::$app->user->identity->no_anggota);
+        return $this->render('view', [
             'model' => $model,
         ]);
     }
-	
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -75,7 +72,7 @@ class SiteAnggotaController extends Controller
 	
 	protected function findModel($id)
     {
-        if (($model = Anggota::findOne($id)) !== null) {
+        if (($model = TransaksiSimpanan::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

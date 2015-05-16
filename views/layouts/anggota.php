@@ -66,7 +66,7 @@ use yii\widgets\Menu;
                                     Transaksi<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Lihat Simpanan</a></li>
+                                    <li><a href="<?= Yii::$app->request->getBaseUrl()?>/lihat-simpanan-anggota/">Lihat Simpanan</a></li>
                                     <li><a href="#">Lihat Pinjaman</a></li>
                                 </ul>
                             </li>

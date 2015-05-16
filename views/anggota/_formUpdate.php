@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'alamat')->textInput(['maxlength' => 150]) ?>
 
-    <?= $form->field($model, 'tgl_lahir')->textInput() ?>
+    <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15]) ?>
 

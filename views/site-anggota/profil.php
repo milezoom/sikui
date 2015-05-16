@@ -3,8 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
+
 
 $this->title = $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];

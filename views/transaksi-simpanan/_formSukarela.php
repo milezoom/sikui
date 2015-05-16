@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
    
 	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPSKRL' => 'Simpanan Sukarela']) ?>
 
-    <?= $form->field($model, 'tanggal')->textInput() ?>
+    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) ?>
 

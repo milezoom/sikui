@@ -7,10 +7,10 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Anggota */
 
 $this->title = $model->nama;
-$this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
+$this->params['breadcrumbs'][] = ['label' => 'TransaksiSimpanan', 'url' => ['no_anggota']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="anggota-view">
+<div class="transaksi-simpanan-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
