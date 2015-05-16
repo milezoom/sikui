@@ -65,18 +65,18 @@ class Anggota extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'no_anggota' => 'No Anggota',
+            'no_anggota' => 'Nomor Anggota',
             'nama' => 'Nama',
-            'kode_unit' => 'Kode Unit',
+            'kode_unit' => 'Kode Unit atau Instansi',
             'alamat' => 'Alamat',
             'tgl_lahir' => 'Tanggal Lahir',
-            'no_telepon' => 'No Telepon',
+            'no_telepon' => 'Nomor Telepon',
             'jenis_kelamin' => 'Jenis Kelamin',
             'thn_pensiun' => 'Tahun Pensiun',
             'status' => 'Status Anggota',
             'is_pns' => 'Status Kepegawaian',
-            'no_ktp' => 'No Ktp',
-            'tgl_masuk' => 'Tanggal Masuk',
+            'no_ktp' => 'Nomor KTP',
+            'tgl_masuk' => 'Tanggal Masuk Keanggotaan',
             'total_simpanan' => 'Total Simpanan',
             'total_pinjaman' => 'Total Pinjaman',
             'total_simpanan_wajib' => 'Total Simpanan Wajib',
