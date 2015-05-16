@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TransaksiSimpananSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Transaksi Simpanans';
+$this->title = 'Daftar Transaksi Simpanan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-simpanan-index">
