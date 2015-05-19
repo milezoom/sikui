@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'kode_trans',
             'kode_simpanan',
             'tanggal',
-            'no_anggota',
+            //'no_anggota',
             'jumlah',
             // 'keterangan',
 
