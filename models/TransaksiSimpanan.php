@@ -33,7 +33,7 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode_simpanan', 'tanggal', 'no_anggota', 'jumlah'], 'required'],
+            [['kode_trans', 'kode_simpanan', 'tanggal', 'no_anggota', 'jumlah'], 'required'],
             [['tanggal'], 'safe'],
             [['jumlah'], 'integer'],
             [['kode_trans', 'kode_simpanan'], 'string', 'max' => 10],
