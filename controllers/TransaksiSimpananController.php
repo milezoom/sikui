@@ -5,9 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\TransaksiSimpanan;
 use app\models\TransaksiSimpananSearch;
+use app\models\UploadForm;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Anggota;
+use app\models\AnggotaSearch;
 
 /**
  * TransaksiSimpananController implements the CRUD actions for TransaksiSimpanan model.
@@ -120,6 +124,51 @@ class TransaksiSimpananController extends Controller
             }
         }        
     }
+
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if(Yii::$app->request->isPost){
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if($model->file && $model->validate()){
+                $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
+                $this::actionWriteToDatabase($model->file->baseName);
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
+    }
+
+    public function actionWriteToDatabase($filename)
+    {
+        $location = glob(Yii::getAlias('@realdir')."/web/uploads/".$filename.".csv")[0];
+        $file = fopen($location, "r");
+
+        $counter = 0; 
+        if($filename == "transaksi_simpanan") {
+            while(!feof($file)) {
+                if($counter > 1) {
+                    $data = fgetcsv($file);
+                    $model = new TransaksiSimpanan();
+                    $model->no_anggota = $data[0];
+                    $model->kode_simpanan = $data[1];
+                    $model->jumlah = $data[2];
+                    $model->tanggal = date("Y-m-d");
+                    $model->keterangan = "from CSV";
+                    $model->save();
+                }
+                $counter = $counter + 1;
+            }
+            fclose($file);
+
+            unlink($location);
+
+            return $this->redirect(['index']);
+        }
+    }
+
     /**
      * Finds the TransaksiSimpanan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -130,6 +179,57 @@ class TransaksiSimpananController extends Controller
     protected function findModel($id)
     {
         if (($model = TransaksiSimpanan::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+	
+	public function actionDaftar()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $searchModel = new AnggotaSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('daftar', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	 /**
+     * Displays a single TransaksiPinjaman model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionLihat($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('lihat', [
+                'model' => $this->findAnggota($id),
+            ]);
+        }        
+    }
+	
+	 /**
+     * Finds the TransaksiPinjaman model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return TransaksiPinjaman the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findAnggota($id)
+    {
+        if (($model = Anggota::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

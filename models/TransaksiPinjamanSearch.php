@@ -18,7 +18,7 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
     public function rules()
     {
         return [
-            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'tgl_pinjam', 'jatuh_tempo', 'kode_barang'], 'safe'],
+            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'tgl_pinjam', 'kode_barang'], 'safe'],
             [['jumlah', 'sisa_piutang', 'banyak_angsuran', 'denda'], 'integer'],
         ];
     }
@@ -59,7 +59,6 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
             'jumlah' => $this->jumlah,
             'sisa_piutang' => $this->sisa_piutang,
             'tgl_pinjam' => $this->tgl_pinjam,
-            'jatuh_tempo' => $this->jatuh_tempo,
             'banyak_angsuran' => $this->banyak_angsuran,
             'denda' => $this->denda,
         ]);

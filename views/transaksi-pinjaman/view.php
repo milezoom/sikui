@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
 
-$this->title = $model->kode_trans;
+$this->title = 'Detail Pinjaman '.$model->kode_trans;
 $this->params['breadcrumbs'][] = ['label' => 'Pinjaman Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -17,13 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Ubah Pinjaman', ['update', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Hapus Pinjaman', ['delete', 'id' => $model->kode_trans], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
 		<?= Html::a('Pembayaran Pinjaman', ['/pembayaran-pinjaman/create'], ['class' => 'btn btn-primary']) ?>
     </p>
 
@@ -36,12 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'jumlah',
             'sisa_piutang',
             'tgl_pinjam',
-            'jatuh_tempo',
             'banyak_angsuran',
-            'denda',
-            'bunga',
             'kode_barang',
-            'keterangan',
         ],
     ]) ?>
 

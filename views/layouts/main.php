@@ -67,25 +67,21 @@ use yii\widgets\Menu;
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/wajib">
-											Tambah Simpanan Wajib
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+                                            Cetak Simpanan Per Anggota
+                                        </a>
+                                    </li>
+									 <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/daftar">
+											Tambah/Ambil Simpanan
 											</a>
 										</li>
-                                   <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/sukarela">
-											Tambah Simpanan Sukarela
-											</a>
-										</li>
-                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/ambil">
-											Ambil Simpanan
-											</a>
-										</li>
-                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
-											Cetak Simpanan Per Anggota
-											</a>
-										</li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/upload">
+                                            Tambah Simpanan Dari File CSV
+                                        </a>
+									</li>
+                                    
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -94,21 +90,21 @@ use yii\widgets\Menu;
                                     Pinjaman<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                   <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman">
-												Lihat Transaksi Pinjaman
-											</a>
-										</li>
-                                  <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/choose">
-												Buat Transaksi Pinjaman
-											</a>
-										</li>
-                                   <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/pembayaran-pinjaman/create">
-												Bayar Pinjaman
-											</a>
-										</li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman">
+                                            Lihat Transaksi Pinjaman
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/daftar">
+                                            Buat Transaksi Pinjaman
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/pembayaran-pinjaman/create">
+                                            Bayar Pinjaman
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -118,14 +114,14 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
-											Lihat Daftar Transaksi
-											</a>
-										</li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+                                            Lihat Daftar Transaksi
+                                        </a>
+                                    </li>
                                     <li><a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
-										Cetak Transaksi per Bulan
-										</a>
-									</li>
+                                        Cetak Transaksi per Bulan
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -135,15 +131,15 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-										<a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota/create">
-											Tambah Anggota Baru
-										</a>
-									</li>
-									<li>
-										<a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota">
-										Lihat Daftar Anggota
-									</a>
-                            </li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota/create">
+                                            Tambah Anggota Baru
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota">
+                                            Lihat Daftar Anggota
+                                        </a>
+                                    </li>
                                     <li><a href="#">Lihat Daftar Penunggak</a></li>
                                 </ul>
                             </li>
@@ -153,34 +149,34 @@ use yii\widgets\Menu;
                                     Barang<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-										<li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/barang/create">
-											Tambah Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/barang">
-											List Barang
-											</a>
-										</li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/barang/create">
+                                            Tambah Barang
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/barang">
+                                            List Barang
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-							<li class="dropdown">
+                            <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                    role="button" aria-expanded="false">
                                     Cetak Kuitansi<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-										<li>
-											<a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">
-											Pembayaran Simpanan
-											</a>
-										</li>
-										<li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/site/print-angsuran">
-											Pembayaran Angsuran
-											</a>
-										</li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">
+                                            Pembayaran Simpanan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/print-angsuran">
+                                            Pembayaran Angsuran
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -192,15 +188,15 @@ use yii\widgets\Menu;
             </div>
             <div class="text-right">
                 <?php
-                    if(!Yii::$app->user->isGuest){
-						echo 'Selamat Datang, ';
-                        echo Yii::$app->user->identity->username;
-                        echo ' ';
-                        echo '<a href="';
-                        echo Yii::$app->request->getBaseUrl();
-                        echo '/site/logout';
-                        echo '" data-method="post">(keluar)</a>';
-                    }
+    if(!Yii::$app->user->isGuest){
+    echo 'Selamat Datang, ';
+    echo Yii::$app->user->identity->username;
+    echo ' ';
+    echo '<a href="';
+    echo Yii::$app->request->getBaseUrl();
+    echo '/site/logout';
+    echo '" data-method="post">(keluar)</a>';
+}
                 ?>                
             </div>
             <div class="content">
