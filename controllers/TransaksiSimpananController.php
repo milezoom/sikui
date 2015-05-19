@@ -5,7 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\TransaksiSimpanan;
 use app\models\TransaksiSimpananSearch;
+use app\models\UploadForm;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -120,6 +122,51 @@ class TransaksiSimpananController extends Controller
             }
         }        
     }
+
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if(Yii::$app->request->isPost){
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if($model->file && $model->validate()){
+                $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
+                $this::actionWriteToDatabase($model->file->baseName);
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
+    }
+
+    public function actionWriteToDatabase($filename)
+    {
+        $location = glob(Yii::getAlias('@realdir')."/web/uploads/".$filename.".csv")[0];
+        $file = fopen($location, "r");
+        
+        $counter = 0; 
+        if($filename == "transaksi_simpanan") {
+            while(!feof($file)) {
+                if($counter > 1) {
+                    $data = fgetcsv($file);
+                    $model = new TransaksiSimpanan();
+                    $model->no_anggota = $data[0];
+                    $model->kode_simpanan = $data[1];
+                    $model->jumlah = $data[2];
+                    $model->tanggal = date("Y-m-d");
+                    $model->keterangan = "from CSV";
+                    $model->save();
+                }
+                $counter = $counter + 1;
+            }
+            return $this->redirect(['index']);
+        } 
+
+        fclose($file);
+
+        unlink($location);
+    }
+
     /**
      * Finds the TransaksiSimpanan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
