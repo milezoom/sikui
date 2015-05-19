@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) ?>
+    <?= $form->field($model, 'no_anggota')?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 

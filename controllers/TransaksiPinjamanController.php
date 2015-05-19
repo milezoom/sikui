@@ -142,6 +142,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+			$model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
 				'anggota' => $anggota,

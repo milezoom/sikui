@@ -61,8 +61,7 @@ class PembayaranPinjamanSearch extends PembayaranPinjaman
             'jumlah' => $this->jumlah,
         ]);
 
-        $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans])
-            ->andFilterWhere(['like', 'keterangan', $this->keterangan]);
+        $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans]);
 
         return $dataProvider;
     }
