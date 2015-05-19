@@ -67,42 +67,21 @@ use yii\widgets\Menu;
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
                                     <li>
-<<<<<<< HEAD
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/wajib">
-                                            Tambah Simpanan Wajib
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/sukarela">
-                                            Tambah Simpanan Sukarela
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/ambil">
-                                            Ambil Simpanan
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
                                             Cetak Simpanan Per Anggota
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/upload">
-                                            Tambah Simpanan Dari File CSV
-                                        </a>
-                                    </li>
-=======
+									 <li>
 											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/daftar">
 											Tambah/Ambil Simpanan
 											</a>
 										</li>
-                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
-											Cetak Simpanan Per Anggota
-											</a>
-										</li>
->>>>>>> utari
+                                    <li>
+                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/upload">
+                                            Tambah Simpanan Dari File CSV
+                                        </a>
+									</li>
+                                    
                                 </ul>
                             </li>
                             <li class="dropdown">
