@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use kartik\mpdf\Pdf;
+use yii\models\Settingan;
 
 class SiteController extends Controller
 {
@@ -153,4 +154,5 @@ class SiteController extends Controller
     public function actionRedirectAnggota(){
         return $this->redirect(['site-anggota/index']);
     }
+	
 }

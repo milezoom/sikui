@@ -139,9 +139,10 @@ class TransaksiPinjamanController extends Controller
         $model = new TransaksiPinjaman();
 		$anggota = new Anggota();
 		
-        if ($anggota->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+			$model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
 				'anggota' => $anggota,
@@ -177,7 +178,7 @@ class TransaksiPinjamanController extends Controller
         $model = new TransaksiPinjaman();
 		$anggota = new Anggota();
 
-        if ($anggota->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {            
             return $this->render('barang', [
@@ -185,21 +186,6 @@ class TransaksiPinjamanController extends Controller
 				'anggota' => $anggota,
             ]);
         }
-    }
-	
-	 /**
-     * Lists all TransaksiPinjaman models.
-     * @return mixed
-     */
-   public function actionChoose()
-    {
-        $searchModel = new TransaksiPinjamanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('choose', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
     }
 	
 	/**

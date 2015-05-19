@@ -31,11 +31,10 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah', 'keterangan'], 'required'],
+            [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah'], 'required'],
             [['tgl_bayar'], 'safe'],
             [['no_angsuran', 'jumlah'], 'integer'],
-            [['kode_trans'], 'string', 'max' => 10],
-            [['keterangan'], 'string', 'max' => 50]
+            [['kode_trans'], 'string', 'max' => 10]
         ];
     }
 
@@ -49,7 +48,6 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
             'tgl_bayar' => 'Tanggal Bayar Angsuran',
             'no_angsuran' => 'Angsuran Ke-',
             'jumlah' => 'Nominal Angsuran',
-            'keterangan' => 'Keterangan',
         ];
     }
 

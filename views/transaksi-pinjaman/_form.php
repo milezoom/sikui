@@ -1,7 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\Barang;
+use app\models\Anggota;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
@@ -16,14 +20,30 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'no_anggota')?>
+   <?= $form->field($model, 'no_anggota')->dropDownList(
+		ArrayHelper::map(Anggota::find()->all(),'no_anggota','nama'),
+		['prompt'=>'Select Anggota']
+	) ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
+    <?= $form->field($model, 'sisa_piutang')->textInput() ?>
+
     <?= $form->field($model, 'tgl_pinjam')->textInput() ?>
 
-    <?= $form->field($model, 'banyak_angsuran')->radioList(array('5' => '5 kali','10' => '10 kali', '15' => '15 kali'))?> 
+    <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 
+    <?= $form->field($model, 'banyak_angsuran')->textInput() ?>
+
+    <?= $form->field($model, 'denda')->textInput() ?>
+
+    <?= $form->field($model, 'kode_barang')->textInput(['maxlength' => 10]) ?>
+	
+	<?= $form->field($model, 'kode_barang')->dropDownList(
+		ArrayHelper::map(Barang::find()->all(),'kode','nama'),
+		['prompt'=>'Select Barang']
+	) ?>
+	
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
