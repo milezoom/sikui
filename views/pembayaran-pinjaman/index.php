@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Pembayaran Pinjaman', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Buat Pembayaran Pinjaman', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_bayar',
             'no_angsuran',
             'jumlah',
-            'keterangan',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

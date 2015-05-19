@@ -2,9 +2,14 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\TransaksiSimpanan;
+use app\models\TransaksiSimpananSearch;
+use app\models\Anggota;
+use app\models\AnggotaSearch;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiSimpanan */
+$model = Yii::$app->user->identity->no_anggota;
 $this->title = $model->no_anggota;
 $coba = $model->no_anggota;
 $this->params['breadcrumbs'][] = ['label' => 'TransaksiSimpanan', 'url' => ['index']];

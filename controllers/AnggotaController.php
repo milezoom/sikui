@@ -38,12 +38,14 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+			
+			return $this->render('index', [
+               'searchModel' => $searchModel,
+               'dataProvider' => $dataProvider,
+			]);
         }        
     }
 
@@ -78,7 +80,7 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
-
+			$timezone = date_default_timezone_get();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->no_anggota]);
             } else {

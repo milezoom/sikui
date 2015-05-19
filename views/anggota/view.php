@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update Anggota', ['update', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update Profil Anggota', ['update', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Ubah Status', ['status', 'id' => $model->no_anggota], ['class' => 'btn btn-primary']) ?>
     </p>
 
@@ -28,9 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'alamat',
             'tgl_lahir',
             'no_telepon',
+			'jenis_kelamin',
             'thn_pensiun',
-            'status:boolean',
-            'is_pns:boolean',
+            'status',
+            'is_pns',
             'no_ktp',
             'tgl_masuk',
             'total_simpanan',

@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\TransaksiSimpanan;
 use app\models\TransaksiSimpananSearch;
+use app\models\Anggota;
+use app\models\AnggotaSearch;
 use yii\web\NotFoundHttpException;
 
 class LihatSimpananAnggotaController extends Controller

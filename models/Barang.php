@@ -44,9 +44,9 @@ class Barang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode' => 'Kode',
-            'nama' => 'Nama',
-            'harga' => 'Harga',
+            'kode' => 'Kode Produk',
+            'nama' => 'Nama Produk',
+            'harga' => 'Harga Produk',
             'img_path' => 'Img Path',
         ];
     }

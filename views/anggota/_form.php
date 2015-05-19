@@ -24,13 +24,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
+    <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Perempuan' => 'Perempuan','Laki Laki' => 'Laki-laki'])?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'thn_pensiun')->textInput() ?>
 
-    <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
+    <?= $form->field($model, 'status')->dropDownList(['non' => 'Tidak Aktif','aktif' => 'Aktif'])?>
 
-    <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
+    <?= $form->field($model, 'is_pns')->dropDownList(['Honorer' => 'Honorer','PNS' => 'PNS'])?>
 
     <?= $form->field($model, 'no_ktp')->textInput(['maxlength' => 16, 'placeholder' => 'Masukan 16 digit Nomor KTP']) ?>
 

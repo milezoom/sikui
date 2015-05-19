@@ -22,9 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15]) ?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput() ?>
+    <?= $form->field($model, 'thn_pensiun')->textInput()?>
 
-    <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
+    <?= $form->field($model, 'is_pns')->dropDownList(['Honorer' => 'Honorer','PNS' => 'PNS'])?>
 
     <?= $form->field($model, 'no_ktp')->textInput(['maxlength' => 16]) ?>
 
