@@ -31,8 +31,6 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'tgl_pinjam')->textInput() ?>
 
-    <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
-
     <?= $form->field($model, 'banyak_angsuran')->textInput() ?>
 
     <?= $form->field($model, 'denda')->textInput() ?>

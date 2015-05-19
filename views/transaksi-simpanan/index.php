@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'jumlah',
             // 'keterangan',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
