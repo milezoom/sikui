@@ -67,18 +67,8 @@ use yii\widgets\Menu;
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/wajib">
-											Tambah Simpanan Wajib
-											</a>
-										</li>
-                                   <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/sukarela">
-											Tambah Simpanan Sukarela
-											</a>
-										</li>
-                                     <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/ambil">
-											Ambil Simpanan
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/daftar">
+											Tambah/Ambil Simpanan
 											</a>
 										</li>
                                      <li>

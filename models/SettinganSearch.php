@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TransaksiPinjaman;
+use app\models\Settingan;
 
 /**
- * TransaksiPinjamanSearch represents the model behind the search form about `app\models\TransaksiPinjaman`.
+ * SettinganSearch represents the model behind the search form about `app\models\Settingan`.
  */
-class TransaksiPinjamanSearch extends TransaksiPinjaman
+class SettinganSearch extends Settingan
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
     public function rules()
     {
         return [
-            [['kode_trans', 'kode_pinjaman', 'no_anggota', 'tgl_pinjam', 'kode_barang'], 'safe'],
-            [['jumlah', 'sisa_piutang', 'banyak_angsuran', 'denda'], 'integer'],
+            [['key'], 'safe'],
+            [['value'], 'integer'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
      */
     public function search($params)
     {
-        $query = TransaksiPinjaman::find();
+        $query = Settingan::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,17 +56,10 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
         }
 
         $query->andFilterWhere([
-            'jumlah' => $this->jumlah,
-            'sisa_piutang' => $this->sisa_piutang,
-            'tgl_pinjam' => $this->tgl_pinjam,
-            'banyak_angsuran' => $this->banyak_angsuran,
-            'denda' => $this->denda,
+            'value' => $this->value,
         ]);
 
-        $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans])
-            ->andFilterWhere(['like', 'kode_pinjaman', $this->kode_pinjaman])
-            ->andFilterWhere(['like', 'no_anggota', $this->no_anggota])
-            ->andFilterWhere(['like', 'kode_barang', $this->kode_barang]);
+        $query->andFilterWhere(['like', 'key', $this->key]);
 
         return $dataProvider;
     }

@@ -8,6 +8,8 @@ use app\models\TransaksiSimpananSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Anggota;
+use app\models\AnggotaSearch;
 
 /**
  * TransaksiSimpananController implements the CRUD actions for TransaksiSimpanan model.
@@ -130,6 +132,57 @@ class TransaksiSimpananController extends Controller
     protected function findModel($id)
     {
         if (($model = TransaksiSimpanan::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+	
+	public function actionDaftar()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $searchModel = new AnggotaSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('daftar', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	 /**
+     * Displays a single TransaksiPinjaman model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionLihat($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('lihat', [
+                'model' => $this->findAnggota($id),
+            ]);
+        }        
+    }
+	
+	 /**
+     * Finds the TransaksiPinjaman model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return TransaksiPinjaman the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findAnggota($id)
+    {
+        if (($model = Anggota::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
