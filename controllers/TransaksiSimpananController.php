@@ -143,7 +143,7 @@ class TransaksiSimpananController extends Controller
     {
         $location = glob(Yii::getAlias('@realdir')."/web/uploads/".$filename.".csv")[0];
         $file = fopen($location, "r");
-        
+
         $counter = 0; 
         if($filename == "transaksi_simpanan") {
             while(!feof($file)) {
@@ -159,12 +159,12 @@ class TransaksiSimpananController extends Controller
                 }
                 $counter = $counter + 1;
             }
+            fclose($file);
+
+            unlink($location);
+
             return $this->redirect(['index']);
-        } 
-
-        fclose($file);
-
-        unlink($location);
+        }
     }
 
     /**

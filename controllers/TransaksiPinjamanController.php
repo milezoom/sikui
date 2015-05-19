@@ -142,10 +142,6 @@ class TransaksiPinjamanController extends Controller
         if ($anggota->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
-            date_default_timezone_set('Asia/Jakarta');
-            $jatuh_tempo = date("d-m-Y",strtotime("+1 month"));
-            $temp = new \DateTime(date('Y',strtotime($jatuh_tempo)).'-'.date('m',strtotime($jatuh_tempo)).'-15');
-            $model->jatuh_tempo = $temp;
             return $this->render('uang', [
                 'model' => $model,
 				'anggota' => $anggota,
@@ -183,11 +179,7 @@ class TransaksiPinjamanController extends Controller
 
         if ($anggota->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
-        } else {
-            date_default_timezone_set('Asia/Jakarta');
-            $jatuh_tempo = date("d-m-Y",strtotime("+1 month"));
-            $temp = new \DateTime(date('Y',strtotime($jatuh_tempo)).'-'.date('m',strtotime($jatuh_tempo)).'-15');
-            $model->jatuh_tempo = $temp;
+        } else {            
             return $this->render('barang', [
                'model' => $model,
 				'anggota' => $anggota,
