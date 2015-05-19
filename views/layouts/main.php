@@ -67,6 +67,7 @@ use yii\widgets\Menu;
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
                                     <li>
+<<<<<<< HEAD
                                         <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/wajib">
                                             Tambah Simpanan Wajib
                                         </a>
@@ -91,6 +92,17 @@ use yii\widgets\Menu;
                                             Tambah Simpanan Dari File CSV
                                         </a>
                                     </li>
+=======
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/daftar">
+											Tambah/Ambil Simpanan
+											</a>
+										</li>
+                                     <li>
+											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+											Cetak Simpanan Per Anggota
+											</a>
+										</li>
+>>>>>>> utari
                                 </ul>
                             </li>
                             <li class="dropdown">
