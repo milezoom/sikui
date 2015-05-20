@@ -17,7 +17,8 @@ use app\models\Unit;
     <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20, 'placeholder' => 'Masukan 10 digit nomor anggota']) ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
-
+	
+	<!-- HACK -->
     <?= $form->field($model, 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
 		['prompt'=>'Pilih Unit']
@@ -31,7 +32,7 @@ use app\models\Unit;
 
     <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'thn_pensiun')->textInput() ?>
 
     <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
 

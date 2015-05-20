@@ -116,11 +116,14 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             //FIXME: error gak bisa update model
             $model = $this->findModel($id);
+			$user = new UserRecord();
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-                && Model::validateMultiple([$model,$user])){
-                return $this->redirect(['index']);
+			  && Model::validateMultiple([$model,$user])){
+				$model->save(false);
+				$user->save(false);
+				return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
