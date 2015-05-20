@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Anggota;
+use app\models\UserRecord;
 use app\models\AnggotaSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -78,11 +80,21 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
+            $user = new UserRecord();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+
+                $model->save();
+                $user->no_anggota = $model->no_anggota;
+                $nama = explode(" ",$model->nama);
+                $user->username = strtolower($nama[0]).$model->no_anggota;
+                $user->password = Yii::$app->getSecurity()->generateRandomString(5);
+                $user->save();
+
                 return $this->redirect(['view', 'id' => $model->no_anggota]);
             } else {
                 return $this->render('create', [
+                    'user' => $user,
                     'model' => $model,
                 ]);
             }
@@ -102,13 +114,17 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
+            //FIXME: error gak bisa update model
             $model = $this->findModel($id);
+            $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
+                && Model::validateMultiple([$model,$user])){
                 return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
+                    'user' => $user,
                 ]);
             }
         }        
