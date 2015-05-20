@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
 
-$this->title = $model->kode_trans;
+$this->title = 'Detail Transaksi Pinjaman '.$model->kode_trans;
 $this->params['breadcrumbs'][] = ['label' => 'Pinjaman Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -39,9 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'jatuh_tempo',
             'banyak_angsuran',
             'denda',
-            'bunga',
             'kode_barang',
-            'keterangan',
         ],
     ]) ?>
 

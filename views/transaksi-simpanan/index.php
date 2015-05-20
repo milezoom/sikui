@@ -29,7 +29,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'jumlah',
             // 'keterangan',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                          'template'=>'{view}',
+                            'buttons'=>[
+                              'view' => function ($url, $model) {     
+                                return Html::a('<span >Lihat</span>', $url, [
+                                        'title' => Yii::t('yii', 'Lihat Transaksi'),
+										'class' => 'btn btn-success',
+                                ]);                                
+                              }
+							]                            
+            ],
+			
+			['class' => 'yii\grid\ActionColumn',
+                          'template'=>'{delete}',
+                            'buttons'=>[
+                              'delete' => function ($url, $model) {     
+                                return Html::a('<span >Hapus</span>', $url, [
+                                        'title' => Yii::t('yii', 'Hapus Transaksi'),
+										'class' => 'btn btn-danger',
+                                ]);                                
+                              }
+							]                            
+            ],
         ],
     ]); ?>
 

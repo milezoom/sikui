@@ -49,7 +49,18 @@ class TransaksiSimpananController extends Controller
         }        
     }
 
-
+	public function actionView($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }        
+    }
 
     /**
      * Creates a new TransaksiSimpanan model.
