@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\Unit;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
@@ -16,7 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
 
-    <?= $form->field($model, 'kode_unit')->dropDownList(['0000000001'=> 'Fasilkom', '0000000002' => 'Rektorat']) ?>
+    <?= $form->field($model, 'kode_unit')->dropDownList(
+		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
+		['prompt'=>'Pilih Unit']
+	) ?>
 
     <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini']) ?>
 

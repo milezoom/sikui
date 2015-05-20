@@ -20,10 +20,7 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
 
-   <?= $form->field($model, 'no_anggota')->dropDownList(
-		ArrayHelper::map(Anggota::find()->all(),'no_anggota','nama'),
-		['prompt'=>'Select Anggota']
-	) ?>
+   <?= $form->field($model, 'no_anggota') ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
