@@ -81,21 +81,21 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
             $user = new UserRecord();
+            $items = [$model,$user];
 
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+            if ($items[0]->load(Yii::$app->request->post()) && $items[1]->load(Yii::$app->request->post())) {
 
-                $model->save();
-                $user->no_anggota = $model->no_anggota;
-                $nama = explode(" ",$model->nama);
-                $user->username = strtolower($nama[0]).$model->no_anggota;
-                $user->password = Yii::$app->getSecurity()->generateRandomString(5);
-                $user->save();
+                $items[0]->save(false);
+                $items[1]->no_anggota = $items[0]->no_anggota;
+                $nama = explode(" ",$items[0]->nama);
+                $items[1]->username = strtolower($nama[0]).$items[0]->no_anggota;
+                $items[1]->password = Yii::$app->getSecurity()->generateRandomString(5);
+                $items[1]->save(false);
 
-                return $this->redirect(['view', 'id' => $model->no_anggota]);
+                return $this->redirect(['view', 'id' => $items[0]->no_anggota]);
             } else {
                 return $this->render('create', [
-                    'user' => $user,
-                    'model' => $model,
+                    'items' => $items
                 ]);
             }
         }        
@@ -116,18 +116,16 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             //FIXME: error gak bisa update model
             $model = $this->findModel($id);
-			$user = new UserRecord();
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
+            $items = [$model,$user];
 
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-			  && Model::validateMultiple([$model,$user])){
-				$model->save(false);
-				$user->save(false);
+            if (Model::loadMultiple($items, Yii::$app->request->post()) && Model::validateMultiple($items)){
+				$items[0]->save();
+                $items[1]->save();
 				return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
-                    'model' => $model,
-                    'user' => $user,
+                    'items' => $items
                 ]);
             }
         }        

@@ -14,38 +14,37 @@ use app\models\Unit;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20, 'placeholder' => 'Masukan 10 digit nomor anggota']) ?>
+    <?= $form->field($items[0], 'no_anggota')->textInput(['maxlength' => 20, 'placeholder' => 'Masukan 10 digit nomor anggota']) ?>
 
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
+    <?= $form->field($items[0], 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
 	
-	<!-- HACK -->
-    <?= $form->field($model, 'kode_unit')->dropDownList(
+    <?= $form->field($items[0], 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
 		['prompt'=>'Pilih Unit']
 	) ?>
 
-    <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini']) ?>
+    <?= $form->field($items[0], 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini']) ?>
 
-    <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
+    <?= $form->field($items[0], 'tgl_lahir')->textInput(['type' => 'date']) ?>
 
-    <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
+    <?= $form->field($items[0], 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
+    <?= $form->field($items[0], 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput() ?>
+    <?= $form->field($items[0], 'thn_pensiun')->textInput() ?>
 
-    <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
+    <?= $form->field($items[0], 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
 
-    <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
+    <?= $form->field($items[0], 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
     
-    <?= $form->field($user, 'role')->radioList(array('anggota' => 'Anggota Biasa','admin' => 'Admin Sistem')) ?>
+    <?= $form->field($items[1], 'role')->radioList(array('anggota' => 'Anggota Biasa','admin' => 'Admin Sistem')) ?>
 
-    <?= $form->field($model, 'no_ktp')->textInput(['maxlength' => 16, 'placeholder' => 'Masukan 16 digit Nomor KTP']) ?>
+    <?= $form->field($items[0], 'no_ktp')->textInput(['maxlength' => 16, 'placeholder' => 'Masukan 16 digit Nomor KTP']) ?>
 
-    <?= $form->field($model, 'tgl_masuk')->textInput(['type' => 'date']) ?>
+    <?= $form->field($items[0], 'tgl_masuk')->textInput(['type' => 'date']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
