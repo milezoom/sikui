@@ -34,13 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                           'template'=>'{lihat}',
                             'buttons'=>[
                               'lihat' => function ($url, $model) {     
-                                return Html::a('<span class="glyphicon glyphicon-plus"></span>', $url, [
+                                return Html::a('<span >Tambah</span>', $url, [
                                         'title' => Yii::t('yii', 'Pilih Anggota'),
+										'class' => 'btn btn-success'
                                 ]);                                
-            
                               }
-                          ]                            
-                            ],
+							]                            
+            ],
         ],
     ]); ?>
 
