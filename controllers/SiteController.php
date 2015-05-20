@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Anggota;
+use app\models\Unit;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -94,8 +96,15 @@ class SiteController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return $this::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
+			//V temporary
+			$sesuatu = Anggota::findOne(2015050005);
+			$unit = Unit::findOne($sesuatu->kode_unit);
             $pdf = new Pdf([
-                'content' => $this->renderPartial('kuitansi'),
+                'content' => $this->renderPartial('kuitansi',[
+					'nama_anggota'=>$sesuatu->nama,
+					'no_anggota'=>$sesuatu->no_anggota,
+					'unit'=>$unit->nama,
+				]),
                 'format' => Pdf::FORMAT_FOLIO,
                 'orientation' => Pdf::ORIENT_LANDSCAPE,
                 'options' => [

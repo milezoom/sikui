@@ -25,13 +25,13 @@ $this->title = 'Kuitansi';
 				<div class="col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Untuk: <a href="#">Nama Anggota</a></h4>
+							<h4>Untuk: <a href="#"><?php echo $nama_anggota;?></a></h4>
 						</div>
 						<div class="row text-right">
 							<div class="col-xs-2">
 								<p>
-									No Anggota : <br>
-									Unit : <br>
+									No Anggota : <?php echo $no_anggota;?> <br> 
+									Unit : <?php echo $unit;?><br>
 									Simp. Wajib : <br>
 									Simp. Sukarela : <br>
 								</p>
