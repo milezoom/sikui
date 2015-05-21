@@ -72,7 +72,7 @@ class TransaksiSimpananController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionWajib()
+    public function actionWajib($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -84,6 +84,7 @@ class TransaksiSimpananController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Wajib', [
                     'model' => $model,
                 ]);
@@ -96,7 +97,7 @@ class TransaksiSimpananController extends Controller
      * @return mixed
      */
 
-    public function actionSukarela()
+    public function actionSukarela($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -108,6 +109,7 @@ class TransaksiSimpananController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Sukarela',[
                     'model' => $model,
                 ]);
@@ -120,7 +122,7 @@ class TransaksiSimpananController extends Controller
      * @return mixed
      */
 
-    public function actionAmbil()
+    public function actionAmbil($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -132,6 +134,7 @@ class TransaksiSimpananController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Ambil',[
                     'model' => $model,
                 ]);
