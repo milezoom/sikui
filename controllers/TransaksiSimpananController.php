@@ -12,6 +12,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use app\models\Unit;
+use kartik\mpdf\Pdf;
+
 
 /**
  * TransaksiSimpananController implements the CRUD actions for TransaksiSimpanan model.
@@ -230,6 +233,41 @@ class TransaksiSimpananController extends Controller
             ]);
         }        
     }
+	
+	 public function actionPrintKuitansi($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			//V temporary
+			$sesuatu = TransaksiSimpanan::findOne($id);
+			$anggota = Anggota::findOne($sesuatu->no_anggota);
+			$unit = Unit::findOne($anggota->kode_unit);
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('kuitansi',[
+					'kode_trans'=>$sesuatu->kode_trans,
+					'jenis'=>$sesuatu->kode_simpanan,
+					'jumlah'=>$sesuatu->jumlah,
+					'keterangan'=>$sesuatu->keterangan,
+					'no_anggota'=>$anggota->no_anggota,	
+					'nama_unit'=>$unit->nama,
+					'nama'=>$anggota->nama,
+					'wajib'=>$anggota->total_simpanan_wajib,
+					'sukarela'=>$anggota->total_simpanan_sukarela,
+				]),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }
+    }	
 	
 	 /**
      * Finds the TransaksiPinjaman model based on its primary key value.

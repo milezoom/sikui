@@ -20,7 +20,12 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['value'=> 'PJBG', 'readonly' => true]) ?>
 
-   <?= $form->field($model, 'no_anggota') ?>
+	<?= $form->field($model, 'no_anggota') ?>
+	
+	<?= $form->field($model, 'kode_barang')->dropDownList(
+		ArrayHelper::map(Barang::find()->all(),'kode','nama'),
+		['prompt'=>'Select Barang']
+	) ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 

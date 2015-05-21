@@ -33,8 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'is_pns:boolean',
             'no_ktp',
             'tgl_masuk',
-            'total_simpanan',
+			'total_simpanan_wajib',
+			'total_simpanan_sukarela',
             'total_pinjaman',
+			
         ],
     ]) ?>
 
