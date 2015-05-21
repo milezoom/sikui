@@ -48,6 +48,17 @@ class SiteController extends Controller
             ],
         ];
     }
+	
+	public function beforeAction($action)
+	{
+		if (parent::beforeAction($action)) {
+			if ($action->id=='error')
+				 $this->layout ='guest';
+			return true;
+		} else {
+			return false;
+		}
+	}
 
     public function actionIndex()
     {
