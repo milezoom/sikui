@@ -149,24 +149,6 @@ class TransaksiPinjamanController extends Controller
             ]);
         }
     }
-	/**
-     * Add Simpanan Sukarela to an existing Anggota model.
-     * If successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-    
-    public function actionAmbil($id)
-    {
-        $model = $this->findModel($id);
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->no_anggota]);
-        } else {
-            return $this->render('ambil',[
-                'model' => $model,
-            ]);
-        }
-    }*/
 	
 	 /**
      * Creates a new TransaksiPinjaman model.
@@ -180,7 +162,11 @@ class TransaksiPinjamanController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
+<<<<<<< HEAD
         } else {     
+=======
+        } else {   
+>>>>>>> origin/master
 			$model->no_anggota = $id;
             return $this->render('barang', [
                'model' => $model,

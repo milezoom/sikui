@@ -6,8 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
 
+<<<<<<< HEAD
 $this->title = $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'TransaksiSimpanan', 'url' => ['no_anggota']];
+=======
+$this->title = 'Detail Anggota : '.$model->nama;
+$this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
+>>>>>>> origin/master
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-simpanan-view">
