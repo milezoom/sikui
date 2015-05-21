@@ -180,7 +180,8 @@ class TransaksiPinjamanController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
-        } else {            
+        } else {     
+			$model->no_anggota = $id;
             return $this->render('barang', [
                'model' => $model,
 				'anggota' => $anggota,
@@ -200,7 +201,9 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('daftar', [
                 'searchModel' => $searchModel,

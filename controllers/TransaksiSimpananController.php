@@ -58,7 +58,7 @@ class TransaksiSimpananController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionWajib()
+    public function actionWajib($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -66,12 +66,14 @@ class TransaksiSimpananController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new TransaksiSimpanan();
-
+			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Wajib', [
                     'model' => $model,
+					'anggota' => $anggota,
                 ]);
             }
         }
@@ -82,7 +84,7 @@ class TransaksiSimpananController extends Controller
      * @return mixed
      */
 
-    public function actionSukarela()
+    public function actionSukarela($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -90,12 +92,14 @@ class TransaksiSimpananController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new TransaksiSimpanan();
-
+			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Sukarela',[
                     'model' => $model,
+					'anggota' => $anggota,
                 ]);
             }
         }        
@@ -106,7 +110,7 @@ class TransaksiSimpananController extends Controller
      * @return mixed
      */
 
-    public function actionAmbil()
+    public function actionAmbil($id)
     {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
@@ -114,12 +118,14 @@ class TransaksiSimpananController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new TransaksiSimpanan();
-
+			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect('index');
             } else {
+				$model->no_anggota = $id;
                 return $this->render('Ambil',[
                     'model' => $model,
+					'anggota' => $anggota,
                 ]);
             }
         }        
@@ -192,9 +198,11 @@ class TransaksiSimpananController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-            $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+			$searchModel = new AnggotaSearch();
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+			
             return $this->render('daftar', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,

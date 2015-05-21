@@ -20,10 +20,7 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
 
-   <?= $form->field($model, 'no_anggota')->dropDownList(
-		ArrayHelper::map(Anggota::find()->all(),'no_anggota','nama'),
-		['prompt'=>'Select Anggota']
-	) ?>
+	<?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 10]) ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
@@ -34,8 +31,6 @@ use app\models\Anggota;
     <?= $form->field($model, 'banyak_angsuran')->textInput() ?>
 
     <?= $form->field($model, 'denda')->textInput() ?>
-
-    <?= $form->field($model, 'kode_barang')->textInput(['maxlength' => 10]) ?>
 	
 	<?= $form->field($model, 'kode_barang')->dropDownList(
 		ArrayHelper::map(Barang::find()->all(),'kode','nama'),

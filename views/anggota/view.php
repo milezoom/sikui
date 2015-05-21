@@ -36,6 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_masuk',
             'total_simpanan',
             'total_pinjaman',
+			'total_simpanan_wajib',
+			'total_simpanan_sukarela',
         ],
     ]) ?>
 
