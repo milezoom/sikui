@@ -144,6 +144,10 @@ width: 50%;
 width: 50%;
 }
 
+.transaksi-pinjaman-create .form-control{
+width: 50%;
+}
+
 textarea .form-control{
 height: 200px;
 }
