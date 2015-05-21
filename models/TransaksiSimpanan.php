@@ -49,7 +49,7 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
     {
         return [
             'kode_trans' => 'Kode Transaksi',
-            'kode_simpanan' => 'Kode Simpanan',
+            'kode_simpanan' => 'Jenis Simpanan',
             'tanggal' => 'Tanggal',
             'no_anggota' => 'No Anggota',
             'jumlah' => 'Jumlah',

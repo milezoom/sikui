@@ -4,33 +4,32 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PembayaranPinjamanSearch */
+/* @var $searchModel app\models\TransaksiSimpananSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar Pembayaran Pinjaman';
+$this->title = 'Riwayat Transaksi Simpanan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pembayaran-pinjaman-index">
+<div class="transaksi-simpanan-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Buat Pembayaran Pinjaman', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'kode_trans',
-            'tgl_bayar',
-            'no_angsuran',
+            'kode_simpanan',
+            'tanggal',
+            //'no_anggota',
             'jumlah',
+            // 'keterangan',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

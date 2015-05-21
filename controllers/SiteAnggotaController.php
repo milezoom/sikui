@@ -10,8 +10,10 @@ use app\models\LoginForm;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
 use yii\web\NotFoundHttpException;
-
-
+use app\models\TransaksiSimpananSearch;
+use app\models\TransaksiSimpanan;
+use app\models\TransaksiPinjaman;
+use app\models\TransaksiPinjamanSearch;
 
 class SiteAnggotaController extends Controller
 {
@@ -65,7 +67,39 @@ class SiteAnggotaController extends Controller
             'model' => $model,
         ]);
     }
+	
+	public function actionSimpananAnggota(){
+		$searchModel = new TransaksiSimpananSearch();
+		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
+		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+		$queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
+		
+        $dataProvider = $searchModel->search($queryParams);
 
+            return $this->render('simpanan-anggota', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+	
+	}
+	
+	public function actionPinjamanAnggota(){
+		$searchModel = new TransaksiPinjamanSearch();
+		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
+		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+		$queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
+		
+        $dataProvider = $searchModel->search($queryParams);
+
+            return $this->render('pinjaman-anggota', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+	
+	}
+	
     public function actionLogout()
     {
         Yii::$app->user->logout();

@@ -11,7 +11,6 @@ use Yii;
  * @property string $tgl_bayar
  * @property integer $no_angsuran
  * @property integer $jumlah
- * @property string $keterangan
  *
  * @property TransaksiPinjaman $kodeTrans
  */

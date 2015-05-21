@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'tgl_bayar')->textInput() ?>
+    <?= $form->field($model, 'tgl_bayar')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'no_angsuran')->textInput() ?>
 

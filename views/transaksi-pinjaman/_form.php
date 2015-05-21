@@ -29,7 +29,7 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'sisa_piutang')->textInput() ?>
 
-    <?= $form->field($model, 'tgl_pinjam')->textInput() ?>
+    <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 

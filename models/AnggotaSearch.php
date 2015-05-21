@@ -19,7 +19,7 @@ class AnggotaSearch extends Anggota
     {
         return [
             [['no_anggota', 'nama', 'kode_unit', 'alamat', 'tgl_lahir', 'no_telepon', 'no_ktp', 'tgl_masuk'], 'safe'],
-            [['jenis_kelamin', 'status', 'is_pns'], 'boolean'],
+            [['jenis_kelamin', 'status', 'is_pns'], 'string'],
             [['thn_pensiun', 'total_simpanan', 'total_pinjaman'], 'integer'],
         ];
     }
@@ -58,10 +58,10 @@ class AnggotaSearch extends Anggota
 
         $query->andFilterWhere([
             'tgl_lahir' => $this->tgl_lahir,
-            'jenis_kelamin' => $this->jenis_kelamin,
+            //'jenis_kelamin' => $this->jenis_kelamin,
             'thn_pensiun' => $this->thn_pensiun,
-            'status' => $this->status,
-            'is_pns' => $this->is_pns,
+            //'status' => $this->status,
+            //'is_pns' => $this->is_pns,
             'tgl_masuk' => $this->tgl_masuk,
             'total_simpanan' => $this->total_simpanan,
             'total_pinjaman' => $this->total_pinjaman,
@@ -72,7 +72,10 @@ class AnggotaSearch extends Anggota
             ->andFilterWhere(['like', 'kode_unit', $this->kode_unit])
             ->andFilterWhere(['like', 'alamat', $this->alamat])
             ->andFilterWhere(['like', 'no_telepon', $this->no_telepon])
-            ->andFilterWhere(['like', 'no_ktp', $this->no_ktp]);
+            ->andFilterWhere(['like', 'no_ktp', $this->no_ktp])
+			->andFilterWhere(['like', 'jenis_kelamin', $this->jenis_kelamin])
+			->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'is_pns', $this->is_pns]);
 
         return $dataProvider;
     }
