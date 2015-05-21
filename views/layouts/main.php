@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\Menu;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -16,6 +17,7 @@ use yii\widgets\Menu;
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+		<link rel="icon" href="<?= Yii::$app->request->getBaseUrl()?>/sikui.ico" type="image/x-icon" />
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>
@@ -57,7 +59,7 @@ use yii\widgets\Menu;
                     <div class="collapse navbar-collapse" id="navbar-data">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl(); ?>">Beranda</a>
+                                <a href="<?php echo Url::home(); ?>">Beranda</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
@@ -67,17 +69,17 @@ use yii\widgets\Menu;
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
                                             Cetak Simpanan Per Anggota
                                         </a>
                                     </li>
 									 <li>
-											<a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/daftar">
+											<a href="<?php echo Url::toRoute('/transaksi-simpanan/daftar'); ?>">
 											Tambah/Ambil Simpanan
 											</a>
 										</li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan/upload">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan/upload'); ?>">
                                             Tambah Simpanan Dari File CSV
                                         </a>
 									</li>
@@ -91,17 +93,17 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman">
+                                        <a href="<?php echo Url::toRoute('/transaksi-pinjaman'); ?>">
                                             Lihat Transaksi Pinjaman
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-pinjaman/daftar">
+                                        <a href="<?php echo Url::toRoute('/transaksi-pinjaman/daftar'); ?>">
                                             Buat Transaksi Pinjaman
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/pembayaran-pinjaman/create">
+                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman/create'); ?>">
                                             Bayar Pinjaman
                                         </a>
                                     </li>
@@ -114,11 +116,11 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
                                             Lihat Daftar Transaksi
                                         </a>
                                     </li>
-                                    <li><a href="<?= Yii::$app->request->getBaseUrl() ?>/transaksi-simpanan">
+                                    <li><a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
                                         Cetak Transaksi per Bulan
                                         </a>
                                     </li>
@@ -131,12 +133,12 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota/create">
+                                        <a href="<?php echo Url::toRoute('/anggota/create'); ?>">
                                             Tambah Anggota Baru
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/anggota">
+                                        <a href="<?php echo Url::toRoute('/anggota'); ?>">
                                             Lihat Daftar Anggota
                                         </a>
                                     </li>
@@ -150,12 +152,12 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/barang/create">
+                                        <a href="<?php echo Url::toRoute('/barang/create'); ?>">
                                             Tambah Barang
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/barang">
+                                        <a href="<?php echo Url::toRoute('/barang'); ?>">
                                             List Barang
                                         </a>
                                     </li>
@@ -168,19 +170,19 @@ use yii\widgets\Menu;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-kuitansi">
+                                        <a href="<?php echo Url::toRoute('/site/print-kuitansi'); ?>">
                                             Pembayaran Simpanan
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?= Yii::$app->request->getBaseUrl() ?>/site/print-angsuran">
+                                        <a href="<?php echo Url::toRoute('/site/print-angsuran'); ?>">
                                             Pembayaran Angsuran
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl()?>/site/print-transaksi">Cetak Transaksi</a>
+                                <a href="<?php echo Url::toRoute('/site/print-transaksi'); ?>">Cetak Transaksi</a>
                             </li>
                         </ul>
                     </div>
@@ -188,15 +190,14 @@ use yii\widgets\Menu;
             </div>
             <div class="text-right">
                 <?php
-    if(!Yii::$app->user->isGuest){
-    echo 'Selamat Datang, ';
-    echo Yii::$app->user->identity->username;
-    echo ' ';
-    echo '<a href="';
-    echo Yii::$app->request->getBaseUrl();
-    echo '/site/logout';
-    echo '" data-method="post">(keluar)</a>';
-}
+                    if(!Yii::$app->user->isGuest){
+						echo 'Selamat Datang, ';
+                        echo Yii::$app->user->identity->username;
+                        echo ' ';
+                        echo '<a href="';
+                        echo Url::toRoute('/site/logout');
+                        echo '" data-method="post">(keluar)</a>';
+                    }
                 ?>                
             </div>
             <div class="content">
@@ -206,7 +207,7 @@ use yii\widgets\Menu;
         </div>
         <div class="container">
             <footer class="footer text-center">            
-                &copy; <?= date('Y') ?> Propensi C05, <?= Yii::powered() ?>            
+                &copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?>            
             </footer>
         </div>
         <?php $this->endBody() ?>
