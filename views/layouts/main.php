@@ -206,7 +206,7 @@ use yii\widgets\Menu;
         </div>
         <div class="container">
             <footer class="footer text-center">            
-                &copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?>            
+                &copy; <?= date('Y') ?> Propensi C05, <?= Yii::powered() ?>            
             </footer>
         </div>
         <?php $this->endBody() ?>

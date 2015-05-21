@@ -99,7 +99,7 @@ use yii\widgets\Menu;
         </div>
         <div class="container">
             <footer class="footer">
-                <p class="text-center">&copy; Propensi C05 <?= date('Y') ?>, <?= Yii::powered() ?></p>
+                <p class="text-center">&copy;<?= date('Y') ?> Propensi C05, <?= Yii::powered() ?></p>
             </footer>
         </div>
         <?php $this->endBody() ?>
