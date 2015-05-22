@@ -82,27 +82,24 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
-<<<<<<< HEAD
-			$timezone = date_default_timezone_get();
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-=======
             $user = new UserRecord();
 
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-
-                $model->save();
+                $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
                 $user->username = strtolower($nama[0]).$model->no_anggota;
-                $user->password = Yii::$app->getSecurity()->generateRandomString(5);
-                $user->save();
-
->>>>>>> origin/master
-                return $this->redirect(['view', 'id' => $model->no_anggota]);
+                $password = Yii::$app->getSecurity()->generateRandomString(5);
+                $user->password = $password;
+                $user->save(false);
+                return $this->render('credential', [
+                    'username'=>$user->username,
+                    'password'=>$password
+                ]);
             } else {
                 return $this->render('create', [
-                    'user' => $user,
                     'model' => $model,
+                    'user' => $user
                 ]);
             }
         }        
@@ -123,18 +120,15 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             //FIXME: error gak bisa update model
             $model = $this->findModel($id);
-			$user = new UserRecord();
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-			  && Model::validateMultiple([$model,$user])){
-				$model->save(false);
-				$user->save(false);
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())
+               && $model->save() && $user->save()){
 				return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
-                    'user' => $user,
+                    'user' => $user
                 ]);
             }
         }        

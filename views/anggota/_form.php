@@ -27,7 +27,6 @@ use app\models\Unit;
 =======
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
 	
-	<!-- HACK -->
     <?= $form->field($model, 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
 		['prompt'=>'Pilih Unit']
@@ -61,7 +60,7 @@ use app\models\Unit;
     <?= $form->field($model, 'tgl_masuk')->textInput(['type' => 'date'])->label('Tanggal Masuk *') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
