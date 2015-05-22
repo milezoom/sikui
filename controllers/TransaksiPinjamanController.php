@@ -7,6 +7,7 @@ use app\models\TransaksiPinjaman;
 use app\models\TransaksiPinjamanSearch;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,6 +44,24 @@ class TransaksiPinjamanController extends Controller
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	public function actionPenunggak()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			$searchModel = new TransaksiPinjamanSearch();
+			$query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
+
+            return $this->render('penunggak', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -207,19 +226,6 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             return $this->render('lihat', [
-                'model' => $this->findAnggota($id),
-            ]);
-        }        
-    }
-    
-    public function actionPenunggak($id)
-    {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            return $this->render('penunggak', [
                 'model' => $this->findAnggota($id),
             ]);
         }        
