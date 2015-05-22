@@ -48,7 +48,7 @@ class SiteController extends Controller
             ],
         ];
     }
-	
+    
 	public function beforeAction($action)
 	{
 		if (parent::beforeAction($action)) {
