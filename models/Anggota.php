@@ -56,7 +56,7 @@ class Anggota extends \yii\db\ActiveRecord
             [['kode_unit'], 'string', 'max' => 10],
             [['alamat'], 'string', 'max' => 150],
             [['no_telepon'], 'string', 'max' => 15],
-            [['no_ktp'], 'string', 'max' => 16],
+            [['no_ktp'], 'string','max' => 16],
             [['tgl_lahir'],'tgl_lahir_validation']
         ];
     }
