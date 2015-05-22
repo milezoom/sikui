@@ -186,9 +186,6 @@ use yii\helpers\Url;
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="<?php echo Url::toRoute('/site/print-transaksi'); ?>">Cetak Transaksi</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
