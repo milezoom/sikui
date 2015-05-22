@@ -7,6 +7,8 @@ use app\models\TransaksiPinjaman;
 use app\models\TransaksiPinjamanSearch;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -41,6 +43,26 @@ class TransaksiPinjamanController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new TransaksiPinjamanSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	public function actionPenunggak()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $searchModel = new AnggotaSearch();
+			$query = new Query();
+            $dataProvider = new ActiveDataProvider([
+				'query' => TransaksiPinjaman::find()->where(['>','jatuh_tempo',date('Y-m-d')])->all(),
+			]);
 
             return $this->render('index', [
                 'searchModel' => $searchModel,
@@ -207,19 +229,6 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             return $this->render('lihat', [
-                'model' => $this->findAnggota($id),
-            ]);
-        }        
-    }
-    
-    public function actionPenunggak($id)
-    {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            return $this->render('penunggak', [
                 'model' => $this->findAnggota($id),
             ]);
         }        

@@ -108,7 +108,7 @@ use yii\helpers\Url;
                                         </a>
                                     </li>
 									<li>
-                                        <a href="#">
+                                        <a href="<?php echo Url::toRoute('/transaksi-pinjaman/penunggak'); ?>">
                                             Lihat Penunggak
                                         </a>
                                     </li>
@@ -147,7 +147,6 @@ use yii\helpers\Url;
                                             Lihat Daftar Anggota
                                         </a>
                                     </li>
-                                    <li><a href="#">Lihat Daftar Penunggak</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
