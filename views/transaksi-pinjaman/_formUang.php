@@ -12,15 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4]) ?>
 
     <?= $form->field($model, 'no_anggota')?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
-    <?= $form->field($model, 'tgl_pinjam')->textInput() ?>
+    <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date']) ?>
+    
+    <?= $form->field($model, 'jatuh_tempo')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'banyak_angsuran')->radioList(array('5' => '5 kali','10' => '10 kali', '15' => '15 kali'))?> 
 

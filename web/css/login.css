@@ -97,6 +97,12 @@ body {
     font-size: 16px;
     text-align: left;
 }
+
+#loginform-password {
+    font-family: Verdana,sans-serif;
+    font-size: 1.2em;
+}
+
 #signupb {
     color: white;
     background: #4090a5;

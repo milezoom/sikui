@@ -142,6 +142,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            $model->kode_pinjaman = 'PJUG';
 			$model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
@@ -163,6 +164,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {   
+            $model->kode_pinjaman = 'PJBG';
 			$model->no_anggota = $id;
             return $this->render('barang', [
                'model' => $model,
@@ -205,6 +207,19 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             return $this->render('lihat', [
+                'model' => $this->findAnggota($id),
+            ]);
+        }        
+    }
+    
+    public function actionPenunggak($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            return $this->render('penunggak', [
                 'model' => $this->findAnggota($id),
             ]);
         }        
