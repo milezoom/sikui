@@ -230,6 +230,26 @@ class TransaksiPinjamanController extends Controller
             ]);
         }        
     }
+    
+    public function actionPrintBulan(){
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('/site/transaksi'),
+                'format' => Pdf::FORMAT_A4,
+                'orientation' => Pdf::ORIENT_PORTRAIT,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }        
+    }
 	
 	 /**
      * Finds the TransaksiPinjaman model based on its primary key value.
