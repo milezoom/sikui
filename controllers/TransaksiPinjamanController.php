@@ -8,7 +8,6 @@ use app\models\TransaksiPinjamanSearch;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -58,13 +57,11 @@ class TransaksiPinjamanController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-            $searchModel = new AnggotaSearch();
-			$query = new Query();
-            $dataProvider = new ActiveDataProvider([
-				'query' => TransaksiPinjaman::find()->where(['>','jatuh_tempo',date('Y-m-d')])->all(),
-			]);
+			$searchModel = new TransaksiPinjamanSearch();
+			$query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
 
-            return $this->render('index', [
+            return $this->render('penunggak', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

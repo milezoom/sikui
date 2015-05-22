@@ -95,7 +95,7 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNoAnggota()
+    public function getAnggota()
     {
         return $this->hasOne(Anggota::className(), ['no_anggota' => 'no_anggota']);
     }
