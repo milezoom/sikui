@@ -94,6 +94,10 @@ class TransaksiPinjamanController extends Controller
              $model->save(false);
 			 return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            date_default_timezone_set('Asia/Jakarta');
+            $tanggal = date('Y-m-d',strtotime('+1 month'));
+            $tanggal = strtotime($tanggal->format('Y').'-'.$tanggal->format('m').'-15');
+            $model->jatuh_tempo = $tanggal;
             $model->kode_pinjaman = 'PJUG';
             $model->no_anggota = $id;
             return $this->render('uang', [
@@ -111,6 +115,10 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            date_default_timezone_set('Asia/Jakarta');
+            $tanggal = date('Y-m-d',strtotime('+1 month'));
+            $tanggal = strtotime($tanggal->format('Y').'-'.$tanggal->format('m').'-15');
+            $model->jatuh_tempo = $tanggal;
             $model->kode_pinjaman = 'PJBG';
             $model->no_anggota = $id;
             return $this->render('barang', [
