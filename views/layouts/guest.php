@@ -16,6 +16,7 @@ use yii\widgets\Menu;
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+		<link rel="icon" href="<?= Yii::$app->request->getBaseUrl()?>/sikui.ico" type="image/x-icon" />
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>

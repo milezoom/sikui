@@ -15,17 +15,15 @@ use app\models\Anggota;
 <div class="transaksi-pinjaman-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
-
-    <?= $form->field($model, 'kode_pinjaman')->textInput(['value'=> 'PJBG', 'readonly' => true]) ?>
-
-	<?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
+    
+    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4]) ?>
 	
 	<?= $form->field($model, 'kode_barang')->dropDownList(
 		ArrayHelper::map(Barang::find()->all(),'kode','nama'),
 		['prompt'=>'Select Barang']
 	) ?>
+    
+    <?= $form->field($model, 'no_anggota') ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 	

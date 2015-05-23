@@ -2,6 +2,7 @@
  * Sign Up/Login Box v0.0.1 (http://codepen.io/koheishingai/FLvgs)
  * Copyright 2014 Kohei Shingai.
  * Licensed under MIT 
+ * Modified by Muslim(mu51im.x28@gmail.com)
  */
 .content {
     font-family: "Open Sans",sans-serif;
@@ -15,8 +16,15 @@ body {
     margin: 0;
     padding: 0;
     position: absolute;
-    background: #fff;
+    background: url(../img/bg_login.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     color: #333;
+}
+.row {
+	margin: 0;
 }
 #logmsk {
     position: absolute;
@@ -97,6 +105,12 @@ body {
     font-size: 16px;
     text-align: left;
 }
+
+#loginform-password {
+    font-family: Verdana,sans-serif;
+    font-size: 1.2em;
+}
+
 #signupb {
     color: white;
     background: #4090a5;

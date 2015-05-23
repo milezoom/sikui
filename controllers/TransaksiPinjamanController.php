@@ -7,6 +7,7 @@ use app\models\TransaksiPinjaman;
 use app\models\TransaksiPinjamanSearch;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,6 +44,24 @@ class TransaksiPinjamanController extends Controller
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	public function actionPenunggak()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			$searchModel = new TransaksiPinjamanSearch();
+			$query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
+
+            return $this->render('penunggak', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -143,6 +162,7 @@ class TransaksiPinjamanController extends Controller
 			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            $model->kode_pinjaman = 'PJUG';
 			$model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
@@ -165,9 +185,10 @@ class TransaksiPinjamanController extends Controller
 			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            $model->kode_pinjaman = 'PJBG';
 			$model->no_anggota = $id;
             return $this->render('barang', [
-               'model' => $model,
+                'model' => $model,
 				'anggota' => $anggota,
             ]);
         }

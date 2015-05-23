@@ -84,18 +84,23 @@ class AnggotaController extends Controller
             $model = new Anggota();
             $user = new UserRecord();
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-                $model->save();
+
+                $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
                 $user->username = strtolower($nama[0]).$model->no_anggota;
-                $user->password = Yii::$app->getSecurity()->generateRandomString(5);
-                $user->save();
-				Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
-                return $this->redirect(['view', 'id' => $model->no_anggota]);
+                $password = Yii::$app->getSecurity()->generateRandomString(5);
+                $user->password = $password;
+                $user->save(false);
+                Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
+                return $this->render('credential', [
+                    'username'=>$user->username,
+                    'password'=>$password
+                ]);
             } else {
                 return $this->render('create', [
-                    'user' => $user,
                     'model' => $model,
+                    'user' => $user
                 ]);
             }
         }        
@@ -116,7 +121,6 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
             //FIXME: error gak bisa update model
             $model = $this->findModel($id);
-			$user = new UserRecord();
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
@@ -128,7 +132,7 @@ class AnggotaController extends Controller
             } else {
                 return $this->render('update', [
                     'model' => $model,
-                    'user' => $user,
+                    'user' => $user
                 ]);
             }
         }        
