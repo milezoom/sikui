@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\Menu;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -16,6 +17,7 @@ use yii\widgets\Menu;
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+		<link rel="icon" href="<?= Yii::$app->request->getBaseUrl()?>/sikui.ico" type="image/x-icon" />
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/bootstrap.css">
         <link rel="stylesheet" href="<?= Yii::$app->request->getBaseUrl()?>/css/site.css">
     </head>
@@ -58,7 +60,7 @@ use yii\widgets\Menu;
                     <div class="collapse navbar-collapse" id="navbar-data">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl(); ?>/site-anggota/">Beranda</a>
+                                <a href="<?php echo Url::toRoute('/site-anggota/'); ?>">Beranda</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
@@ -66,12 +68,12 @@ use yii\widgets\Menu;
                                     Transaksi<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Lihat Simpanan</a></li>
-                                    <li><a href="#">Lihat Pinjaman</a></li>
+                                    <li><a href="<?= Yii::$app->request->getBaseUrl()?>/site-anggota/simpanan-anggota">Lihat Simpanan</a></li>
+                                    <li><a href="<?= Yii::$app->request->getBaseUrl()?>/site-anggota/pinjaman-anggota">Lihat Pinjaman</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?= Yii::$app->request->getBaseUrl()?>/barang/produk">Lihat Produk</a>
+                                <a href="<?php echo Url::toRoute('/barang/produk'); ?>">Lihat Produk</a>
                             </li>
                         </ul>
                     </div>
@@ -86,8 +88,7 @@ use yii\widgets\Menu;
                         echo Yii::$app->user->identity->username;
                         echo ' ';
                         echo '<a href="';
-                        echo Yii::$app->request->getBaseUrl();
-                        echo '/site/logout';
+                        echo Url::toRoute('/site/logout');
                         echo '" data-method="post">(keluar)</a>';
                     }
                 ?>                

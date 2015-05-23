@@ -6,7 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\TransaksiPinjaman */
 
-$this->title = 'Detail Pinjaman '.$model->kode_trans;
+
+$this->title = 'Detail Transaksi Pinjaman '.$model->kode_trans;
 $this->params['breadcrumbs'][] = ['label' => 'Pinjaman Anggota', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

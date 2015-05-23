@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Anggota;
+use app\models\UserRecord;
 use app\models\AnggotaSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,12 +40,14 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+			
+			return $this->render('index', [
+               'searchModel' => $searchModel,
+               'dataProvider' => $dataProvider,
+			]);
         }        
     }
 
@@ -78,12 +82,24 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
+            $user = new UserRecord();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->no_anggota]);
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+                $model->save(false);
+                $user->no_anggota = $model->no_anggota;
+                $nama = explode(" ",$model->nama);
+                $user->username = strtolower($nama[0]).$model->no_anggota;
+                $password = Yii::$app->getSecurity()->generateRandomString(5);
+                $user->password = $password;
+                $user->save(false);
+                return $this->render('credential', [
+                    'username'=>$user->username,
+                    'password'=>$password
+                ]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
+                    'user' => $user
                 ]);
             }
         }        
@@ -102,13 +118,17 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
+            //FIXME: error gak bisa update model
             $model = $this->findModel($id);
+            $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())
+               && $model->save() && $user->save()){
+				return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
+                    'user' => $user
                 ]);
             }
         }        

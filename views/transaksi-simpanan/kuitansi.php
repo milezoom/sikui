@@ -25,15 +25,23 @@ $this->title = 'Kuitansi';
 				<div class="col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Untuk: <a href="#"><?php echo $nama_anggota;?></a></h4>
+							<h4>Untuk: <?php echo $nama	 ?></h4>
 						</div>
-						<div class="row text-right">
-							<div class="col-xs-2">
+						<div class="row ">
+							<div class="col-xs-2 text-right">
 								<p>
-									No Anggota : <?php echo $no_anggota;?> <br> 
-									Unit : <?php echo $unit;?><br>
+									No Anggota : <br> 
+									Unit : <br>
 									Simp. Wajib : <br>
 									Simp. Sukarela : <br>
+								</p>
+							</div>
+							<div class="col-xs-7">
+								<p>
+									<?php echo $no_anggota ?><br>
+									<?php echo $nama_unit ?><br>
+									<?php echo $wajib ?><br>
+									<?php echo $sukarela ?><br>
 								</p>
 							</div>
 						</div>
@@ -45,7 +53,7 @@ $this->title = 'Kuitansi';
 				<thead>
 					<tr>
 						<th>
-							<h4>Nomor Transaksi</h4>
+							<h4>Kode Transaksi</h4>
 						</th>
 						<th>
 							<h4>Jenis Simpanan</h4>
@@ -60,17 +68,17 @@ $this->title = 'Kuitansi';
 				</thead>
 				<tbody>
 					<tr>
-						<td>00000001</td>
-						<td>Wajib</td>
-						<td class="text-right">Rp. 2.000.000,00</td>
-						<td>Simpanan Wajib Bulan Januari-September</td>  
+						<td><?php echo $kode_trans ?></td>
+						<td><?php echo $jenis ?></td>
+						<td class="text-right">Rp.<?php echo $jumlah ?></td>
+						<td><?php echo $keterangan ?></td>  
 					</tr>
 				</tbody>
 			</table>
 			<div class="row">
 				<div class="col-xs-12">
 					<strong>
-						TERBILANG : DUA JUTA RUPIAH <br><br><br><br>
+						TERBILANG :  <br><br><br><br>
 					</strong>
 				</div>
 			</div>

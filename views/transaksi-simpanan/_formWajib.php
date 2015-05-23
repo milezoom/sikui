@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 	
 	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPWJB' => 'Simpanan Wajib']) ?>
 
-    <?= $form->field($model, 'tanggal')->textInput() ?>
+    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) ?>
 
@@ -24,6 +24,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::a('Batal', ['daftar'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

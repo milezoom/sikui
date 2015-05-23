@@ -7,6 +7,7 @@ use app\models\TransaksiPinjaman;
 use app\models\TransaksiPinjamanSearch;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,6 +44,24 @@ class TransaksiPinjamanController extends Controller
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	public function actionPenunggak()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			$searchModel = new TransaksiPinjamanSearch();
+			$query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
+
+            return $this->render('penunggak', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -142,6 +161,7 @@ class TransaksiPinjamanController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
+            $model->kode_pinjaman = 'PJUG';
 			$model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
@@ -162,10 +182,11 @@ class TransaksiPinjamanController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
-        } else {   
+        } else {
+            $model->kode_pinjaman = 'PJBG';
 			$model->no_anggota = $id;
             return $this->render('barang', [
-               'model' => $model,
+                'model' => $model,
 				'anggota' => $anggota,
             ]);
         }
@@ -183,7 +204,9 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('daftar', [
                 'searchModel' => $searchModel,

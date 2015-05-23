@@ -3,8 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Anggota */
+
 
 $this->title = $model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Anggotas', 'url' => ['index']];
@@ -23,14 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'alamat',
             'tgl_lahir',
             'no_telepon',
-            'jenis_kelamin:boolean',
+            'jenis_kelamin',
             'thn_pensiun',
-            'status:boolean',
-            'is_pns:boolean',
+            'status',
+            'is_pns',
             'no_ktp',
             'tgl_masuk',
             'total_simpanan',
             'total_pinjaman',
+			'total_simpanan_wajib',
+			'total_simpanan_sukarela',
         ],
     ]) ?>
 
