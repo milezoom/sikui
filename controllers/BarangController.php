@@ -25,6 +25,11 @@ class BarangController extends Controller
 
     public function actionIndex()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new BarangSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -32,17 +37,29 @@ class BarangController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+		}
     }
 
     public function actionView($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+		}
     }
 
     public function actionCreate()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new Barang();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -52,10 +69,16 @@ class BarangController extends Controller
                 'model' => $model,
             ]);
         }
+		}
     }
 
     public function actionUpdate($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -65,12 +88,19 @@ class BarangController extends Controller
                 'model' => $model,
             ]);
         }
+		}
     }
 
     public function actionDelete($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
+		}
     }
 
     protected function findModel($id)
@@ -84,6 +114,11 @@ class BarangController extends Controller
 
     public function actionProduk()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new BarangSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $this->layout = 'anggota';
@@ -91,5 +126,6 @@ class BarangController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+		}
     }
 }

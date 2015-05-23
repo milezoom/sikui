@@ -95,6 +95,11 @@ class SiteController extends Controller
 
     public function actionPrintKuitansi()
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $sesuatu = Anggota::findOne(2015050005);
         $unit = Unit::findOne($sesuatu->kode_unit);
         $pdf = new Pdf([
@@ -112,10 +117,16 @@ class SiteController extends Controller
         ]);
 
         return $pdf->render();
+		}
     }
 
     public function actionPrintAngsuran() 
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $pdf = new Pdf([
             'content' => $this->renderPartial('print-angsuran'),
             'format' => Pdf::FORMAT_FOLIO,
@@ -127,10 +138,16 @@ class SiteController extends Controller
         ]);
 
         return $pdf->render();
+		}
     }        
 
     public function actionPrintTransaksi()
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $pdf = new Pdf([
             'content' => $this->renderPartial('transaksi'),
             'format' => Pdf::FORMAT_A4,
@@ -142,6 +159,7 @@ class SiteController extends Controller
         ]);
 
         return $pdf->render();
+		}
     }
 
     public function actionRedirectGuest(){

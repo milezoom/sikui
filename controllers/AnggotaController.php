@@ -27,6 +27,11 @@ class AnggotaController extends Controller
 
     public function actionIndex()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new AnggotaSearch();
         $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
         $queryParams["AnggotaSearch"]["status"] = "aktif";
@@ -35,19 +40,29 @@ class AnggotaController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ]);}
     }
 
     public function actionView($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
+}
     }
 
     public function actionCreate()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new Anggota();
         $user = new UserRecord();
 
@@ -68,11 +83,16 @@ class AnggotaController extends Controller
                 'model' => $model,
                 'user' => $user
             ]);
-        }        
+        }
+        }
     }
 
     public function actionUpdate($id)
-    {
+    {if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
         } elseif (Yii::$app->user->identity->role == 'anggota') {
@@ -91,10 +111,16 @@ class AnggotaController extends Controller
                 ]);
             }
         }        
+		
     }
 
     public function actionStatus($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
         } elseif (Yii::$app->user->identity->role == 'anggota') {
@@ -109,7 +135,8 @@ class AnggotaController extends Controller
                     'model' => $model,
                 ]);
             }
-        }        
+        }  }     
+		
     }
 
     protected function findModel($id)
