@@ -6,6 +6,7 @@ use Yii;
 use app\models\TransaksiSimpanan;
 use app\models\TransaksiSimpananSearch;
 use app\models\UploadForm;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
@@ -227,6 +228,38 @@ class TransaksiSimpananController extends Controller
         }        
     }
 	
+	public function actionList()
+    {
+        if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			$searchModel = new AnggotaSearch();
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+			
+            return $this->render('list', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }        
+    }
+	
+	public function actionSimpananAnggota($id){
+		$searchModel = new TransaksiSimpananSearch();
+		//$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+		$test = TransaksiSimpanan::find()->where(['no_anggota' => $id]);		
+        $dataProvider = new ActiveDataProvider(['query'=>$test]);
+
+            return $this->render('simpanan-anggota', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+	
+	}
+	
 	 /**
      * Displays a single TransaksiPinjaman model.
      * @param string $id
@@ -267,6 +300,34 @@ class TransaksiSimpananController extends Controller
 					'nama'=>$anggota->nama,
 					'wajib'=>$anggota->total_simpanan_wajib,
 					'sukarela'=>$anggota->total_simpanan_sukarela,
+				]),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
+
+            return $pdf->render();
+        }
+    }	
+	
+	public function actionSimpananAnggotaPrint($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return $this::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
+			$searchModel = new TransaksiSimpananSearch();
+			//$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+			$test = TransaksiSimpanan::find()->where(['no_anggota' => $id]);		
+			$dataProvider = new ActiveDataProvider(['query'=>$test]);
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('simpanan-anggota-print',[
+					'searchModel' => $searchModel,
+					'dataProvider' => $dataProvider,
 				]),
                 'format' => Pdf::FORMAT_FOLIO,
                 'orientation' => Pdf::ORIENT_LANDSCAPE,
