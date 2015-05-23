@@ -28,6 +28,11 @@ class TransaksiPinjamanController extends Controller
 
     public function actionIndex()
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new TransaksiPinjamanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -35,10 +40,16 @@ class TransaksiPinjamanController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+		}
     }
 
     public function actionPenunggak()
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new TransaksiPinjamanSearch();
         $query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
         $dataProvider = new ActiveDataProvider(['query' => $query]);
@@ -46,20 +57,32 @@ class TransaksiPinjamanController extends Controller
         return $this->render('penunggak', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);        
+        ]);  
+				}
     }
 
     public function actionView($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+		}
     }
 
 
 
     public function actionUpdate($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->kode_trans]);
@@ -68,12 +91,19 @@ class TransaksiPinjamanController extends Controller
                 'model' => $model,
             ]);
         }
+		}
     }
 
     public function actionDelete($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $this->findModel($id)->delete();
         return $this->redirect(['index']); 
+		}
     }
 
     protected function findModel($id)
@@ -87,6 +117,11 @@ class TransaksiPinjamanController extends Controller
 
     public function actionUang($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new TransaksiPinjaman();
         $anggota = new Anggota();
 
@@ -105,10 +140,16 @@ class TransaksiPinjamanController extends Controller
                 'anggota' => $anggota,
             ]);
         }
+		}
     }
 
     public function actionBarang($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new TransaksiPinjaman();
         $anggota = new Anggota();
 
@@ -126,10 +167,16 @@ class TransaksiPinjamanController extends Controller
                 'anggota' => $anggota,
             ]);
         }
+		}
     }
 
     public function actionDaftar()
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         $searchModel = new AnggotaSearch();
         $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
         $queryParams["AnggotaSearch"]["status"] = "Aktif";
@@ -139,13 +186,20 @@ class TransaksiPinjamanController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);        
+		}
     }
 
     public function actionLihat($id)
     {
+		if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } elseif (Yii::$app->user->identity->role == 'anggota') {
+            return SiteController::actionRedirectAnggota();
+        } elseif (Yii::$app->user->identity->role == 'admin') {
         return $this->render('lihat', [
             'model' => $this->findAnggota($id),
-        ]);        
+        ]);  
+			}
     }
 
     protected function findAnggota($id)

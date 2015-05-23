@@ -55,20 +55,29 @@ class SiteAnggotaController extends Controller
 	
 	public function actionView($id)
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } else{
         return $this->render('view', [
             'model' => $this->findModel($id),
-        ]);
+        ]);}
     }
 	
     public function actionIndex()
     {
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } else{
         $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
         return $this->render('profil', [
             'model' => $model,
-        ]);
+        ]);}
     }
 	
 	public function actionSimpananAnggota(){
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } else{
 		$searchModel = new TransaksiSimpananSearch();
 		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
 		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
@@ -80,10 +89,13 @@ class SiteAnggotaController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
+	}
 	}
 	
 	public function actionPinjamanAnggota(){
+	if (Yii::$app->user->isGuest) {
+            return SiteController::actionRedirectGuest();
+        } else{
 		$searchModel = new TransaksiPinjamanSearch();
 		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
 		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
@@ -95,7 +107,7 @@ class SiteAnggotaController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
+	}
 	}
 	
     public function actionLogout()
