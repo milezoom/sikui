@@ -68,8 +68,10 @@ use yii\helpers\Url;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
 
+
                                     <li><a href="<?php echo Url::toRoute('/settingan/update?id=SP'); ?>">
 										Ubah Nominal Simpanan Pokok</a></li>
+
 
                                     <li>
                                         <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
