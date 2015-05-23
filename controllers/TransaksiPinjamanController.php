@@ -11,6 +11,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\BarangSearch;
+use app\models\Barang;
 
 class TransaksiPinjamanController extends Controller
 {
@@ -33,8 +35,15 @@ class TransaksiPinjamanController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-        $searchModel = new TransaksiPinjamanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $searchModel = new TransaksiPinjamanSearch();
+			
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			
+			$queryParams["TransaksiPinjamanSearch"]["kode_pinjaman"] = "PJBG";
+			
+            $dataProvider = $searchModel->search($queryParams);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -123,11 +132,13 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new TransaksiPinjaman();
-        $anggota = new Anggota();
 
-        if ($model->load(Yii::$app->request->post())) {
-             $model->save(false);
-			 return $this->redirect(['index', 'id' => $model->kode_trans]);
+		$anggota = new Anggota();
+		
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
+            return $this->redirect(['index', 'id' => $model->kode_trans]);
+
         } else {
             date_default_timezone_set('Asia/Jakarta');
             $tanggal = date('Y-m-d',strtotime('+1 month'));
@@ -154,17 +165,15 @@ class TransaksiPinjamanController extends Controller
         $anggota = new Anggota();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
-            date_default_timezone_set('Asia/Jakarta');
-            $tanggal = date('Y-m-d',strtotime('+1 month'));
-            $tanggal = strtotime($tanggal->format('Y').'-'.$tanggal->format('m').'-15');
-            $model->jatuh_tempo = $tanggal;
+
             $model->kode_pinjaman = 'PJBG';
             $model->no_anggota = $id;
             return $this->render('barang', [
                 'model' => $model,
-                'anggota' => $anggota,
+				'anggota' => $anggota,
             ]);
         }
 		}
@@ -177,10 +186,12 @@ class TransaksiPinjamanController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-        $searchModel = new AnggotaSearch();
-        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["AnggotaSearch"]["status"] = "Aktif";
-        $dataProvider = $searchModel->search($queryParams);
+
+            $searchModel = new AnggotaSearch();
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+
 
         return $this->render('daftar', [
             'searchModel' => $searchModel,

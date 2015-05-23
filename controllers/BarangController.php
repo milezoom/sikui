@@ -7,8 +7,11 @@ use app\models\Barang;
 use app\models\BarangSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+/**
+ * BarangController implements the CRUD actions for Barang model.
+ */
 class BarangController extends Controller
 {
     public function behaviors()
@@ -62,14 +65,15 @@ class BarangController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = new Barang();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->kode]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', 'Barang berhasil ditambah!');
+                return $this->redirect(['view', 'id' => $model->kode]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
-		}
     }
 
     public function actionUpdate($id)
@@ -81,14 +85,15 @@ class BarangController extends Controller
         } elseif (Yii::$app->user->identity->role == 'admin') {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->kode]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('update', 'Barang berhasil di update!');
+                return $this->redirect(['view', 'id' => $model->kode]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         }
-		}
     }
 
     public function actionDelete($id)
@@ -98,9 +103,10 @@ class BarangController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
-		}
+            $this->findModel($id)->delete();
+			Yii::$app->getSession()->setFlash('delete', 'Barang berhasil di hapus!');
+            return $this->redirect(['index']);
+        }
     }
 
     protected function findModel($id)
@@ -127,5 +133,20 @@ class BarangController extends Controller
             'dataProvider' => $dataProvider,
         ]);
 		}
+    }
+	
+	 public function actionUpload()
+    {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->file && $model->validate()) {                
+                $model->file->saveAs('assets/barang' . $model->file->baseName . '.' . $model->file->extension);
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
     }
 }

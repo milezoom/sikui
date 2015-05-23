@@ -25,7 +25,6 @@ use app\models\Unit;
 
     <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
 
-    <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
 
     <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 

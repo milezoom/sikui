@@ -75,11 +75,9 @@ class SiteAnggotaController extends Controller
     }
 	
 	public function actionSimpananAnggota(){
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } else{
 		$searchModel = new TransaksiSimpananSearch();
 		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
 		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
 		$queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
 		
@@ -89,15 +87,13 @@ class SiteAnggotaController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	}
+	
 	}
 	
 	public function actionPinjamanAnggota(){
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } else{
 		$searchModel = new TransaksiPinjamanSearch();
 		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
 		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
 		$queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
 		
@@ -107,7 +103,7 @@ class SiteAnggotaController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	}
+	
 	}
 	
     public function actionLogout()

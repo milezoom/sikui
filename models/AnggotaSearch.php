@@ -74,7 +74,7 @@ class AnggotaSearch extends Anggota
             ->andFilterWhere(['like', 'no_telepon', $this->no_telepon])
             ->andFilterWhere(['like', 'no_ktp', $this->no_ktp])
 			->andFilterWhere(['like', 'jenis_kelamin', $this->jenis_kelamin])
-            ->andFilterWhere(['like', 'status', $this->status])
+			->andFilterWhere(['like', 'status', $this->status])
 			->andFilterWhere(['like', 'is_pns', $this->is_pns]);
 
         return $dataProvider;

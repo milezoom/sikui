@@ -32,15 +32,16 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-        $searchModel = new AnggotaSearch();
-        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["AnggotaSearch"]["status"] = "Aktif";
-        $dataProvider = $searchModel->search($queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);}
+            $searchModel = new AnggotaSearch();
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $dataProvider = $searchModel->search($queryParams);
+			
+			return $this->render('index', [
+               'searchModel' => $searchModel,
+               'dataProvider' => $dataProvider,
+			]);
+        }
     }
 
     public function actionView($id)
@@ -63,36 +64,34 @@ class AnggotaController extends Controller
         } elseif (Yii::$app->user->identity->role == 'anggota') {
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
-        $model = new Anggota();
-        $user = new UserRecord();
 
-        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-            $model->save(false);
-            $user->no_anggota = $model->no_anggota;
-            $nama = explode(" ",$model->nama);
-            $user->username = strtolower($nama[0]).$model->no_anggota;
-            $password = Yii::$app->getSecurity()->generateRandomString(5);
-            $user->password = $password;
-            $user->save(false);
-            return $this->render('credential', [
-                'username'=>$user->username,
-                'password'=>$password
-            ]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'user' => $user
-            ]);
-        }
+            $model = new Anggota();
+            $user = new UserRecord();
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+
+                $model->save(false);
+                $user->no_anggota = $model->no_anggota;
+                $nama = explode(" ",$model->nama);
+                $user->username = strtolower($nama[0]).$model->no_anggota;
+                $password = Yii::$app->getSecurity()->generateRandomString(5);
+                $user->password = $password;
+                $user->save(false);
+                Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
+                return $this->render('credential', [
+                    'username'=>$user->username,
+                    'password'=>$password
+                ]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'user' => $user
+                ]);
+            }
         }
     }
 
     public function actionUpdate($id)
-    {if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+    {
         if (Yii::$app->user->isGuest) {
             return SiteController::actionRedirectGuest();
         } elseif (Yii::$app->user->identity->role == 'anggota') {
@@ -101,9 +100,14 @@ class AnggotaController extends Controller
             $model = $this->findModel($id);
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
 
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())
-                && $model->save() && $user->save()){
-                return $this->redirect(['index']);
+
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
+			  && Model::validateMultiple([$model,$user])){
+				$model->save(false);
+				$user->save(false);
+				Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
+				return $this->redirect(['index']);
+
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -129,6 +133,7 @@ class AnggotaController extends Controller
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('update', 'Status anggota berhasil di ubah!');
                 return $this->redirect(['index']);
             } else {
                 return $this->render('status', [

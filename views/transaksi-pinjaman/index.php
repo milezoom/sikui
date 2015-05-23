@@ -7,10 +7,21 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TransaksiPinjamanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar Transaksi Pinjaman';
+$this->title = 'Daftar Transaksi Pinjaman Barang';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-pinjaman-index">
+
+	<?php if(Yii::$app->session->hasFlash('success')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-success" role="alert">
+					<?php echo Yii::$app->session->getFlash('success'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -22,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'kode_trans',
-            'kode_pinjaman',
+            //'kode_pinjaman',
             'no_anggota',
             'jumlah',
             'sisa_piutang',

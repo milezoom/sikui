@@ -47,15 +47,18 @@ class Anggota extends \yii\db\ActiveRecord
         return [
             [['nama', 'kode_unit', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns'], 'required'],
             [['tgl_lahir', 'tgl_masuk'], 'safe'],
-            [['jenis_kelamin'], 'string', 'max' => 20],
-			[['status'], 'string', 'max' => 5],
-			[['is_pns'], 'string', 'max' => 20],
-            [['no_anggota', 'thn_pensiun', 'total_simpanan', 'total_pinjaman', 'total_simpanan_wajib', 'total_simpanan_sukarela'], 'integer'],
+
+            [['jenis_kelamin'], 'string', 'max' => 10],
+			[['status'], 'string', 'max' => 10],
+			[['is_pns'], 'string', 'max' => 10],
+            [['thn_pensiun', 'total_simpanan', 'total_pinjaman', 'total_simpanan_wajib', 'total_simpanan_sukarela'], 'integer'],
+            [['no_anggota'], 'string', 'max' => 20],
+
             [['nama'], 'string', 'max' => 30],
             [['kode_unit'], 'string', 'max' => 10],
             [['alamat'], 'string', 'max' => 150],
             [['no_telepon'], 'string', 'max' => 15],
-            [['no_ktp'], 'string', 'max' => 16],
+            [['no_ktp'], 'string','max' => 16],
             [['tgl_lahir'],'tgl_lahir_validation']
         ];
     }

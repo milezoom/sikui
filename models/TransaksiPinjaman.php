@@ -55,13 +55,13 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode_trans' => 'Kode Trans',
-            'kode_pinjaman' => 'Kode Pinjaman',
-            'no_anggota' => 'No Anggota',
-            'jumlah' => 'Jumlah',
+            'kode_trans' => 'Kode Transaksi',
+            'kode_pinjaman' => 'Kode Pinjamanan',
+            'no_anggota' => 'Nomor Anggota',
+            'jumlah' => 'Jumlah Pinjaman',
             'sisa_piutang' => 'Sisa Piutang',
-            'tgl_pinjam' => 'Tgl Pinjam',
-            'jatuh_tempo' => 'Jatuh Tempo',
+            'tgl_pinjam' => 'Tanggal Pinjaman',
+            'jatuh_tempo' => 'Tanggal Jatuh Tempo',
             'banyak_angsuran' => 'Banyak Angsuran',
             'denda' => 'Denda',
             'kode_barang' => 'Kode Barang',

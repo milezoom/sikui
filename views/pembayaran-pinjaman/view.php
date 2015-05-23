@@ -11,18 +11,20 @@ $this->params['breadcrumbs'][] = ['label' => 'Pembayaran Pinjamen', 'url' => ['i
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pembayaran-pinjaman-view">
+	<?php if(Yii::$app->session->hasFlash('success')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-success" role="alert">
+					<?php echo Yii::$app->session->getFlash('success'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+		<?= Html::a('Print Angsuran', ['print-kuitansi', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
 		<?= Html::a('Daftar Pembayaran Pinjaman', ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
 

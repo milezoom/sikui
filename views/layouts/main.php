@@ -74,7 +74,7 @@ use yii\helpers\Url;
 
 
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan/list'); ?>">
                                             Cetak Simpanan Per Anggota
                                         </a>
                                     </li>
