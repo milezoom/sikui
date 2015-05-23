@@ -11,7 +11,6 @@ use Yii;
  * @property string $tgl_bayar
  * @property integer $no_angsuran
  * @property integer $jumlah
- * @property string $keterangan
  *
  * @property TransaksiPinjaman $kodeTrans
  */
@@ -33,8 +32,7 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
         return [
             [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah'], 'required'],
             [['tgl_bayar'], 'safe'],
-            [['no_angsuran', 'jumlah'], 'integer'],
-            [['kode_trans'], 'string', 'max' => 10]
+            [['kode_trans', 'no_angsuran', 'jumlah'], 'integer'],
         ];
     }
 

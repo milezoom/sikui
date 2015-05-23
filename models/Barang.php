@@ -31,8 +31,7 @@ class Barang extends \yii\db\ActiveRecord
     {
         return [
             [['kode', 'nama', 'harga'], 'required'],
-            [['harga'], 'integer'],
-            [['kode'], 'string', 'max' => 10],
+            [['kode', 'harga'], 'integer'],
             [['nama'], 'string', 'max' => 30],
             [['img_path'], 'string', 'max' => 150]
         ];
@@ -44,9 +43,9 @@ class Barang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode' => 'Kode',
-            'nama' => 'Nama',
-            'harga' => 'Harga',
+            'kode' => 'Kode Produk',
+            'nama' => 'Nama Produk',
+            'harga' => 'Harga Produk',
             'img_path' => 'Img Path',
         ];
     }
@@ -54,7 +53,7 @@ class Barang extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTransaksiPinjamen()
+    public function getTransaksiPinjaman()
     {
         return $this->hasMany(TransaksiPinjaman::className(), ['kode_barang' => 'kode']);
     }

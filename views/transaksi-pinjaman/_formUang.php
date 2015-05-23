@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4]) ?>
 
-    <?= $form->field($model, 'no_anggota')?>
+    <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
@@ -26,6 +26,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::a('Batal', ['daftar'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

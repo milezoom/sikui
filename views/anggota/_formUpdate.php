@@ -29,9 +29,9 @@ use app\models\Unit;
 
     <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput() ?>
+    <?= $form->field($model, 'thn_pensiun')->textInput()?>
 
-    <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
+    <?= $form->field($model, 'status')->radioList(array('non' => 'Tidak Aktif','aktif' => 'Aktif'))?>
 
     <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
     

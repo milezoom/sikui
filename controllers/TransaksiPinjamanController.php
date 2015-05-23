@@ -12,9 +12,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * TransaksiPinjamanController implements the CRUD actions for TransaksiPinjaman model.
- */
 class TransaksiPinjamanController extends Controller
 {
     public function behaviors()
@@ -29,116 +26,56 @@ class TransaksiPinjamanController extends Controller
         ];
     }
 
-    /**
-     * Lists all TransaksiPinjaman models.
-     * @return mixed
-     */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            $searchModel = new TransaksiPinjamanSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new TransaksiPinjamanSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
-	
-	public function actionPenunggak()
+
+    public function actionPenunggak()
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-			$searchModel = new TransaksiPinjamanSearch();
-			$query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
-            $dataProvider = new ActiveDataProvider(['query' => $query]);
+        $searchModel = new TransaksiPinjamanSearch();
+        $query = TransaksiPinjaman::find()->where(['<','jatuh_tempo',date('Y-m-d')]);
+        $dataProvider = new ActiveDataProvider(['query' => $query]);
 
-            return $this->render('penunggak', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }        
+        return $this->render('penunggak', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);        
     }
 
-    /**
-     * Displays a single TransaksiPinjaman model.
-     * @param string $id
-     * @return mixed
-     */
     public function actionView($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-        }        
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
-    
 
-    /**
-     * Updates an existing TransaksiPinjaman model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
+
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            $model = $this->findModel($id);
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->kode_trans]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
-            }
-        }        
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->kode_trans]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
-    /**
-     * Deletes an existing TransaksiPinjaman model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }        
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']); 
     }
 
-    /**
-     * Finds the TransaksiPinjaman model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return TransaksiPinjaman the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = TransaksiPinjaman::findOne($id)) !== null) {
@@ -147,117 +84,61 @@ class TransaksiPinjamanController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-	
-	 /**
-     * Creates a new TransaksiPinjaman model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+
     public function actionUang($id)
     {
         $model = new TransaksiPinjaman();
-		$anggota = new Anggota();
-		
+        $anggota = new Anggota();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
             $model->kode_pinjaman = 'PJUG';
-			$model->no_anggota = $id;
+            $model->no_anggota = $id;
             return $this->render('uang', [
                 'model' => $model,
-				'anggota' => $anggota,
+                'anggota' => $anggota,
             ]);
         }
     }
-	
-	 /**
-     * Creates a new TransaksiPinjaman model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+
     public function actionBarang($id)
     {
         $model = new TransaksiPinjaman();
-		$anggota = new Anggota();
+        $anggota = new Anggota();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->kode_trans]);
-        } else {   
+        } else {
             $model->kode_pinjaman = 'PJBG';
-			$model->no_anggota = $id;
+            $model->no_anggota = $id;
             return $this->render('barang', [
-               'model' => $model,
-				'anggota' => $anggota,
+                'model' => $model,
+                'anggota' => $anggota,
             ]);
         }
     }
-	
-	/**
-     * Lists all TransaksiPinjaman models.
-     * @return mixed
-     */
+
     public function actionDaftar()
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            $searchModel = new AnggotaSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new AnggotaSearch();
+        $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+        $queryParams["AnggotaSearch"]["status"] = "aktif";
+        $dataProvider = $searchModel->search($queryParams);
 
-            return $this->render('daftar', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }        
+        return $this->render('daftar', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);        
     }
-	
-	 /**
-     * Displays a single TransaksiPinjaman model.
-     * @param string $id
-     * @return mixed
-     */
+
     public function actionLihat($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            return $this->render('lihat', [
-                'model' => $this->findAnggota($id),
-            ]);
-        }        
+        return $this->render('lihat', [
+            'model' => $this->findAnggota($id),
+        ]);        
     }
-    
-    public function actionPrintBulan(){
-        if (Yii::$app->user->isGuest) {
-            return $this::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return $this::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-            $pdf = new Pdf([
-                'content' => $this->renderPartial('/site/transaksi'),
-                'format' => Pdf::FORMAT_A4,
-                'orientation' => Pdf::ORIENT_PORTRAIT,
-                'options' => [
-                    'title' => 'Homepage',
-                    'subject' => 'generate pdf using mpdf library'
-                ],
-            ]);
 
-            return $pdf->render();
-        }        
-    }
-	
-	 /**
-     * Finds the TransaksiPinjaman model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return TransaksiPinjaman the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findAnggota($id)
     {
         if (($model = Anggota::findOne($id)) !== null) {

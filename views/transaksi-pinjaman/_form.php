@@ -29,7 +29,7 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'sisa_piutang')->textInput() ?>
 
-    <?= $form->field($model, 'tgl_pinjam')->textInput() ?>
+    <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date']) ?>
 
     <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 
@@ -46,6 +46,7 @@ use app\models\Anggota;
 	
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::a('Batal', ['daftar'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
