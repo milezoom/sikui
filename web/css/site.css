@@ -72,11 +72,7 @@ img {
 .navbar {
     min-height: 35px;
     background: black;
-<<<<<<< HEAD
-    font-family: "Signika", sans-serif;
-=======
     font-family: "Open Sans", sans-serif;
->>>>>>> master
 }
 
 .navbar-default .navbar-nav li a {
@@ -103,7 +99,7 @@ img {
 }
 
 .content {
-    font-family: Signika, sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 .footer, .push {
@@ -141,6 +137,10 @@ width: 50%;
 }
 
 .transaksi-simpanan-create .form-control{
+width: 50%;
+}
+
+.transaksi-pinjaman-create .form-control{
 width: 50%;
 }
 
