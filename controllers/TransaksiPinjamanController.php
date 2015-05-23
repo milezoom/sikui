@@ -140,6 +140,7 @@ class TransaksiPinjamanController extends Controller
 		$anggota = new Anggota();
 		
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
             return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
 			$model->no_anggota = $id;
@@ -161,12 +162,9 @@ class TransaksiPinjamanController extends Controller
 		$anggota = new Anggota();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
             return $this->redirect(['index', 'id' => $model->kode_trans]);
-<<<<<<< HEAD
-        } else {     
-=======
-        } else {   
->>>>>>> origin/master
+        } else {
 			$model->no_anggota = $id;
             return $this->render('barang', [
                'model' => $model,

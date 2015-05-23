@@ -26,21 +26,12 @@ use app\models\Unit;
 
     <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
 
-<<<<<<< HEAD
-    <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
-=======
-    <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
->>>>>>> origin/master
 
     <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
 
     <?= $form->field($model, 'thn_pensiun')->textInput()?>
 
-<<<<<<< HEAD
-    <?= $form->field($model, 'is_pns')->dropDownList(['Honorer' => 'Honorer','PNS' => 'PNS'])?>
-=======
     <?= $form->field($model, 'status')->radioList(array('0' => 'Tidak Aktif','1' => 'Aktif'))?>
->>>>>>> origin/master
 
     <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
     

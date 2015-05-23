@@ -82,6 +82,7 @@ class TransaksiSimpananController extends Controller
             $model = new TransaksiSimpanan();
 			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
 				$model->no_anggota = $id;
@@ -108,6 +109,7 @@ class TransaksiSimpananController extends Controller
             $model = new TransaksiSimpanan();
 			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
 				$model->no_anggota = $id;
@@ -134,6 +136,7 @@ class TransaksiSimpananController extends Controller
             $model = new TransaksiSimpanan();
 			$anggota = new Anggota();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
 				$model->no_anggota = $id;

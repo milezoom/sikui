@@ -12,6 +12,26 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-simpanan-view">
 
+	<?php if(Yii::$app->session->hasFlash('success')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-success" role="alert">
+					<?php echo Yii::$app->session->getFlash('success'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if(Yii::$app->session->hasFlash('update')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-info" role="alert">
+					<?php echo Yii::$app->session->getFlash('update'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

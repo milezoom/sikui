@@ -82,22 +82,15 @@ class AnggotaController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $model = new Anggota();
-<<<<<<< HEAD
-			$timezone = date_default_timezone_get();
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-=======
             $user = new UserRecord();
-
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-
                 $model->save();
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
                 $user->username = strtolower($nama[0]).$model->no_anggota;
                 $user->password = Yii::$app->getSecurity()->generateRandomString(5);
                 $user->save();
-
->>>>>>> origin/master
+				Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
                 return $this->redirect(['view', 'id' => $model->no_anggota]);
             } else {
                 return $this->render('create', [
@@ -130,6 +123,7 @@ class AnggotaController extends Controller
 			  && Model::validateMultiple([$model,$user])){
 				$model->save(false);
 				$user->save(false);
+				Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
 				return $this->redirect(['index']);
             } else {
                 return $this->render('update', [
@@ -156,6 +150,7 @@ class AnggotaController extends Controller
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('update', 'Status anggota berhasil di ubah!');
                 return $this->redirect(['index']);
             } else {
                 return $this->render('status', [

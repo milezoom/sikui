@@ -80,6 +80,7 @@ class BarangController extends Controller
             $model = new Barang();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('success', 'Barang berhasil ditambah!');
                 return $this->redirect(['view', 'id' => $model->kode]);
             } else {
                 return $this->render('create', [
@@ -105,6 +106,7 @@ class BarangController extends Controller
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				Yii::$app->getSession()->setFlash('update', 'Barang berhasil di update!');
                 return $this->redirect(['view', 'id' => $model->kode]);
             } else {
                 return $this->render('update', [
@@ -128,7 +130,7 @@ class BarangController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $this->findModel($id)->delete();
-
+			Yii::$app->getSession()->setFlash('delete', 'Barang berhasil di hapus!');
             return $this->redirect(['index']);
         }        
     }

@@ -12,6 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="anggota-index">
 
+	<?php if(Yii::$app->session->hasFlash('update')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-info" role="alert">
+					<?php echo Yii::$app->session->getFlash('update'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
