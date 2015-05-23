@@ -87,10 +87,7 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getKodePinjaman()
-    {
-        return $this->hasOne(JenisPinjaman::className(), ['kode' => 'kode_pinjaman']);
-    }
+   
 
     /**
      * @return \yii\db\ActiveQuery

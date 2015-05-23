@@ -149,7 +149,7 @@ class TransaksiSimpananController extends Controller
     {
         $searchModel = new AnggotaSearch();
         $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["AnggotaSearch"]["status"] = "aktif";
+        $queryParams["AnggotaSearch"]["status"] = "Aktif";
         $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('daftar', [

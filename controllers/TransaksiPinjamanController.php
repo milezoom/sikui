@@ -90,8 +90,9 @@ class TransaksiPinjamanController extends Controller
         $model = new TransaksiPinjaman();
         $anggota = new Anggota();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->kode_trans]);
+        if ($model->load(Yii::$app->request->post())) {
+             $model->save(false);
+			 return $this->redirect(['index', 'id' => $model->kode_trans]);
         } else {
             $model->kode_pinjaman = 'PJUG';
             $model->no_anggota = $id;
@@ -123,7 +124,7 @@ class TransaksiPinjamanController extends Controller
     {
         $searchModel = new AnggotaSearch();
         $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-        $queryParams["AnggotaSearch"]["status"] = "aktif";
+        $queryParams["AnggotaSearch"]["status"] = "Aktif";
         $dataProvider = $searchModel->search($queryParams);
 
         return $this->render('daftar', [

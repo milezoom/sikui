@@ -45,7 +45,7 @@ class Anggota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama', 'kode_unit', 'alamat', 'tgl_lahir', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns', 'tgl_masuk'], 'required'],
+            [['nama', 'kode_unit', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns'], 'required'],
             [['tgl_lahir', 'tgl_masuk'], 'safe'],
             [['jenis_kelamin'], 'string', 'max' => 20],
 			[['status'], 'string', 'max' => 5],

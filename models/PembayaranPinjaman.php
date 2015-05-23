@@ -32,7 +32,7 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
         return [
             [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah'], 'required'],
             [['tgl_bayar'], 'safe'],
-            [['kode_trans', 'no_angsuran', 'jumlah'], 'integer'],
+            [['kode_trans', 'no_angsuran', 'jumlah', 'jasa','denda'], 'integer'],
         ];
     }
 
@@ -46,6 +46,8 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
             'tgl_bayar' => 'Tanggal Bayar Angsuran',
             'no_angsuran' => 'Angsuran Ke-',
             'jumlah' => 'Nominal Angsuran',
+			'jasa' => 'Jasa',
+			'denda' => 'Denda',
         ];
     }
 
