@@ -23,7 +23,7 @@ class UploadForm extends Model
             [['file'], 
              'file', 
              'checkExtensionByMimeType' => false,
-             'extensions' => 'csv',
+             'extensions' => 'csv, jpg',
             ],
         ];
     }
