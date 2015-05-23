@@ -2,19 +2,19 @@
 
 use yii\helpers\Html;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Barang */
 
-$this->title = 'Ubah Barang: ' . ' ' . $model->kode;
+$this->title = 'Create Barang';
 $this->params['breadcrumbs'][] = ['label' => 'Barangs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->kode, 'url' => ['view', 'id' => $model->kode]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="barang-update">
+<div class="barang-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_formUpload', [
         'model' => $model,
     ]) ?>
 
