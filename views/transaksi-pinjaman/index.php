@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TransaksiPinjamanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar Transaksi Pinjaman';
+$this->title = 'Daftar Transaksi Pinjaman Barang';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-pinjaman-index">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'kode_trans',
-            'kode_pinjaman',
+            //'kode_pinjaman',
             'no_anggota',
             'jumlah',
             'sisa_piutang',

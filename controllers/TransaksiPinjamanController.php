@@ -11,6 +11,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\BarangSearch;
+use app\models\Barang;
 
 /**
  * TransaksiPinjamanController implements the CRUD actions for TransaksiPinjaman model.
@@ -41,7 +43,12 @@ class TransaksiPinjamanController extends Controller
             return SiteController::actionRedirectAnggota();
         } elseif (Yii::$app->user->identity->role == 'admin') {
             $searchModel = new TransaksiPinjamanSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			
+			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+			
+			$queryParams["TransaksiPinjamanSearch"]["kode_pinjaman"] = "PJBG";
+			
+            $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('index', [
                 'searchModel' => $searchModel,
