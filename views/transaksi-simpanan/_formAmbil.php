@@ -11,8 +11,8 @@ use yii\widgets\ActiveForm;
 <div class="transaksi-simpanan-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'kode_simpanan')-> dropdownList(['AMSP' => 'Ambil Simpanan']) ?>
+   
+	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'AMSP', 'readonly'=>true]) -> label('Kode Simpanan*')?>
 
     <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
 

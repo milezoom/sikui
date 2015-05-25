@@ -54,7 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'kode',
             'nama',
             'harga',
-            'img_path',
         ],
     ]) ?>
 
