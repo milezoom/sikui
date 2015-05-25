@@ -22,7 +22,7 @@ class Authorization
         'site' => array('login','logout')
     );
     private static $guest = array(
-        'site' => array('login'),
+        'site' => array('login','index'),
     );
 
     public function authorize($controller, $action)
