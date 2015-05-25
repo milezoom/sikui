@@ -33,7 +33,7 @@ use app\models\Unit;
 
     <?= $form->field($model, 'thn_pensiun')->textInput()->label('Tahun Pensiun *') ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['non' => 'Tidak Aktif','aktif' => 'Aktif'])->label('Status Keanggotaan *')?>
+    <?= $form->field($model, 'status')->dropDownList(['Non' => 'Tidak Aktif','Aktif' => 'Aktif'])->label('Status Keanggotaan *')?>
 
 
     <?= $form->field($model, 'is_pns')->radioList(array('P-UI' => 'Pegawai UI','PNS' => 'PNS'))?>
