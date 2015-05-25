@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
    
-	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPSKRL' => 'Simpanan Sukarela']) ?>
+	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'SPSKRL', 'readonly'=>true]) -> label('Kode Simpanan*')?>
 
     <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
 

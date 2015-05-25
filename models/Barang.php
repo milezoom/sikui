@@ -32,8 +32,7 @@ class Barang extends \yii\db\ActiveRecord
         return [
             [['kode', 'nama', 'harga'], 'required'],
             [['kode', 'harga'], 'integer'],
-            [['nama'], 'string', 'max' => 30],
-            [['img_path'], 'string', 'max' => 150]
+            [['nama'], 'string', 'max' => 30]
         ];
     }
 
@@ -46,7 +45,6 @@ class Barang extends \yii\db\ActiveRecord
             'kode' => 'Kode Produk',
             'nama' => 'Nama Produk',
             'harga' => 'Harga Produk',
-            'img_path' => 'Img Path',
         ];
     }
 

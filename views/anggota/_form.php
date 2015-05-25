@@ -30,11 +30,11 @@ use app\models\Unit;
 
     <?= $form->field($model, 'no_telepon')->textInput(['maxlength' => 15, 'placeholder' => 'No Telp/HP']) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Perempuan' => 'Perempuan','Laki Laki' => 'Laki-laki'])->label('Jenis Kelamin *')?>
+    <?= $form->field($model, 'jenis_kelamin')->radioList(['Perempuan' => 'Perempuan','Laki Laki' => 'Laki-laki'])->label('Jenis Kelamin *')?>
 
     <?= $form->field($model, 'thn_pensiun')->textInput()->label('Tahun Pensiun *') ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['Non' => 'Tidak Aktif','Aktif' => 'Aktif'])->label('Status Keanggotaan *')?>
+    <?= $form->field($model, 'status')->radioList(['Non' => 'Tidak Aktif','Aktif' => 'Aktif'])->label('Status Keanggotaan *')?>
 
     <?= $form->field($model, 'is_pns')->radioList(['P-UI' => 'Pegawai UI','PNS' => 'PNS'])->label('Status Kepegawaian *')?>
 

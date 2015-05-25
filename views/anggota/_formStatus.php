@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['non' => 'Tidak Aktif','aktif' => 'Aktif'])?>
+    <?= $form->field($model, 'status')->radioList(['non' => 'Tidak Aktif','aktif' => 'Aktif'])?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
