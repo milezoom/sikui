@@ -23,10 +23,6 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4]) ?>
 	
-	<?= $form->field($model, 'kode_barang')->dropDownList(
-		ArrayHelper::map(Barang::find()->all(),'kode','nama'),
-		['prompt'=>'Select Barang']
-	) ?>
 
     <?= $form->field($model, 'no_anggota') ?>
 
