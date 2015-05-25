@@ -60,6 +60,7 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
         }
 
         $query->andFilterWhere([
+            'no_anggota' => $this->no_anggota,
             'jumlah' => $this->jumlah,
             'sisa_piutang' => $this->sisa_piutang,
             'tgl_pinjam' => $this->tgl_pinjam,
@@ -68,7 +69,6 @@ class TransaksiPinjamanSearch extends TransaksiPinjaman
 
         $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans])
             ->andFilterWhere(['like', 'kode_pinjaman', $this->kode_pinjaman])
-            ->andFilterWhere(['like', 'no_anggota', $this->no_anggota])
             ->andFilterWhere(['like', 'kode_barang', $this->kode_barang])
             ->andFilterWhere(['like', 'anggota.nama', $this->anggota]);
 

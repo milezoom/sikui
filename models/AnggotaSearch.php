@@ -38,6 +38,7 @@ class AnggotaSearch extends Anggota
         }
 
         $query->andFilterWhere([
+            'no_anggota' => $this->no_anggota,
             'tgl_lahir' => $this->tgl_lahir,
             'thn_pensiun' => $this->thn_pensiun,
             'tgl_masuk' => $this->tgl_masuk,
@@ -45,8 +46,7 @@ class AnggotaSearch extends Anggota
             'total_pinjaman' => $this->total_pinjaman,
         ]);
 
-        $query->andFilterWhere(['like', 'no_anggota', $this->no_anggota])
-            ->andFilterWhere(['like', 'nama', $this->nama])
+        $query ->andFilterWhere(['like', 'nama', $this->nama])
             ->andFilterWhere(['like', 'kode_unit', $this->kode_unit])
             ->andFilterWhere(['like', 'alamat', $this->alamat])
             ->andFilterWhere(['like', 'no_telepon', $this->no_telepon])

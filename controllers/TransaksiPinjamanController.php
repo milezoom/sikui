@@ -155,7 +155,7 @@ class TransaksiPinjamanController extends Controller
         if(Authorization::authorize('transaksi-pinjaman','daftar')){
             $searchModel = new AnggotaSearch();
             $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-            $queryParams["AnggotaSearch"]["status"] = "aktif";
+            $queryParams["AnggotaSearch"]["status"] = "Aktif";
             $dataProvider = $searchModel->search($queryParams);
             return $this->render('daftar', [
                 'searchModel' => $searchModel,

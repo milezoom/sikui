@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -82,12 +83,9 @@ class SiteAnggotaController extends Controller
     {
         if(Authorization::authorize('site-anggota','simpanan-anggota')){
             $searchModel = new TransaksiSimpananSearch();
-            $id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-            $queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-
-            $dataProvider = $searchModel->search($queryParams);
-
+            $id = Yii::$app->user->identity->no_anggota;
+            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -101,12 +99,9 @@ class SiteAnggotaController extends Controller
     {
         if(Authorization::authorize('site-anggota','pinjaman-anggota')){
             $searchModel = new TransaksiPinjamanSearch();
-            $id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-            $queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-
-            $dataProvider = $searchModel->search($queryParams);
-
+            $id = Yii::$app->user->identity->no_anggota;
+            $query = TransaksiPinjaman::find()->where(['no_anggota' => $id]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('pinjaman-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,

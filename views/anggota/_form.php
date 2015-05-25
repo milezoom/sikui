@@ -16,13 +16,9 @@ use app\models\Unit;
     
 	<?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 10, 'placeholder' => 'Masukan 10 digit nomor anggota'])->label('Nomor Anggota *') ?>
-
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota'])->label('Nama Anggota *') ?>
 
     <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini'])->label('Alamat *') ?>
-
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
 
     <?= $form->field($model, 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),

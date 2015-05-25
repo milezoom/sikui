@@ -17,6 +17,7 @@ class Authorization
         'user' => array('index','view','create','update','delete')
     );
     private static $anggota = array(
+        'barang' => array('index','view','produk'),
         'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','logout'),
         'site' => array('login','logout')
     );
