@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
-
     <?= $form->field($model, 'kode_simpanan')-> dropdownList(['AMSP' => 'Ambil Simpanan']) ?>
 
     <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>

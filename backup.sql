@@ -31,22 +31,49 @@ SET search_path = public, pg_catalog;
 
 CREATE FUNCTION kurangi_total_pinjaman() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$                   
-begin                         
-    update anggota 
-    set total_pinjaman = total_pinjaman - new.jumlah
-    where no_anggota in(              
-    select * 
-    from transaksi_simpanan
-    where transaksi_simpanan.kode_trans = new.kode_trans);
-    
-    update transaksi_pijaman
-    set sisa_piutang = sisa_piutang - new.jumlah
-    where kode_trans = new.kode_trans;
-    return new;
-end;
+    AS $$                   
+begin                         
+    update anggota 
+    set total_pinjaman = total_pinjaman - new.jumlah
+    where no_anggota in(              
+    select no_anggota 
+    from transaksi_pinjaman
+    where transaksi_pinjaman.kode_trans = new.kode_trans);
+    
+    update transaksi_pinjaman
+    set sisa_piutang = sisa_piutang - new.jumlah
+    where kode_trans = new.kode_trans;
+    return new;
+end;
 $$;
 
+
+ALTER FUNCTION public.kurangi_total_pinjaman() OWNER TO milezoom;
+
+--
+-- Name: tambah_sisa_piutang(); Type: FUNCTION; Schema: public; Owner: milezoom
+--
+
+CREATE FUNCTION tambah_sisa_piutang() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$                   
+
+begin                         
+
+    update transaksi_pinjaman 
+
+    set sisa_piutang = new.jumlah
+
+    where transaksi_pinjaman.kode_trans = new.kode_trans;
+	
+	return new;
+
+end;
+
+$$;
+
+
+ALTER FUNCTION public.tambah_sisa_piutang() OWNER TO milezoom;
 
 --
 -- Name: tambah_total_pinjaman(); Type: FUNCTION; Schema: public; Owner: milezoom
@@ -54,14 +81,17 @@ $$;
 
 CREATE FUNCTION tambah_total_pinjaman() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$                   
-begin
-    update anggota 
-    set total_pinjaman = total_pinjaman + new.jumlah
-    where no_anggota = new.no_anggota;
-    return new; 
-end;
+    AS $$                   
+begin
+    update anggota 
+    set total_pinjaman = total_pinjaman + new.jumlah
+    where no_anggota = new.no_anggota;
+    return new; 
+end;
 $$;
+
+
+ALTER FUNCTION public.tambah_total_pinjaman() OWNER TO milezoom;
 
 --
 -- Name: update_total_simpanan(); Type: FUNCTION; Schema: public; Owner: milezoom
@@ -69,38 +99,41 @@ $$;
 
 CREATE FUNCTION update_total_simpanan() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$                   
-begin
-    if(new.kode_simpanan like '%SPSKRL%') then
-    update anggota 
-    set total_simpanan = total_simpanan + new.jumlah
-    where no_anggota = new.no_anggota;
-    update anggota
-    set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
-    where no_anggota = new.no_anggota;
-    return new;
-    
-    elsif(new.kode_simpanan like '%SPWJB%') then
-    update anggota 
-    set total_simpanan = total_simpanan + new.jumlah
-    where no_anggota = new.no_anggota;
-    update anggota
-    set total_simpanan_wajib = total_simpanan_wajib + new.jumlah
-    where no_anggota = new.no_anggota;
-    return new;
-    
-    elsif(new.kode_simpanan like '%AMSP%') then
-    update anggota 
-    set total_simpanan = total_simpanan - new.jumlah
-    where no_anggota = new.no_anggota;
-    update anggota
-    set total_simpanan_sukarela = total_simpanan_sukarela - new.jumlah
-    where no_anggota = new.no_anggota;
-    return new;
-
-    end if; 
-end;
+    AS $$                   
+begin
+    if(new.kode_simpanan like '%SPSKRL%') then
+    update anggota 
+    set total_simpanan = total_simpanan + new.jumlah
+    where no_anggota = new.no_anggota;
+    update anggota
+    set total_simpanan_sukarela = total_simpanan_sukarela + new.jumlah
+    where no_anggota = new.no_anggota;
+    return new;
+    
+    elsif(new.kode_simpanan like '%SPWJB%') then
+    update anggota 
+    set total_simpanan = total_simpanan + new.jumlah
+    where no_anggota = new.no_anggota;
+    update anggota
+    set total_simpanan_wajib = total_simpanan_wajib + new.jumlah
+    where no_anggota = new.no_anggota;
+    return new;
+    
+    elsif(new.kode_simpanan like '%AMSP%') then
+    update anggota 
+    set total_simpanan = total_simpanan - new.jumlah
+    where no_anggota = new.no_anggota;
+    update anggota
+    set total_simpanan_sukarela = total_simpanan_sukarela - new.jumlah
+    where no_anggota = new.no_anggota;
+    return new;
+
+    end if; 
+end;
 $$;
+
+
+ALTER FUNCTION public.update_total_simpanan() OWNER TO milezoom;
 
 SET default_tablespace = '';
 
@@ -111,34 +144,75 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE anggota (
-    no_anggota character varying(20) NOT NULL,
+    no_anggota integer NOT NULL,
     nama character varying(30) NOT NULL,
     kode_unit character(10) NOT NULL,
-    alamat character varying(150) NOT NULL,
-    tgl_lahir date NOT NULL,
+    alamat character varying(150),
+    tgl_lahir date,
     no_telepon character varying(15),
-    jenis_kelamin boolean NOT NULL,
+    jenis_kelamin character varying(20) NOT NULL,
     thn_pensiun smallint NOT NULL,
-    status boolean NOT NULL,
-    is_pns boolean NOT NULL,
+    status character varying(5) NOT NULL,
+    is_pns character varying(20) NOT NULL,
     no_ktp character(16),
-    tgl_masuk date NOT NULL,
+    tgl_masuk date,
     total_simpanan integer DEFAULT 0,
     total_pinjaman integer DEFAULT 0,
     total_simpanan_wajib integer DEFAULT 0,
     total_simpanan_sukarela integer DEFAULT 0
 );
 
+
+ALTER TABLE anggota OWNER TO milezoom;
+
+--
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
+--
+
+CREATE SEQUENCE anggota_no_anggota_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE anggota_no_anggota_seq OWNER TO milezoom;
+
+--
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
+--
+
+ALTER SEQUENCE anggota_no_anggota_seq OWNED BY anggota.no_anggota;
+
+
+--
+-- Name: barang_kode_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
+--
+
+CREATE SEQUENCE barang_kode_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE barang_kode_seq OWNER TO milezoom;
+
 --
 -- Name: barang; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE barang (
-    kode character(10) NOT NULL,
+    kode integer DEFAULT nextval('barang_kode_seq'::regclass) NOT NULL,
     nama character varying(30) NOT NULL,
     harga integer NOT NULL,
     img_path character varying(150)
 );
+
+
+ALTER TABLE barang OWNER TO milezoom;
 
 --
 -- Name: jenis_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
@@ -149,6 +223,9 @@ CREATE TABLE jenis_pinjaman (
     jenis character varying(30) NOT NULL
 );
 
+
+ALTER TABLE jenis_pinjaman OWNER TO milezoom;
+
 --
 -- Name: jenis_simpanan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
@@ -158,49 +235,113 @@ CREATE TABLE jenis_simpanan (
     jenis character varying(30) NOT NULL
 );
 
+
+ALTER TABLE jenis_simpanan OWNER TO milezoom;
+
 --
 -- Name: pembayaran_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE pembayaran_pinjaman (
-    kode_trans character(10) NOT NULL,
+    kode_trans integer NOT NULL,
     tgl_bayar date NOT NULL,
     no_angsuran smallint NOT NULL,
     jumlah integer NOT NULL,
-    keterangan character varying(50) NOT NULL
+    denda integer,
+    jasa integer
 );
+
+
+ALTER TABLE pembayaran_pinjaman OWNER TO milezoom;
+
+--
+-- Name: settingan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
+--
+
+CREATE TABLE settingan (
+    key character varying(20) NOT NULL,
+    value integer NOT NULL
+);
+
+
+ALTER TABLE settingan OWNER TO milezoom;
 
 --
 -- Name: transaksi_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE transaksi_pinjaman (
-    kode_trans character(10) NOT NULL,
+    kode_trans integer NOT NULL,
     kode_pinjaman character(10) NOT NULL,
-    no_anggota character varying(20) NOT NULL,
+    no_anggota integer NOT NULL,
     jumlah integer NOT NULL,
-    sisa_piutang integer NOT NULL,
+    sisa_piutang integer DEFAULT 0,
     tgl_pinjam date NOT NULL,
-    jatuh_tempo date NOT NULL,
     banyak_angsuran smallint NOT NULL,
-    denda integer NOT NULL,
-    bunga double precision NOT NULL,
-    kode_barang character(10),
-    keterangan character varying(50)
+    kode_barang integer,
+    jatuh_tempo date NOT NULL
 );
+
+
+ALTER TABLE transaksi_pinjaman OWNER TO milezoom;
+
+--
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
+--
+
+CREATE SEQUENCE transaksi_pinjaman_kode_trans_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE transaksi_pinjaman_kode_trans_seq OWNER TO milezoom;
+
+--
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
+--
+
+ALTER SEQUENCE transaksi_pinjaman_kode_trans_seq OWNED BY transaksi_pinjaman.kode_trans;
+
 
 --
 -- Name: transaksi_simpanan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE transaksi_simpanan (
-    kode_trans character(10) NOT NULL,
+    kode_trans integer NOT NULL,
     kode_simpanan character(10) NOT NULL,
     tanggal date NOT NULL,
-    no_anggota character varying(20) NOT NULL,
+    no_anggota integer NOT NULL,
     jumlah integer NOT NULL,
     keterangan character varying(50)
 );
+
+
+ALTER TABLE transaksi_simpanan OWNER TO milezoom;
+
+--
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
+--
+
+CREATE SEQUENCE transaksi_simpanan_kode_trans_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE transaksi_simpanan_kode_trans_seq OWNER TO milezoom;
+
+--
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
+--
+
+ALTER SEQUENCE transaksi_simpanan_kode_trans_seq OWNED BY transaksi_simpanan.kode_trans;
+
 
 --
 -- Name: unit; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
@@ -208,9 +349,11 @@ CREATE TABLE transaksi_simpanan (
 
 CREATE TABLE unit (
     kode character(10) NOT NULL,
-    nama character varying(30) NOT NULL,
-    lokasi character varying(20) NOT NULL
+    nama character varying(30) NOT NULL
 );
+
+
+ALTER TABLE unit OWNER TO milezoom;
 
 --
 -- Name: user; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
@@ -218,12 +361,15 @@ CREATE TABLE unit (
 
 CREATE TABLE "user" (
     id integer NOT NULL,
-    username character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
+    username character varying(25) NOT NULL,
+    password character varying(60) NOT NULL,
     auth_key character varying(255) NOT NULL,
-    no_anggota character varying(20) NOT NULL,
+    no_anggota integer NOT NULL,
     role character varying(7) DEFAULT 'anggota'::character varying NOT NULL
 );
+
+
+ALTER TABLE "user" OWNER TO milezoom;
 
 --
 -- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
@@ -236,11 +382,35 @@ CREATE SEQUENCE user_id_seq
     NO MAXVALUE
     CACHE 1;
 
+
+ALTER TABLE user_id_seq OWNER TO milezoom;
+
 --
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: no_anggota; Type: DEFAULT; Schema: public; Owner: milezoom
+--
+
+ALTER TABLE ONLY anggota ALTER COLUMN no_anggota SET DEFAULT nextval('anggota_no_anggota_seq'::regclass);
+
+
+--
+-- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: milezoom
+--
+
+ALTER TABLE ONLY transaksi_pinjaman ALTER COLUMN kode_trans SET DEFAULT nextval('transaksi_pinjaman_kode_trans_seq'::regclass);
+
+
+--
+-- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: milezoom
+--
+
+ALTER TABLE ONLY transaksi_simpanan ALTER COLUMN kode_trans SET DEFAULT nextval('transaksi_simpanan_kode_trans_seq'::regclass);
 
 
 --
@@ -255,11 +425,17 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regcl
 --
 
 COPY anggota (no_anggota, nama, kode_unit, alamat, tgl_lahir, no_telepon, jenis_kelamin, thn_pensiun, status, is_pns, no_ktp, tgl_masuk, total_simpanan, total_pinjaman, total_simpanan_wajib, total_simpanan_sukarela) FROM stdin;
-2015020002	Hussein Iman	0000000001	8467 Maple Street Coachella, CA 92236	1994-04-28	\N	t	2016	t	f	\N	2015-02-16	750000	0	0	0
-2015020003	Utari Azzahra	0000000001	508 6th Avenue Orange, NJ 07050	1995-01-30	\N	f	2016	t	f	\N	2015-02-17	500000	0	0	0
-2015030004	Muslim	0000000001	6693 Highland Avenue Uniontown, PA 15401	1994-08-13	\N	t	2016	t	f	\N	2015-03-12	800000	0	0	0
-2015010001	Rizka Meutia	0000000001	969 Lincoln Avenue Attleboro, MA 02703	1994-09-17	\N	f	2016	t	f	\N	2015-01-05	500000	0	0	0
+1	Muslim	0000000017		\N		Laki Laki	2020	Aktif	P-UI	                	\N	10000000	0	10000000	0
+2	Hussein	0000000051		\N		Laki Laki	2030	Aktif	PNS	                	\N	0	200000	0	0
+3	Utari Azzahra Putri	0000000015	Jl Kukel No 21	1995-01-12		Perempuan	2020	Aktif	P-UI	                	2015-05-25	0	0	0	0
 \.
+
+
+--
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
+--
+
+SELECT pg_catalog.setval('anggota_no_anggota_seq', 3, true);
 
 
 --
@@ -267,10 +443,14 @@ COPY anggota (no_anggota, nama, kode_unit, alamat, tgl_lahir, no_telepon, jenis_
 --
 
 COPY barang (kode, nama, harga, img_path) FROM stdin;
-BRG0000001	Panci HappyCall	1500000	\N
-BRG0000002	Sepatu Nike	250000	\N
-BRG0000003	Ricecooker Maspion	750000	\N
 \.
+
+
+--
+-- Name: barang_kode_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
+--
+
+SELECT pg_catalog.setval('barang_kode_seq', 1, false);
 
 
 --
@@ -298,7 +478,18 @@ AMSP      	Ambil Simpanan
 -- Data for Name: pembayaran_pinjaman; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
-COPY pembayaran_pinjaman (kode_trans, tgl_bayar, no_angsuran, jumlah, keterangan) FROM stdin;
+COPY pembayaran_pinjaman (kode_trans, tgl_bayar, no_angsuran, jumlah, denda, jasa) FROM stdin;
+\.
+
+
+--
+-- Data for Name: settingan; Type: TABLE DATA; Schema: public; Owner: milezoom
+--
+
+COPY settingan (key, value) FROM stdin;
+SP	100000
+Bunga	1
+Denda	3
 \.
 
 
@@ -306,8 +497,17 @@ COPY pembayaran_pinjaman (kode_trans, tgl_bayar, no_angsuran, jumlah, keterangan
 -- Data for Name: transaksi_pinjaman; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
-COPY transaksi_pinjaman (kode_trans, kode_pinjaman, no_anggota, jumlah, sisa_piutang, tgl_pinjam, jatuh_tempo, banyak_angsuran, denda, bunga, kode_barang, keterangan) FROM stdin;
+COPY transaksi_pinjaman (kode_trans, kode_pinjaman, no_anggota, jumlah, sisa_piutang, tgl_pinjam, banyak_angsuran, kode_barang, jatuh_tempo) FROM stdin;
+2	PJUG      	2	100000	100000	2015-05-16	5	\N	2015-06-05
+4	PJUG      	2	100000	100000	2015-05-16	10	\N	2015-06-15
 \.
+
+
+--
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
+--
+
+SELECT pg_catalog.setval('transaksi_pinjaman_kode_trans_seq', 4, true);
 
 
 --
@@ -315,21 +515,78 @@ COPY transaksi_pinjaman (kode_trans, kode_pinjaman, no_anggota, jumlah, sisa_piu
 --
 
 COPY transaksi_simpanan (kode_trans, kode_simpanan, tanggal, no_anggota, jumlah, keterangan) FROM stdin;
-SP00000001	SPSKRL    	2015-03-27	2015020002	750000	Iseng
-SP00000002	SPSKRL    	2015-04-13	2015010001	500000	Iseng
-SP00000003	SPWJB     	2015-04-29	2015020003	200000	Iseng
-SP00000004	SPSKRL    	2015-04-30	2015030004	1000000	Iseng
-SP00000005	SPWJB     	2015-05-01	2015020003	300000	Iseng
+2	SPWJB     	2015-05-23	1	10000000	\N
 \.
+
+
+--
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
+--
+
+SELECT pg_catalog.setval('transaksi_simpanan_kode_trans_seq', 2, true);
 
 
 --
 -- Data for Name: unit; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
-COPY unit (kode, nama, lokasi) FROM stdin;
-0000000001	Fasilkom	Gedung Bundar
-0000000002	Rektorat	Gedung Rumah Susun
+COPY unit (kode, nama) FROM stdin;
+0000000001	Akuntansi
+0000000002	Alumni
+0000000003	Arsip
+0000000004	Asrama
+0000000005	BAI
+0000000006	BPMA
+0000000007	CDC
+0000000008	Daya Makara
+0000000009	DGB
+0000000010	DIIB
+0000000011	Dikara Putri
+0000000012	DPA
+0000000013	DRPM
+0000000014	Farmasi
+0000000015	Fasilkom
+0000000016	FEB UI
+0000000017	FH UI
+0000000018	FIB UI
+0000000019	FIK
+0000000020	FISIP
+0000000021	FK UI
+0000000022	FKG UI
+0000000023	FKM UI
+0000000024	FMIPA UI
+0000000025	FT UI
+0000000026	Humas
+0000000027	IO
+0000000028	Kemahasiswaan
+0000000029	Kerjasama
+0000000030	Keuangan
+0000000031	Koperasi
+0000000032	KPHP
+0000000033	Logistik
+0000000034	Masjid
+0000000035	Pasca Sarjana
+0000000036	Pendidikan
+0000000037	Perpustakaan
+0000000038	PKM UI
+0000000039	PMB
+0000000040	PMU
+0000000041	PPSI
+0000000042	PPSP
+0000000043	Psikologi
+0000000044	PSJ UI
+0000000045	Pusilkom
+0000000046	RenBang
+0000000047	RIK
+0000000048	RT
+0000000049	SAU
+0000000050	Sekr. Rektor
+0000000051	SU
+0000000052	TU
+0000000053	ULP
+0000000054	Umum & Fasilitas
+0000000055	UPT. PLK
+0000000056	Vokasi
 \.
 
 
@@ -338,10 +595,9 @@ COPY unit (kode, nama, lokasi) FROM stdin;
 --
 
 COPY "user" (id, username, password, auth_key, no_anggota, role) FROM stdin;
-1	rizka.meutia	$2y$13$INXqjXVMEEHac5g3PkqEh.AOWv.ydNmV9Jger2xwk5KlJn0qALp/2	xQ3xKKbTydxOKbmJKMsDyOL-HVBNZ4yafuayLHzgQDxCikl9YIMGH7KG0dl8SM3z_EJSljBwUIBkftxS-ioPBHen22eAnGWoUwD0DRE-qqU-bWVviDaokR118jIPOIvnvBuqr3A31Im3GMmghdMuvsX-kJbSoYS2xoBNdD6zCIYuToppdLb3Qo3iGrFMA0c4bvDx3VPjlJjiyWVNXt561UkFlTSK1lqUV8FcqO94mTDMFpGk51LZEofQAb_nOjO	2015010001	anggota
-3	utari.azzahra	$2y$13$jSwwe2aZlMcGJKbOfN8M3ea1inmZBUeAWptkkHpTQIEsZqY6Obk.W	mFyfaZaOC7YdommfpOh5zBhQk3PO-3y3d26AGMR_sL2-K6o1ma_64IU9K_t8An4z1OJ-4M6X8OtBR4CQRgoW31DAgZSRfZzabdvlkJcjr96o4yDoueVZCASeWiwsm20yaSaxLl0VG2bGM1xCdO85neDMtfAmDu3HlydIZSyvF7lMCIwEOSqXQCs4mAENZi6uyoLVKYlzRDyDyPyxKkCa8axoMluyoinsBL8utmPOYN26KA-Q5FjbeHRMecRP4GM	2015020003	admin
-4	muslim	$2y$13$qHfieEqtmN5gHx25BGGhN.KVnEgGlghXMnskX7fFYUvhnUPP5.Tae	CXlOXnlMlr-G68iZbDpHYufilIjFM3CGxJb09U7uccugKCXmD1HME5ore7FouforwsJdc9sLVBTMnf6vamORAD2GLrlF2UzKyTDQ2yj4Ql-MXTBBilC7Ac_Ps0SGWCYCuKD35yg-Dy4889o8EL2LpGlFIdW0IJGjEt128y4Tqrf9O1BDx0jW3v-mqWPbNpiuQclakSShFjM0c9k6idyu5vNCpxPihvii1ru2293zFwzj8gFN05fBYa5WzOikKq9	2015030004	admin
-2	hussein.iman	$2y$13$SnJLN8f888BvS9zrqjiwoOsMDwyt9Y7ffTmaKu.HchH2XdyBgEJgC	xNmFf_N5ZcJ3n2N41H2Q9griE7CS4NcGhAvr4XXsD-T4JSOR-eD9Y7Vy9QfQk9ZTxs5kAOZX-lEFLxS87gUhX5c9uvzsZ5vR9VjCAZ106ggYMDYPVKHRm0I35wZ_ipwpm9lTsSKGrK7CQ2mSX_Qgekix5nDZgZdpUluJ8a5DpWZ1NvPLOFyFeSXkXjPQdtYNDN6fVW3siu5yGI8cvM4tfHckm4dnfNNoECQzfdbJOg4LKs8-vnXyhoJPueyvaBC	2015020002	anggota
+1	muslim1	$2y$13$WvZPs9paNvdxmGgIvVGrnOBaQWAyNNypPehA0EYG58E.cmWABvHvq	tUHP07jstuLP2QWufEviTUy5qy4RmR6gunmrounF68GstYrJjllfjdjoDF4v3p7qmE6uz6mhgDV0uUayOWSwyUAitsq9uA8T8rW8dfr-8F6zkP-Zq4CTKt1fhVhFZaEBgfBqX2kVmgrM-HO3yWSmOLdclWBL-Otfa5ri810TSByL0xSwV3PNnU03igpcVINTQvTyxDyVvzO-3HXSqEAIpy00Y0GO3NPhjcDtr4oyjTd4qV8DUaTL-SyEgI33iiw	1	admin
+2	hussein2	$2y$13$GM0AY.iFROXFfse0hanpeO3UWVuPc.TmayukGxllVGuwjc/lg1Ft6	xy_Pn0Dtxm0uMphEvSHVlHjBi_uotVweTd6gLMhSr4J7n6JszfF9nF2-5zFHLS0PT1xN8yZ2aIfso5YRTkUdJ5foVpQJOkR-0JETf_11oXVXGlk_Qdy3iX42j5NkT9H7u9JSl0tvsWH5wkKS1QQaDHsUrUmGlDZU2610mweH_Y7F13d5FPNqczFz9AnQHJJXeUizAaAttku-0ZnkunUPtGQJ084DblMZ0vZ6Eeh7NwFjLCpUhrFGsczjVy7azDO	2	admin
+4	utari3	$2y$13$nV7/juqLdp5x3pqZ.tWT2OzxnDonXctd2PmVC5A9C.idjiTrRESVi	LXQ24v27EoMG9cblOjqqPt0Ym58qxpl7trd1OgUT8IsZLx9Kg3XnFNExm8wijypSCrxS963nQO1QvqTkag3iSglCM2K0ryF_a4z1qwLCgSn06ZvojFG5rBR7MqCmCD8yn-zIWd-NORE76vy6M5cWyugqu9msora_01svsb22wH3ysckSIFhHXUV4a2mt-gJNn0--LW6Ygd5f0RMrDAAU2jxoYDl8huDV3xUW-LgGFBQjINuMFFvAufeULle6t60	3	anggota
 \.
 
 
@@ -382,6 +638,14 @@ ALTER TABLE ONLY jenis_pinjaman
 
 ALTER TABLE ONLY pembayaran_pinjaman
     ADD CONSTRAINT pembayaran_pinjaman_pkey PRIMARY KEY (kode_trans, tgl_bayar);
+
+
+--
+-- Name: settingan_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
+--
+
+ALTER TABLE ONLY settingan
+    ADD CONSTRAINT settingan_pkey PRIMARY KEY (key);
 
 
 --
@@ -433,11 +697,10 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: user_username_key; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
+-- Name: trg_tambah_sisa_piutang; Type: TRIGGER; Schema: public; Owner: milezoom
 --
 
-ALTER TABLE ONLY "user"
-    ADD CONSTRAINT user_username_key UNIQUE (username);
+CREATE TRIGGER trg_tambah_sisa_piutang AFTER INSERT ON transaksi_pinjaman FOR EACH ROW EXECUTE PROCEDURE tambah_sisa_piutang();
 
 
 --
@@ -538,3 +801,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+

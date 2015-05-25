@@ -13,18 +13,21 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-simpanan-view">
 
+
+	<?php if(Yii::$app->session->hasFlash('success')):?>
+		<div class="row">	
+			<div class="col-xs-6">
+				<div class="alert alert-success" role="alert">
+					<?php echo Yii::$app->session->getFlash('success'); ?>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
+	
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Ubah Simpanan', ['update', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
 		<?= Html::a('Print Simpanan', ['print-kuitansi', 'id' => $model->kode_trans], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Hapus Simpanan', ['delete', 'id' => $model->kode_trans], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
     </p>
 
     <?= DetailView::widget([

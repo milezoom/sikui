@@ -5,11 +5,14 @@ namespace app\controllers;
 use Yii;
 use app\models\Barang;
 use app\models\BarangSearch;
+use app\controllers\Authorization;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
+
 /**
  * BarangController implements the CRUD actions for Barang model.
  */
@@ -27,17 +30,9 @@ class BarangController extends Controller
         ];
     }
 
-    /**
-     * Lists all Barang models.
-     * @return mixed
-     */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('barang','index')){
             $searchModel = new BarangSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -45,102 +40,101 @@ class BarangController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-        }        
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
-    /**
-     * Displays a single Barang model.
-     * @param string $id
-     * @return mixed
-     */
     public function actionView($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('barang','view')){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
-        }        
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
-    /**
-     * Creates a new Barang model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('barang','create')){
             $model = new Barang();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->getSession()->setFlash('success', 'Barang berhasil ditambah!');
                 return $this->redirect(['view', 'id' => $model->kode]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
                 ]);
             }
-        }        
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
-    /**
-     * Updates an existing Barang model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('barang','update')){
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                Yii::$app->getSession()->setFlash('update', 'Barang berhasil di update!');
                 return $this->redirect(['view', 'id' => $model->kode]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
                 ]);
             }
-        }        
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
-    /**
-     * Deletes an existing Barang model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('barang','delete')){
             $this->findModel($id)->delete();
-
+            Yii::$app->getSession()->setFlash('delete', 'Barang berhasil di hapus!');
             return $this->redirect(['index']);
-        }        
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
-    /**
-     * Finds the Barang model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Barang the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionProduk()
+    {
+        if(Authorization::authorize('barang','produk')){
+            $searchModel = new BarangSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $this->layout = 'anggota';
+            return $this->render('produk', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
+    //FIXME: masih error nih :'(
+    public function actionUpload()
+    {
+        if(Authorization::authorize('barang','upload')){
+            $model = new UploadForm();
+            if (Yii::$app->request->isPost) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                if ($model->file && $model->validate()) {                
+                    $model->file->saveAs('uploads/barang' . $model->file->baseName . '.' . $model->file->extension);
+                }
+            }
+            return $this->render('upload', ['model' => $model]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
     protected function findModel($id)
     {
         if (($model = Barang::findOne($id)) !== null) {
@@ -148,31 +142,5 @@ class BarangController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionProduk()
-    {
-        $searchModel = new BarangSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $this->layout = 'anggota';
-        return $this->render('produk', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-	
-	 public function actionUpload()
-    {
-        $model = new UploadForm();
-
-        if (Yii::$app->request->isPost) {
-            $model->file = UploadedFile::getInstance($model, 'file');
-
-            if ($model->file && $model->validate()) {                
-                $model->file->saveAs('assets/barang' . $model->file->baseName . '.' . $model->file->extension);
-            }
-        }
-
-        return $this->render('upload', ['model' => $model]);
     }
 }

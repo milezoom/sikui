@@ -67,9 +67,14 @@ use yii\helpers\Url;
                                     Simpanan<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Ubah Nominal Simpanan Pokok</a></li>
+
+
+                                    <li><a href="<?php echo Url::toRoute('/settingan/update?id=SP'); ?>">
+										Ubah Nominal Simpanan Pokok</a></li>
+
+
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan/list'); ?>">
                                             Cetak Simpanan Per Anggota
                                         </a>
                                     </li>
@@ -103,7 +108,7 @@ use yii\helpers\Url;
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman/create'); ?>">
+                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman/daftar'); ?>">
                                             Bayar Pinjaman
                                         </a>
                                     </li>

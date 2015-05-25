@@ -10,7 +10,18 @@ use yii\grid\GridView;
 $this->title = 'Data Barang';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="barang-index">
+
+<?php if(Yii::$app->session->hasFlash('delete')):?>
+	<div class="row">	
+		<div class="col-xs-6">
+			<div class="alert alert-danger" role="alert">
+				<?php echo Yii::$app->session->getFlash('delete'); ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -50,17 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
 							]                            
             ],
 			
-			['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{delete}',
-                            'buttons'=>[
-                              'delete' => function ($url, $model) {     
-                                return Html::a('<span >Hapus</span>', $url, [
-                                        'title' => Yii::t('yii', 'Hapus Transaksi'),
-										'class' => 'btn btn-danger'
-                                ]);                                
-                              }
-							]                            
-            ],
         ],
     ]); ?>
 

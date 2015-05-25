@@ -19,7 +19,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'harga')->textInput(['placeholder' => 'Harga Barang']) ?>
 
     <?= $form->field($model, 'img_path')->textInput(['maxlength' => 150]) ?>
-	
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::a('Batal', ['index'], ['class' => 'btn btn-danger']) ?>

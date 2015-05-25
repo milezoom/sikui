@@ -12,9 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4]) ?>
+    <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
+
 
     <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
+
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
 

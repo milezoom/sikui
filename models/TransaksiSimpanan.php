@@ -34,7 +34,7 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
     {
         return [
             [['kode_simpanan', 'tanggal', 'no_anggota', 'jumlah'], 'required'],
-            [['tanggal'], 'safe'],
+            [['tanggal', 'jatuh_tempo'], 'safe'],
             [['jumlah'], 'integer'],
             [['kode_trans', 'kode_simpanan'], 'string', 'max' => 10],
             [['no_anggota'], 'string', 'max' => 20],

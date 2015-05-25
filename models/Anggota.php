@@ -45,11 +45,11 @@ class Anggota extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['no_anggota', 'nama', 'kode_unit', 'alamat', 'tgl_lahir', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns', 'tgl_masuk'], 'required'],
+            [['nama', 'kode_unit', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns'], 'required'],
             [['tgl_lahir', 'tgl_masuk'], 'safe'],
             [['jenis_kelamin'], 'string', 'max' => 10],
-			[['status'], 'string', 'max' => 10],
-			[['is_pns'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 10],
+            [['is_pns'], 'string', 'max' => 10],
             [['thn_pensiun', 'total_simpanan', 'total_pinjaman', 'total_simpanan_wajib', 'total_simpanan_sukarela'], 'integer'],
             [['no_anggota'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 30],
@@ -117,11 +117,12 @@ class Anggota extends \yii\db\ActiveRecord
     {
         return $this->hasMany(User::className(), ['no_anggota' => 'no_anggota']);
     }
-    
+
     public function tgl_lahir_validation($attribute)
     {
-        if ($this->$attribute >= date("Y-m-d"))
-	        $this->addError($attribute,'Input harus lebih kecil dari tanggal saat ini.');
-        
+        date_default_timezone_set('Asia/Jakarta');
+        if ($this->$attribute >= date('Y-m-d', strtotime('-17 years')))
+            $this->addError($attribute,'Minimal 17 tahun untuk daftar di koperasi.');
+
     }
 }

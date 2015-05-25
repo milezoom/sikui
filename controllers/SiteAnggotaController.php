@@ -3,12 +3,15 @@
 namespace app\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use app\controllers\Authorization;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\models\TransaksiSimpananSearch;
 use app\models\TransaksiSimpanan;
@@ -52,62 +55,69 @@ class SiteAnggotaController extends Controller
             ],
         ];
     }
-	
-	public function actionView($id)
+
+    public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(Authorization::authorize('site-anggota','view')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
-	
+
     public function actionIndex()
     {
-        $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-        return $this->render('profil', [
-            'model' => $model,
-        ]);
+        if(Authorization::authorize('site-anggota','index')){
+            $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+            return $this->render('profil', [
+                'model' => $model,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
-	
-	public function actionSimpananAnggota(){
-		$searchModel = new TransaksiSimpananSearch();
-		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
-		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-		$queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-		
-        $dataProvider = $searchModel->search($queryParams);
 
+    public function actionSimpananAnggota()
+    {
+        if(Authorization::authorize('site-anggota','simpanan-anggota')){
+            $searchModel = new TransaksiSimpananSearch();
+            $id = Yii::$app->user->identity->no_anggota;
+            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
-	}
-	
-	public function actionPinjamanAnggota(){
-		$searchModel = new TransaksiPinjamanSearch();
-		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
-		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-		$queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-		
-        $dataProvider = $searchModel->search($queryParams);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
 
+    public function actionPinjamanAnggota()
+    {
+        if(Authorization::authorize('site-anggota','pinjaman-anggota')){
+            $searchModel = new TransaksiPinjamanSearch();
+            $id = Yii::$app->user->identity->no_anggota;
+            $query = TransaksiPinjaman::find()->where(['no_anggota' => $id,"extract(month from tanggal) = 5"]);
+            $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('pinjaman-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
-	}
-	
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
-	
-	protected function findModel($id)
+
+    protected function findModel($id)
     {
         if (($model = Anggota::findOne($id)) !== null) {
             return $model;

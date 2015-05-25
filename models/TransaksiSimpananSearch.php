@@ -56,13 +56,13 @@ class TransaksiSimpananSearch extends TransaksiSimpanan
         }
 
         $query->andFilterWhere([
+            'no_anggota' => $this->no_anggota,
             'tanggal' => $this->tanggal,
             'jumlah' => $this->jumlah,
         ]);
 
         $query->andFilterWhere(['like', 'kode_trans', $this->kode_trans])
             ->andFilterWhere(['like', 'kode_simpanan', $this->kode_simpanan])
-            ->andFilterWhere(['like', 'no_anggota', $this->no_anggota])
             ->andFilterWhere(['like', 'keterangan', $this->keterangan]);
 
         return $dataProvider;

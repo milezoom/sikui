@@ -47,40 +47,40 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
             'role' => 'Peran di Koperasi',
         ];
     }
-    
+
     public function beforeSave($insert)
     {        
         $return = parent::beforeSave($insert);
-        
+
         if($this->isAttributeChanged('password'))       
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
-        
+
         if($this->isNewRecord)
             $this->auth_key = Yii::$app->security->generateRandomString($length = 255);
-        
+
         return $return;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public static function findIdentity($id)
     {
         return static::findOne($id);
     }
-    
+
     public function getAuthKey()
     {
         return $this->auth_key;
     }
-    
+
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
     }
-    
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('Maaf, login hanya bisa menggunakan username/password');
