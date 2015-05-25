@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TransaksiSimpananSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Riwayat Transaksi Simpanan';
+$this->title = 'Riwayat Transaksi Simpanan untuk Bulan Mei 2015';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transaksi-simpanan-index">

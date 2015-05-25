@@ -100,7 +100,7 @@ class SiteAnggotaController extends Controller
         if(Authorization::authorize('site-anggota','pinjaman-anggota')){
             $searchModel = new TransaksiPinjamanSearch();
             $id = Yii::$app->user->identity->no_anggota;
-            $query = TransaksiPinjaman::find()->where(['no_anggota' => $id]);
+            $query = TransaksiPinjaman::find()->where(['no_anggota' => $id,"extract(month from tanggal) = 5"]);
             $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('pinjaman-anggota', [
                 'searchModel' => $searchModel,
