@@ -6,9 +6,11 @@ use Yii;
 use app\models\Anggota;
 use app\models\UserRecord;
 use app\models\AnggotaSearch;
+use app\controllers\Authorization;
 use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 class AnggotaController extends Controller
@@ -27,44 +29,35 @@ class AnggotaController extends Controller
 
     public function actionIndex()
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('anggota','index')){
             $searchModel = new AnggotaSearch();
-			$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-			$queryParams["AnggotaSearch"]["status"] = "aktif";
+            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+            $queryParams["AnggotaSearch"]["status"] = "Aktif";
             $dataProvider = $searchModel->search($queryParams);
-			
-			return $this->render('index', [
-               'searchModel' => $searchModel,
-               'dataProvider' => $dataProvider,
-			]);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
     }
 
     public function actionView($id)
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-}
+        if(Authorization::authorize('anggota','view')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionCreate()
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-
+        if(Authorization::authorize('anggota','create')){
             $model = new Anggota();
             $user = new UserRecord();
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
@@ -87,26 +80,22 @@ class AnggotaController extends Controller
                     'user' => $user
                 ]);
             }
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
     }
 
     public function actionUpdate($id)
     {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('anggota','update')){
             $model = $this->findModel($id);
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
-
-
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-			  && Model::validateMultiple([$model,$user])){
-				$model->save(false);
-				$user->save(false);
-				Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
-				return $this->redirect(['index']);
+                && Model::validateMultiple([$model,$user])){
+                $model->save(false);
+                $user->save(false);
+                Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
+                return $this->redirect(['index']);
 
             } else {
                 return $this->render('update', [
@@ -114,34 +103,27 @@ class AnggotaController extends Controller
                     'user' => $user
                 ]);
             }
-        }        
-		
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionStatus($id)
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-        if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
+        if(Authorization::authorize('anggota','status')){
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-				Yii::$app->getSession()->setFlash('update', 'Status anggota berhasil di ubah!');
+                Yii::$app->getSession()->setFlash('update', 'Status anggota berhasil di ubah!');
                 return $this->redirect(['index']);
             } else {
                 return $this->render('status', [
                     'model' => $model,
                 ]);
             }
-        }  }     
-		
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     protected function findModel($id)

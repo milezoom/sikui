@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Anggota;
 use app\models\Unit;
+use app\controllers\Authorization;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use kartik\mpdf\Pdf;
@@ -62,7 +64,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if(Authorization::authorize('site','index')){
+            return $this->render('index');
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionLogin()
@@ -95,71 +101,65 @@ class SiteController extends Controller
 
     public function actionPrintKuitansi()
     {
-		if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-        $sesuatu = Anggota::findOne(2015050005);
-        $unit = Unit::findOne($sesuatu->kode_unit);
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('kuitansi',[
-                'nama_anggota'=>$sesuatu->nama,
-                'no_anggota'=>$sesuatu->no_anggota,
-                'unit'=>$unit->nama,
-            ]),
-            'format' => Pdf::FORMAT_FOLIO,
-            'orientation' => Pdf::ORIENT_LANDSCAPE,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
+        if(Authorization::authorize('site','print-kuitansi')){
+            $sesuatu = Anggota::findOne(2015050005);
+            $unit = Unit::findOne($sesuatu->kode_unit);
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('kuitansi',[
+                    'nama_anggota'=>$sesuatu->nama,
+                    'no_anggota'=>$sesuatu->no_anggota,
+                    'unit'=>$unit->nama,
+                ]),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
 
-        return $pdf->render();
-		}
+            return $pdf->render();
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionPrintAngsuran() 
     {
-		if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('print-angsuran'),
-            'format' => Pdf::FORMAT_FOLIO,
-            'orientation' => Pdf::ORIENT_LANDSCAPE,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
+        if(Authorization::authorize('site','print-angsuran')){
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('print-angsuran'),
+                'format' => Pdf::FORMAT_FOLIO,
+                'orientation' => Pdf::ORIENT_LANDSCAPE,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
 
-        return $pdf->render();
-		}
+            return $pdf->render();
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }        
 
     public function actionPrintTransaksi()
     {
-		if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } elseif (Yii::$app->user->identity->role == 'anggota') {
-            return SiteController::actionRedirectAnggota();
-        } elseif (Yii::$app->user->identity->role == 'admin') {
-        $pdf = new Pdf([
-            'content' => $this->renderPartial('transaksi'),
-            'format' => Pdf::FORMAT_A4,
-            'orientation' => Pdf::ORIENT_PORTRAIT,
-            'options' => [
-                'title' => 'Homepage',
-                'subject' => 'generate pdf using mpdf library'
-            ],
-        ]);
+        if(Authorization::authorize('site','print-transaksi')){
+            $pdf = new Pdf([
+                'content' => $this->renderPartial('transaksi'),
+                'format' => Pdf::FORMAT_A4,
+                'orientation' => Pdf::ORIENT_PORTRAIT,
+                'options' => [
+                    'title' => 'Homepage',
+                    'subject' => 'generate pdf using mpdf library'
+                ],
+            ]);
 
-        return $pdf->render();
-		}
+            return $pdf->render();
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionRedirectGuest(){

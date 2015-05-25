@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Settingan;
 use app\models\SettinganSearch;
+use app\controllers\Authorization;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 class SettinganController extends Controller
@@ -25,56 +27,76 @@ class SettinganController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new SettinganSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Authorization::authorize('settingan','index')){
+            $searchModel = new SettinganSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
 
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if(Authorization::authorize('settingan','view')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
 
     public function actionCreate()
     {
-        $model = new Settingan();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->index]);
+        if(Authorization::authorize('settingan','create')){
+            $model = new Settingan();
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->index]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
     }
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->index]);
+        if(Authorization::authorize('settingan','update')){
+            $model = $this->findModel($id);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->index]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
     }
-	
+
     public function actionPokok($id)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['pokok', 'id' => $model->index]);
+        if(Authorization::authorize('settingan','pokok')){
+            $model = $this->findModel($id);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['pokok', 'id' => $model->index]);
+            } else {
+                return $this->render('pokok', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('pokok', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
     }
 

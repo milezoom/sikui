@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use app\controllers\Authorization;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\models\TransaksiSimpananSearch;
 use app\models\TransaksiSimpanan;
@@ -52,67 +54,75 @@ class SiteAnggotaController extends Controller
             ],
         ];
     }
-	
-	public function actionView($id)
+
+    public function actionView($id)
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } else{
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);}
+        if(Authorization::authorize('site-anggota','view')){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
-	
+
     public function actionIndex()
     {
-	if (Yii::$app->user->isGuest) {
-            return SiteController::actionRedirectGuest();
-        } else{
-        $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-        return $this->render('profil', [
-            'model' => $model,
-        ]);}
+        if(Authorization::authorize('site-anggota','index')){
+            $model = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+            return $this->render('profil', [
+                'model' => $model,
+            ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
     }
-	
-	public function actionSimpananAnggota(){
-		$searchModel = new TransaksiSimpananSearch();
-		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
-		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-		$queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-		
-        $dataProvider = $searchModel->search($queryParams);
+
+    public function actionSimpananAnggota()
+    {
+        if(Authorization::authorize('site-anggota','simpanan-anggota')){
+            $searchModel = new TransaksiSimpananSearch();
+            $id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+            $queryParams["TransaksiSimpananSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
+
+            $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
-	}
-	
-	public function actionPinjamanAnggota(){
-		$searchModel = new TransaksiPinjamanSearch();
-		$id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
-		//$test = TransaksiSimpanan::find()->where(['no_anggota' => $id])->all();
-		$queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-		$queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
-		
-        $dataProvider = $searchModel->search($queryParams);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
+    public function actionPinjamanAnggota()
+    {
+        if(Authorization::authorize('site-anggota','pinjaman-anggota')){
+            $searchModel = new TransaksiPinjamanSearch();
+            $id = Anggota::findOne(Yii::$app->user->identity->no_anggota);
+            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+            $queryParams["TransaksiPinjamanSearch"]["no_anggota"] = Yii::$app->user->identity->no_anggota;
+
+            $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('pinjaman-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-	
-	}
-	
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
         return $this->goHome();
     }
-	
-	protected function findModel($id)
+
+    protected function findModel($id)
     {
         if (($model = Anggota::findOne($id)) !== null) {
             return $model;
