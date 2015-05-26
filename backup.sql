@@ -193,9 +193,16 @@ ALTER TABLE public.anggota_no_anggota_seq OWNER TO postgres;
 ALTER SEQUENCE anggota_no_anggota_seq OWNED BY anggota.no_anggota;
 
 
+
 --
--- Name: barang_kode_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: barang; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
+
+CREATE TABLE barang (
+    kode integer NOT NULL,
+    nama character varying(30) NOT NULL,
+    harga integer NOT NULL
+);
 
 CREATE SEQUENCE barang_kode_seq
     START WITH 1
@@ -203,22 +210,10 @@ CREATE SEQUENCE barang_kode_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE public.barang_kode_seq OWNER TO postgres;
-
---
--- Name: barang; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE barang (
-    kode integer DEFAULT nextval('barang_kode_seq'::regclass) NOT NULL,
-    nama character varying(30) NOT NULL,
-    harga integer NOT NULL
-);
-
-
+	
 ALTER TABLE public.barang OWNER TO postgres;
+
+ALTER SEQUENCE barang_kode_seq OWNED BY barang.kode;
 
 --
 -- Name: jenis_pinjaman; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -249,6 +244,7 @@ ALTER TABLE public.jenis_simpanan OWNER TO postgres;
 --
 
 CREATE TABLE pembayaran_pinjaman (
+	id integer NOT NULL,
     kode_trans integer NOT NULL,
     tgl_bayar date NOT NULL,
     no_angsuran smallint NOT NULL,
@@ -257,8 +253,16 @@ CREATE TABLE pembayaran_pinjaman (
     jasa integer
 );
 
+CREATE SEQUENCE pembayaran_pinjaman_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 ALTER TABLE public.pembayaran_pinjaman OWNER TO postgres;
+
+ALTER SEQUENCE pembayaran_pinjaman_id_seq OWNED BY pembayaran_pinjaman.id;
 
 --
 -- Name: settingan; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -447,7 +451,7 @@ SELECT pg_catalog.setval('anggota_no_anggota_seq', 2, true);
 -- Data for Name: barang; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY barang (kode, nama, harga) FROM stdin;
+COPY barang (id, kode, nama, harga) FROM stdin;
 \.
 
 
@@ -455,7 +459,7 @@ COPY barang (kode, nama, harga) FROM stdin;
 -- Name: barang_kode_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('barang_kode_seq', 1, false);
+SELECT pg_catalog.setval('barang_kode_seq', 1, true);
 
 
 --
@@ -641,7 +645,7 @@ ALTER TABLE ONLY jenis_pinjaman
 --
 
 ALTER TABLE ONLY pembayaran_pinjaman
-    ADD CONSTRAINT pembayaran_pinjaman_pkey PRIMARY KEY (kode_trans, tgl_bayar);
+    ADD CONSTRAINT pembayaran_pinjaman_pkey PRIMARY KEY (id);
 
 
 --
