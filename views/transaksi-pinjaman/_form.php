@@ -18,22 +18,22 @@ use app\models\Anggota;
 
     <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
 
-    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 10])->label('Nomor Transaksi Pinjaman *') ?>
 
    <?= $form->field($model, 'no_anggota')->dropDownList(
 		ArrayHelper::map(Anggota::find()->all(),'no_anggota','nama'),
 		['prompt'=>'Select Anggota']
-	) ?>
+	)->label('Nomor Anggota *') ?>
 
-    <?= $form->field($model, 'jumlah')->textInput() ?>
+    <?= $form->field($model, 'jumlah')->textInput()->label('Jumlah Pinjaman *') ?>
 
     <?= $form->field($model, 'sisa_piutang')->textInput() ?>
 
-    <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date'])->label('Tanggal Pinjam *') ?>
 
     <?= $form->field($model, 'jatuh_tempo')->textInput() ?>
 
-    <?= $form->field($model, 'banyak_angsuran')->textInput() ?>
+    <?= $form->field($model, 'banyak_angsuran')->textInput()->label('Banyak Angsuran *') ?>
 
     <?= $form->field($model, 'denda')->textInput() ?>
 

@@ -15,9 +15,9 @@ use yii\widgets\ActiveForm;
 	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'SPWJB', 'readonly'=>true]) -> label('Kode Simpanan*')?>
 
 
-    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date'])->label('Tanggal Setoran *') ?>
 
-    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) -> label('Nomor Anggota*') ?>
+    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) -> label('Nomor Anggota *') ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ->label('Jumlah *')  ?>
 

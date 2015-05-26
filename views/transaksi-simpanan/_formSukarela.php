@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
    
-	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPSKRL' => 'Simpanan Sukarela']) ?>
+	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPSKRL' => 'Simpanan Sukarela'])->label('Kode Simpanan *') ?>
 
-    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'tanggal')->textInput(['type' => 'date'])->label('Tanggal Setoran *') ?>
 
-    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) ?>
+    <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20])->label('Nomor Anggota *') ?>
 
-    <?= $form->field($model, 'jumlah')->textInput() ?>
+    <?= $form->field($model, 'jumlah')->textInput()->label('Jumlah Setoran  *') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

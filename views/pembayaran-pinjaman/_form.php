@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10]) ?>
+    <?= $form->field($model, 'kode_trans')->textInput(['maxlength' => 10])->label('Kode Transaksi *') ?>
 
-    <?= $form->field($model, 'tgl_bayar')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'tgl_bayar')->textInput(['type' => 'date'])->label('Tanggal Bayar *') ?>
 
-    <?= $form->field($model, 'no_angsuran')->textInput() ?>
+    <?= $form->field($model, 'no_angsuran')->textInput()->label('Nomor Angsuran *') ?>
 
-    <?= $form->field($model, 'jumlah')->textInput() ?>
+    <?= $form->field($model, 'jumlah')->textInput()->label('Jumlah Pembayaran *') ?>
 
 	<?= $form->field($model, 'jasa')->textInput() ?>
 	

@@ -14,23 +14,23 @@ use app\models\Unit;
 
     <?php $form = ActiveForm::begin(); ?>
 
-	<?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
+	<?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota'])->label('Nama Anggota *') ?>
 	
     <?= $form->field($model, 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
 		['prompt'=>'Pilih Unit']
-	) ?>
+	)->label('Kode Unit atau Instansi *') ?>
 
-    <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini']) ?>
+    <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini'])->label('Alamat *') ?>
 
-    <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
+    <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date'])->label('Tanggal Lahir *') ?>
 
 
-    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
+    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))->label('Jenis Kelamin *')?>
 
-    <?= $form->field($model, 'thn_pensiun')->textInput()?>
+    <?= $form->field($model, 'thn_pensiun')->textInput()->label('Tahun Pensiun *')?>
 
-    <?= $form->field($model, 'status')->radioList(array('non' => 'Tidak Aktif','aktif' => 'Aktif'))?>
+    <?= $form->field($model, 'status')->radioList(array('non' => 'Tidak Aktif','aktif' => 'Aktif'))->label('Status Keanggotaan *')?>
 
     <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
     
