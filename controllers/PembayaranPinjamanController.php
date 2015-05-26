@@ -33,7 +33,7 @@ class PembayaranPinjamanController extends Controller
         if(Authorization::authorize('pembayaran-pinjaman','index')){
             $searchModel = new PembayaranPinjamanSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+			
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -54,17 +54,21 @@ class PembayaranPinjamanController extends Controller
         }
     }
 
-    public function actionCreate()
+    public function actionCreate($id)
     {
         if(Authorization::authorize('pembayaran-pinjaman','create')){
             $model = new PembayaranPinjaman();
+			$transaksi = new TransaksiPinjaman();
+			
             if ($model->load(Yii::$app->request->post()) && $model->no_angsuran <= 15 && $model->save()) {
                 Yii::$app->getSession()->setFlash('success', 'Pembayaran pinjaman berhasil ditambah!');
                 return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
             } 
             else {
+				$model->kode_trans = $id;
                 return $this->render('create', [
                     'model' => $model,
+					'transaksi'=> $transaksi,
                 ]);
             }
         } else {
@@ -154,5 +158,25 @@ class PembayaranPinjamanController extends Controller
                 'dataProvider' => $dataProvider,
             ]);   
         } 
+    }
+	
+	public function actionLihat($id)
+    {
+        if(Authorization::authorize('pembayaran-pinjaman','lihat')){
+            return $this->render('lihat', [
+                'model' => $this->findPinjaman($id),
+            ]);  
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+	
+	protected function findPinjaman($id)
+    {
+        if (($model = TransaksiPinjaman::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

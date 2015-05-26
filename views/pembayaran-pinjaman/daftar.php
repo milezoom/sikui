@@ -46,9 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'keterangan',
 
             ['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{view}',
+                          'template'=>'{lihat}',
                             'buttons'=>[
-                              'view' => function ($url, $model) {     
+                              'lihat' => function ($url, $model) {     
                                 return Html::a('<span >Lihat</span>', $url, [
                                         'title' => Yii::t('yii', 'Lihat Pinjaman'),
 										'class' => 'btn btn-success',
