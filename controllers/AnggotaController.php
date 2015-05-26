@@ -94,7 +94,7 @@ class AnggotaController extends Controller
                 $model->save(false);
                 $user->save(false);
                 Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
-                return $this->redirect(['index']);
+				return $this->redirect(['view', 'id' => $model->kode]);
 
             } else {
                 return $this->render('update', [

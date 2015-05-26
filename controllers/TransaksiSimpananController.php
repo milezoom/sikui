@@ -237,6 +237,7 @@ class TransaksiSimpananController extends Controller
                     'kode_trans'=>$sesuatu->kode_trans,
                     'jenis'=>$sesuatu->kode_simpanan,
                     'jumlah'=>$sesuatu->jumlah,
+					'tanggal'=>$sesuatu->tanggal,
                     'keterangan'=>$sesuatu->keterangan,
                     'no_anggota'=>$anggota->no_anggota,	
                     'nama_unit'=>$unit->nama,
