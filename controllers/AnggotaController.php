@@ -61,7 +61,6 @@ class AnggotaController extends Controller
             $model = new Anggota();
             $user = new UserRecord();
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-
                 $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
@@ -75,6 +74,7 @@ class AnggotaController extends Controller
                     'password'=>$password
                 ]);
             } else {
+                $model->tgl_masuk = date('Y-m-d');
                 return $this->render('create', [
                     'model' => $model,
                     'user' => $user
@@ -90,8 +90,7 @@ class AnggotaController extends Controller
         if(Authorization::authorize('anggota','update')){
             $model = $this->findModel($id);
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-                && Model::validateMultiple([$model,$user])){
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) && Model::validateMultiple([$model,$user])){
                 $model->save(false);
                 $user->save(false);
                 Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');

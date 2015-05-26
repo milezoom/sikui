@@ -10,7 +10,9 @@ use yii\widgets\ActiveForm;
 
 <div class="transaksi-pinjaman-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
+	
+	<?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
 

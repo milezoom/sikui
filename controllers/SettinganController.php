@@ -73,9 +73,7 @@ class SettinganController extends Controller
         if(Authorization::authorize('settingan','update')){
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this -> render('update', [
-                    'model' => $model,
-                ]);
+                return $this->redirect(['site/index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -91,7 +89,7 @@ class SettinganController extends Controller
         if(Authorization::authorize('settingan','pokok')){
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['pokok', 'id' => $model->update]);
+                return $this->redirect(['pokok', 'id' => $model->index]);
             } else {
                 return $this->render('pokok', [
                     'model' => $model,
@@ -104,7 +102,7 @@ class SettinganController extends Controller
 
     public function actionBatal()
     {
-        return $this->redirect(['update()']);
+        return $this->redirect(['pokok']);
     }
 
     protected function findModel($id)

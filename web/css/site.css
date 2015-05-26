@@ -128,22 +128,192 @@ img {
 	font-weight: bold;
 }
 
-.anggota-create .form-control{
-width: 50%;
-}
-
-.barang-create .form-control{
-width: 50%;
-}
-
-.transaksi-simpanan-create .form-control{
-width: 50%;
-}
-
-.transaksi-pinjaman-create .form-control{
-width: 50%;
-}
-
 textarea .form-control{
-height: 200px;
+height: 400px;
 }
+
+.content .anggota-create{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+
+.anggota-create .anggota-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.anggota-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.content .anggota-update{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+
+.anggota-update .anggota-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.anggota-update h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.anggota-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.anggota-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.anggota-view th{
+	width: 30%;
+}
+
+.content .barang-create{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+
+.barang-create .barang-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.barang-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.barang-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.barang-view th{
+	width: 30%;
+}
+
+.barang-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.content .transaksi-simpanan-create{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+
+.transaksi-simpanan-create .transaksi-simpanan-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.transaksi-simpanan-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.barang-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.barang-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.barang-view th{
+	width: 30%;
+}
+
+.barang-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.transaksi-simpanan-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.transaksi-simpanan-view th{
+	width: 30%;
+}
+
+.transaksi-simpanan-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.content .transaksi-pinjaman-create{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+
+.transaksi-pinjaman-create .transaksi-pinjaman-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.transaksi-pinjaman-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.transaksi-pinjaman-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.transaksi-pinjaman-view th{
+	width: 30%;
+}
+
+.transaksi-pinjaman-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : cent

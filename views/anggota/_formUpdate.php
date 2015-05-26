@@ -19,7 +19,7 @@ use app\models\Unit;
     <?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota'])->label('Nama Anggota *') ?>
 
     <?= $form->field($model, 'alamat')->textArea(['maxlength' => 150, 'placeholder' => 'Alamat saat ini'])->label('Alamat') ?>
-
+	
     <?= $form->field($model, 'kode_unit')->dropDownList(
 		ArrayHelper::map(Unit::find()->all(),'kode','nama'),
 		['prompt'=>'Pilih Unit']
