@@ -90,8 +90,7 @@ class AnggotaController extends Controller
         if(Authorization::authorize('anggota','update')){
             $model = $this->findModel($id);
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-                && Model::validateMultiple([$model,$user])){
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())){
                 $model->save(false);
                 $user->save(false);
                 Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
