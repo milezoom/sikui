@@ -9,6 +9,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="transaksi-simpanan-form">
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
 
     <?php $form = ActiveForm::begin(); ?>
    

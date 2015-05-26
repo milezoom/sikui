@@ -10,6 +10,8 @@ use yii\widgets\ActiveForm;
 
 <div class="transaksi-simpanan-form">
 	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
+	
     <?php $form = ActiveForm::begin(); ?>
 	
 	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'SPWJB', 'readonly'=>true]) -> label('Kode Simpanan*')?>

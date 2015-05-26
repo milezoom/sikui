@@ -12,7 +12,7 @@ use app\models\Unit;
 
 <div class="anggota-form">
 
-	<p class ="note">Kolom dengan <span class="required">*</span> wajib diisi.</p>
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
     
 	<?php $form = ActiveForm::begin(); ?>
 

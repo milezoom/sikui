@@ -11,7 +11,9 @@ use app\models\Unit;
 ?>
 
 <div class="anggota-form">
-
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
+	
     <?php $form = ActiveForm::begin(); ?>
 
 	<?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
