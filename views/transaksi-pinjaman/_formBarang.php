@@ -13,6 +13,8 @@ use app\models\Anggota;
 ?>
 
 <div class="transaksi-pinjaman-form">
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
 
     <?php $form = ActiveForm::begin(); ?>
    
