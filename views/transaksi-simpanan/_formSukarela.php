@@ -10,9 +10,11 @@ use yii\widgets\ActiveForm;
 
 <div class="transaksi-simpanan-form">
 
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
+
     <?php $form = ActiveForm::begin(); ?>
    
-	<?= $form->field($model, 'kode_simpanan')-> dropdownList(['SPSKRL' => 'Simpanan Sukarela']) ?>
+	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'SPSKRL', 'readonly'=>true]) -> label('Kode Simpanan*')?>
 
     <?= $form->field($model, 'tanggal')->textInput(['type' => 'date']) ?>
 

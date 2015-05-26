@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Anggota;
 use app\models\TransaksiPinjaman;
+use app\models\TransaksiPinjamanSearch;
 use app\models\Unit;
 use kartik\mpdf\Pdf;
 

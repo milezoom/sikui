@@ -11,7 +11,9 @@ use app\models\Unit;
 ?>
 
 <div class="anggota-form">
-
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
+	
     <?php $form = ActiveForm::begin(); ?>
 
 	<?= $form->field($model, 'nama')->textInput(['maxlength' => 30, 'placeholder' => 'Nama Anggota']) ?>
@@ -30,9 +32,7 @@ use app\models\Unit;
 
     <?= $form->field($model, 'thn_pensiun')->textInput()?>
 
-    <?= $form->field($model, 'status')->radioList(array('non' => 'Tidak Aktif','aktif' => 'Aktif'))?>
-
-    <?= $form->field($model, 'is_pns')->radioList(array('0' => 'Honorer','1' => 'PNS'))?>
+    <?= $form->field($model, 'is_pns')->radioList(array('P-UI' => 'Pegawai UI','PNS' => 'PNS'))?>
     
     <?= $form->field($user, 'role')->radioList(array('anggota' => 'Anggota Biasa','admin' => 'Admin Sistem')) ?>
 

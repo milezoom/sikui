@@ -15,7 +15,7 @@ class BarangSearch extends Barang
     public function rules()
     {
         return [
-            [['kode', 'nama', 'img_path'], 'safe'],
+            [['kode', 'nama'], 'safe'],
             [['harga'], 'integer'],
         ];
     }
@@ -47,8 +47,7 @@ class BarangSearch extends Barang
         ]);
 
         $query->andFilterWhere(['like', 'kode', $this->kode])
-            ->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'img_path', $this->img_path]);
+            ->andFilterWhere(['like', 'nama', $this->nama]);
 
         return $dataProvider;
     }

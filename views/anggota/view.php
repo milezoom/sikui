@@ -10,7 +10,7 @@ $this->title = 'Detail Anggota : '.$model->nama;
 $this->params['breadcrumbs'][] = ['label' => 'Anggota', 'url' => ['nama']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="transaksi-simpanan-view">
+<div class="anggota-view">
 
 
 	<?php if(Yii::$app->session->hasFlash('success')):?>

@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'no_anggota',
         'nama',
         //'kode_unit',
-        'alamat',
+        //'alamat',
         //'tgl_lahir',
         'total_simpanan',
         'total_pinjaman',
@@ -50,30 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
                      'class' => 'btn btn-success',
                  ]);                                
              }                                
-         ]                            
-        ],
-
-        ['class' => 'yii\grid\ActionColumn',
-         'template'=>'{update}',
-         'buttons'=>[
-             'update' => function ($url, $model) {     
-                 return Html::a('<span >Ubah</span>', $url, [
-                     'title' => Yii::t('yii', 'Ubah Transaksi'),
-                     'class' => 'btn btn-success',
-                 ]);                                
-             }
-         ]                            
-        ],
-
-        ['class' => 'yii\grid\ActionColumn',
-         'template'=>'{delete}',
-         'buttons'=>[
-             'delete' => function ($url, $model) {     
-                 return Html::a('<span >Hapus</span>', $url, [
-                     'title' => Yii::t('yii', 'Hapus Transaksi'),
-                     'class' => 'btn btn-danger',
-                 ]);                                
-             }
          ]                            
         ],
     ],

@@ -134,7 +134,7 @@ class TransaksiPinjamanController extends Controller
             $anggota = new Anggota();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
+                Yii::$app->getSession()->setFlash('success', 'Pinjaman barang berhasil ditambah!');
                 return $this->redirect(['index', 'id' => $model->kode_trans]);
             } else {
 
