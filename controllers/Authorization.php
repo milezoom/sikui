@@ -25,7 +25,7 @@ class Authorization
         'site' => array('login'),
     );
 
-    public function authorize($controller, $action)
+    public static function authorize($controller, $action)
     {
         if(Yii::$app->user->isGuest) {
             return in_array($action,self::$guest[$controller]);
