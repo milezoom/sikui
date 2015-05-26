@@ -16,10 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
 
-
-    <?= $form->field($model, 'no_anggota')->textInput(['readonly' => true])?>
-
-
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
     <?= $form->field($model, 'tgl_pinjam')->textInput(['type' => 'date']) ?>

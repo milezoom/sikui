@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\base\DynamicModel;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -82,6 +83,34 @@ class SiteAnggotaController extends Controller
     public function actionSimpananAnggota()
     {
         if(Authorization::authorize('site-anggota','simpanan-anggota')){
+            $rangeTahun = [];
+            $counter = 2015;
+            while($counter<=intval(date('Y'))){
+                array_push($rangeTahun,$counter);
+                $counter=$counter+1;
+            }
+            $rangeBulan = ['Januari' => 1,
+                           'Februari' => 2,
+                           'Maret' => 3,
+                           'April' => 4,
+                           'Mei' => 5,
+                           'Juni' => 6,
+                           'Juli' => 7,
+                           'Agustus' => 8,
+                           'September' => 9,
+                           'Oktober' => 10,
+                           'November' => 11,
+                           'Desember' => 12
+                          ];
+            $model = DynamicModel::validateData(compact('bulan','tahun'),[
+                [['bulan','tahun'],'integer'],
+            ]);
+            
+            if($model->load(Yii::$app->request->post())){
+                
+            }
+            
+            
             $searchModel = new TransaksiSimpananSearch();
             $id = Yii::$app->user->identity->no_anggota;
             $query = TransaksiSimpanan::find()->where(['no_anggota' => $id]);
@@ -89,6 +118,8 @@ class SiteAnggotaController extends Controller
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'rangeTahun' => $rangeTahun,
+                'rangeBulan' => $rangeBulan
             ]);
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
