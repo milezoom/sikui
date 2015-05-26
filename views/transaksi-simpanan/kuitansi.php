@@ -89,7 +89,7 @@ $this->title = 'Kuitansi';
 					Nama Petugas
 				</div>
 				<div class="col-xs-5 col-xs-offset-2 text-right">
-					Tanggal<br>
+					<?php echo $tanggal ?><br>
 					Penyetor <br><br><br>
 					Nama Penyetor
 				</div>

@@ -64,7 +64,7 @@ class TransaksiPinjamanController extends Controller
 
     public function actionView($id)
     {
-        if(Auhorization::authorize('transaksi-pinjaman','view')){
+        if(Authorization::authorize('transaksi-pinjaman','view')){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);

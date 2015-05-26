@@ -94,8 +94,8 @@ $this->title = 'Angsuran';
 						<td><?php echo $tanggal ?></td>
 						<td><?php echo $no_angsuran ?></td>
 						<td class="text-right">Rp. <?php echo $jumlah ?>,00</td>
-						<td class="text-right">Rp. 100.000,00</td>
-						<td class="text-right">Rp. 0,00	</td>  
+						<td class="text-right">Rp. <?php echo $jasa ?>,00</td>
+						<td class="text-right">Rp. <?php echo $denda ?>,00	</td>  
 					</tr>
 				</tbody>
 			</table>

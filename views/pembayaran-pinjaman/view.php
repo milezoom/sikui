@@ -35,6 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'tgl_bayar',
             'no_angsuran',
             'jumlah',
+			'jasa',
+			'denda',
         ],
     ]) ?>
 
