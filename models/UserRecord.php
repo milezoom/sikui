@@ -27,10 +27,12 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-            [['username', 'password', 'no_anggota'], 'required'],
-            [['username', 'password','auth_key'], 'string', 'max' => 255],
+            [['username', 'password', 'no_anggota','auth_key'], 'required'],
+            [['username'], 'string', 'max' => 25],
+            [['password'], 'string', 'max' => 60],
+            [['auth_key'], 'string', 'max' => 255],
             [['username'], 'unique'],
-            [['no_anggota'],'string','max' => 20],
+            [['no_anggota'],'integer'],
             [['role'],'string','max' => 7]
         ];
     }

@@ -27,8 +27,7 @@ use app\models\Unit;
 
     <?= $form->field($model, 'tgl_lahir')->textInput(['type' => 'date']) ?>
 
-
-    <?= $form->field($model, 'jenis_kelamin')->radioList(array('0' => 'Perempuan','1' => 'Laki-laki'))?>
+    <?= $form->field($model, 'jenis_kelamin')->radioList(array('Perempuan' => 'Perempuan','Laki-laki' => 'Laki-laki'))?>
 
     <?= $form->field($model, 'thn_pensiun')->textInput()?>
 
