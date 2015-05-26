@@ -142,4 +142,17 @@ class PembayaranPinjamanController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	public function actionDaftar()
+    {
+        if(Authorization::authorize('pembayaran-pinjaman','daftar')){
+            $searchModel = new TransaksiPinjamanSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('daftar', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);   
+        } 
+    }
 }

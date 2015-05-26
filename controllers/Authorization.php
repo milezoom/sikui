@@ -8,7 +8,7 @@ class Authorization
     private static $admin = array(
         'anggota' => array('index','view','create','update','status'),
         'barang' => array('index','view','create','update','delete','produk','upload'),
-        'pembayaran-pinjaman' => array('index','view','create','print-kuitansi','update','delete'),
+        'pembayaran-pinjaman' => array('index','view','create','print-kuitansi','update','delete', 'daftar', 'lihat'),
         'settingan' => array('index','view','create','update','pokok','batal'),
         'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','logout'),
         'site' => array('index','login','logout','print-kuitansi','print-angsuran','print-transaksi'),
