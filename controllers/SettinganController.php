@@ -72,14 +72,13 @@ class SettinganController extends Controller
     {
         if(Authorization::authorize('settingan','update')){
             $model = $this->findModel($id);
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post())) {
+				$model->save(false);
                 return $this -> render('update', [
                     'model' => $model,
                 ]);
             } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
+                return $this->redirect(['site/index']);
             }
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');

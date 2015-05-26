@@ -7,12 +7,16 @@ use app\models\PembayaranPinjaman;
 use app\models\PembayaranPinjamanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Anggota;
+use app\models\AnggotaSearch;
 use app\models\TransaksiPinjaman;
 use app\models\TransaksiPinjamanSearch;
 use app\models\Unit;
 use kartik\mpdf\Pdf;
+use app\controllers\Authorization;
+use yii\data\ActiveDataProvider;
 
 class PembayaranPinjamanController extends Controller
 {
@@ -28,19 +32,29 @@ class PembayaranPinjamanController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndeks($id)
     {
         if(Authorization::authorize('pembayaran-pinjaman','index')){
             $searchModel = new PembayaranPinjamanSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+			$test = PembayaranPinjaman::find()->where(['kode_trans' => $id]);		
+            $dataProvider = new ActiveDataProvider(['query'=>$test]);
 
-            return $this->render('index', [
+            return $this->render('indeks', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);   
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
+		
+			$searchModel = new TransaksiPinjamanSearch();
+            $test = TransaksiPinjaman::find()->where(['no_anggota' => $id]);		
+            $dataProvider = new ActiveDataProvider(['query'=>$test]);
+
+            return $this->render('pinjaman-anggota', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
     }
 
     public function actionView($kode_trans, $tgl_bayar)
@@ -88,11 +102,14 @@ class PembayaranPinjamanController extends Controller
                     'tanggal'=>$bayar->tgl_bayar,
                     'no_angsuran'=>$bayar->no_angsuran,
                     'jumlah'=>$bayar->jumlah,
+					'jasa'=>$bayar->jasa,
+					'denda'=>$bayar->denda,
                     'no_anggota'=>$anggota->no_anggota,	
                     'nama_unit'=>$unit->nama,
                     'nama'=>$anggota->nama,
                     'wajib'=>$anggota->total_simpanan_wajib,
                     'sukarela'=>$anggota->total_simpanan_sukarela,
+					 
                 ]),
                 'format' => Pdf::FORMAT_FOLIO,
                 'orientation' => Pdf::ORIENT_LANDSCAPE,
@@ -106,7 +123,32 @@ class PembayaranPinjamanController extends Controller
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
-    }	
+    }
+
+	public function actionList()
+    {
+            $searchModel = new AnggotaSearch();
+            $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
+            $queryParams["AnggotaSearch"]["status"] = "Aktif";
+            $dataProvider = $searchModel->search($queryParams);
+
+            return $this->render('list', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+    }
+	
+	public function actionPinjamanAnggota($id)
+    {
+            $searchModel = new TransaksiPinjamanSearch();
+            $test = TransaksiPinjaman::find()->where(['no_anggota' => $id]);		
+            $dataProvider = new ActiveDataProvider(['query'=>$test]);
+
+            return $this->render('pinjaman-anggota', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+    }
 
     public function actionUpdate($kode_trans, $tgl_bayar)
     {
