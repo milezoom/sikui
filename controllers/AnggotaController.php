@@ -60,8 +60,7 @@ class AnggotaController extends Controller
         if(Authorization::authorize('anggota','create')){
             $model = new Anggota();
             $user = new UserRecord();
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
@@ -69,12 +68,12 @@ class AnggotaController extends Controller
                 $password = Yii::$app->getSecurity()->generateRandomString(5);
                 $user->password = $password;
                 $user->save(false);
-                Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
                 return $this->render('credential', [
                     'username'=>$user->username,
                     'password'=>$password
                 ]);
             } else {
+                $model->tgl_masuk = date('Y-m-d');
                 return $this->render('create', [
                     'model' => $model,
                     'user' => $user
@@ -90,12 +89,11 @@ class AnggotaController extends Controller
         if(Authorization::authorize('anggota','update')){
             $model = $this->findModel($id);
             $user = UserRecord::find()->where(['no_anggota' => $id])->one();
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) 
-                && Model::validateMultiple([$model,$user])){
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) && Model::validateMultiple([$model,$user])){
                 $model->save(false);
                 $user->save(false);
                 Yii::$app->getSession()->setFlash('update', 'Data anggota berhasil di update!');
-                return $this->redirect(['index']);
+				return $this->redirect(['view', 'id' => $model->kode]);
 
             } else {
                 return $this->render('update', [

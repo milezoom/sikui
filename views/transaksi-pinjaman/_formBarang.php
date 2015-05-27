@@ -13,6 +13,8 @@ use app\models\Anggota;
 ?>
 
 <div class="transaksi-pinjaman-form">
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
 
     <?php $form = ActiveForm::begin(); ?>
    
@@ -21,7 +23,9 @@ use app\models\Anggota;
 		['prompt'=>'Select Barang']
 	) ?>
 
+
     <?= $form->field($model, 'kode_pinjaman')->textInput(['maxlength' => 4])->label('Kode Pinjaman *') ?>
+
 
     <?= $form->field($model, 'no_anggota')->label('Nomor Anggota *') ?>
 

@@ -108,7 +108,7 @@ use yii\helpers\Url;
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman/daftar'); ?>">
+                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman/list'); ?>">
                                             Bayar Pinjaman
                                         </a>
                                     </li>
@@ -179,12 +179,12 @@ use yii\helpers\Url;
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/site/print-kuitansi'); ?>">
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
                                             Pembayaran Simpanan
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo Url::toRoute('/site/print-angsuran'); ?>">
+                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman'); ?>">
                                             Pembayaran Angsuran
                                         </a>
                                     </li>

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="barang-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'kode')->textInput(['maxlength' => 10, 'placeholder' => 'Masukan Kode Barang']) ?>
 
@@ -18,9 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'harga')->textInput(['placeholder' => 'Harga Barang']) ?>
 
-    <?= $form->field($model, 'img_path')->textInput(['maxlength' => 150]) ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Tambah' : 'Simpan', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::a('Batal', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 

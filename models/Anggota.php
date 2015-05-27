@@ -47,11 +47,10 @@ class Anggota extends \yii\db\ActiveRecord
         return [
             [['nama', 'kode_unit', 'jenis_kelamin', 'thn_pensiun', 'status', 'is_pns'], 'required'],
             [['tgl_lahir', 'tgl_masuk'], 'safe'],
-            [['jenis_kelamin'], 'string', 'max' => 10],
-            [['status'], 'string', 'max' => 10],
-            [['is_pns'], 'string', 'max' => 10],
+            [['jenis_kelamin'], 'string', 'max' => 20],
+            [['status'], 'string', 'max' => 5],
+            [['is_pns'], 'string', 'max' => 20],
             [['thn_pensiun', 'total_simpanan', 'total_pinjaman', 'total_simpanan_wajib', 'total_simpanan_sukarela'], 'integer'],
-            [['no_anggota'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 30],
             [['kode_unit'], 'string', 'max' => 10],
             [['alamat'], 'string', 'max' => 150],
@@ -122,7 +121,8 @@ class Anggota extends \yii\db\ActiveRecord
     {
         date_default_timezone_set('Asia/Jakarta');
         if ($this->$attribute >= date('Y-m-d', strtotime('-17 years')))
+        {
             $this->addError($attribute,'Minimal 17 tahun untuk daftar di koperasi.');
-
+        }
     }
 }

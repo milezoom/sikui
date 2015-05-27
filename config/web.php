@@ -14,7 +14,6 @@ $config = [
             'showScriptName' => false,
         ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'hLITDK9lh4O7nr8mDwSlItRDiolOftpx',
         ],
         'cache' => [

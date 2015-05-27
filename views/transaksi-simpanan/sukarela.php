@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="transaksi-simpanan-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-	<p>Keterangan :<strong> * is required</strong></p>
 
     <?= $this->render('_formSukarela', [
         'model' => $model,

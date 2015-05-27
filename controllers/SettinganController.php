@@ -73,7 +73,7 @@ class SettinganController extends Controller
         if(Authorization::authorize('settingan','update')){
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->index]);
+                return $this->redirect(['site/index']);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -102,7 +102,7 @@ class SettinganController extends Controller
 
     public function actionBatal()
     {
-        return $this->redirect(['pokok']);
+        return $this->redirect(['site/index']);
     }
 
     protected function findModel($id)

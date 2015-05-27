@@ -4,14 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\TransaksiSimpananSearch */
+/* @var $searchModel app\models\TransaksiPinjamanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar Transaksi Simpanan';
+$this->title = 'Daftar Transaksi Pinjaman Barang';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="transaksi-simpanan-index">
-
+<div class="transaksi-pinjaman-index">
 
 	<?php if(Yii::$app->session->hasFlash('success')):?>
 		<div class="row">	
@@ -23,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 	<?php endif; ?>
 
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -34,18 +33,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'kode_trans',
-            'kode_simpanan',
-            'tanggal',
+            //'kode_pinjaman',
             'no_anggota',
             'jumlah',
-            'keterangan',
+            'sisa_piutang',
+            // 'tgl_pinjam',
+            // 'jatuh_tempo',
+            // 'banyak_angsuran',
+            // 'denda',
+            // 'bunga',
+            // 'kode_barang',
+            // 'keterangan',
 
             ['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{view}',
+                          'template'=>'{lihat}',
                             'buttons'=>[
-                              'view' => function ($url, $model) {     
+                              'lihat' => function ($url, $model) {     
                                 return Html::a('<span >Lihat</span>', $url, [
-                                        'title' => Yii::t('yii', 'Lihat Transaksi'),
+                                        'title' => Yii::t('yii', 'Lihat Pinjaman'),
 										'class' => 'btn btn-success',
                                 ]);                                
                               }

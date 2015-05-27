@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'kode',
             'nama',
             'harga',
-            'img_path',
 
             ['class' => 'yii\grid\ActionColumn',
                           'template'=>'{view}',
@@ -43,18 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                               'view' => function ($url, $model) {     
                                 return Html::a('<span >Lihat</span>', $url, [
                                         'title' => Yii::t('yii', 'Lihat Transaksi'),
-										'class' => 'btn btn-success'
-                                ]);                                
-                              }
-							]                            
-            ],
-			
-			['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{update}',
-                            'buttons'=>[
-                              'update' => function ($url, $model) {     
-                                return Html::a('<span >Ubah</span>', $url, [
-                                        'title' => Yii::t('yii', 'Ubah Transaksi'),
 										'class' => 'btn btn-success'
                                 ]);                                
                               }

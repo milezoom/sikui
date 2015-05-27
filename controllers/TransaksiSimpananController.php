@@ -69,8 +69,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Wajib', [
+                return $this->render('wajib', [
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);
@@ -89,8 +90,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Sukarela',[
+                return $this->render('sukarela',[
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);
@@ -109,8 +111,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Ambil',[
+                return $this->render('ambil',[
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);
@@ -170,7 +173,7 @@ class TransaksiSimpananController extends Controller
         if(Authorization::authorize('transaksi-simpanan','daftar')) {
             $searchModel = new AnggotaSearch();
             $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-            $queryParams["AnggotaSearch"]["status"] = "aktif";
+            $queryParams["AnggotaSearch"]["status"] = "Aktif";
             $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('daftar', [
@@ -187,7 +190,7 @@ class TransaksiSimpananController extends Controller
         if(Authorization::authorize('transaksi-simpanan','list')){
             $searchModel = new AnggotaSearch();
             $queryParams = array_merge(array(),Yii::$app->request->getQueryParams());
-            $queryParams["AnggotaSearch"]["status"] = "aktif";
+            $queryParams["AnggotaSearch"]["status"] = "Aktif";
             $dataProvider = $searchModel->search($queryParams);
 
             return $this->render('list', [
@@ -237,6 +240,7 @@ class TransaksiSimpananController extends Controller
                     'kode_trans'=>$sesuatu->kode_trans,
                     'jenis'=>$sesuatu->kode_simpanan,
                     'jumlah'=>$sesuatu->jumlah,
+					'tanggal'=>$sesuatu->tanggal,
                     'keterangan'=>$sesuatu->keterangan,
                     'no_anggota'=>$anggota->no_anggota,	
                     'nama_unit'=>$unit->nama,

@@ -27,16 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
             //'kode_unit',
             'alamat',
             //'tgl_lahir',
-            'total_simpanan',
-            //'total_pinjaman',
-			
-			['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{simpanan-anggota}',
+            //'total_simpanan',
+            'total_pinjaman',
+
+            ['class' => 'yii\grid\ActionColumn',
+                          'template'=>'{pinjaman-anggota}',
                             'buttons'=>[
-                              'simpanan-anggota' => function ($url, $model) {     
-                                return Html::a('<span >Lihat</span>', $url, [
-                                        'title' => Yii::t('yii', 'Lihat Simpanan'),
-										'class' => 'btn btn-success',
+                              'pinjaman-anggota' => function ($url, $model) {     
+                                return Html::a('<span >Pilih</span>', $url, [
+                                        'title' => Yii::t('yii', 'Pilih Anggota'),
+										'class' => 'btn btn-success'
                                 ]);                                
                               }
 							]                            

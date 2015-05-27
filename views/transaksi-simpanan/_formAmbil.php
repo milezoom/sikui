@@ -9,10 +9,13 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="transaksi-simpanan-form">
+	
+	<p class ="note"> <br> Kolom dengan <span class="required">*</span> wajib diisi.</p>
 
     <?php $form = ActiveForm::begin(); ?>
+   
+	<?= $form->field($model, 'kode_simpanan')-> textInput(['value' => 'AMSP', 'readonly'=>true]) -> label('Kode Simpanan*')?>
 
-    <?= $form->field($model, 'kode_simpanan')-> dropdownList(['AMSP' => 'Ambil Simpanan'])->label('Kode Simpanan *') ?>
 
     <?= $form->field($model, 'tanggal')->textInput(['type' => 'date'])->label('Tanggal Pengambilan *') ?>
 
@@ -21,7 +24,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'jumlah')->textInput()->label('Jumlah Pengambilan *') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Ambil' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::a('Batal', ['daftar'], ['class' => 'btn btn-danger']) ?>
     </div>
 
