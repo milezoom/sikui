@@ -317,3 +317,39 @@ height: 400px;
 	margin:auto;
 	position: relative;
 	text-align : cent
+}
+	
+.content .pembayaran-pinjaman-create{
+	width: 750px;
+	margin:auto;
+	position: relative;
+	border:3px solid #000;
+}
+	
+.pembayaran-pinjaman-create .pembayaran-pinjaman-form{
+	width: 90%;
+	margin:auto;
+	position: relative;
+}
+.pembayaran-pinjaman-create h1{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : center;
+}
+
+.pembayaran-pinjaman-view .table{
+	width: 80%;
+	margin:auto;
+	position: relative;
+}
+
+.pembayaran-pinjaman-view th{
+	width: 30%;
+}
+
+.pembayaran-pinjaman-index .table .btn{
+	width: 90%;
+	margin:auto;
+	position: relative;
+	text-align : cent

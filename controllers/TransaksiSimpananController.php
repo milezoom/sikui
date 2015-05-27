@@ -206,8 +206,8 @@ class TransaksiSimpananController extends Controller
     {
         if(Authorization::authorize('transaksi-simpanan','simpanan-anggota')){
             $searchModel = new TransaksiSimpananSearch();
-            $test = TransaksiSimpanan::find()->where(['no_anggota' => $id]);		
-            $dataProvider = new ActiveDataProvider(['query'=>$test]);
+            $trans = TransaksiSimpanan::find()->where(['no_anggota' => $id]);		
+            $dataProvider = new ActiveDataProvider(['query'=>$trans]);
 
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
