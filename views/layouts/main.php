@@ -88,6 +88,11 @@ use yii\helpers\Url;
                                             Tambah Simpanan Dari File CSV
                                         </a>
 									</li>
+									<li>
+                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
+                                            Lihat Transaksi Simpanan
+                                        </a>
+                                    </li>
                                     
                                 </ul>
                             </li>
@@ -119,23 +124,7 @@ use yii\helpers\Url;
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                   role="button" aria-expanded="false">
-                                    Transaksi<span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
-                                            Lihat Daftar Transaksi
-                                        </a>
-                                    </li>
-                                    <li><a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
-                                        Cetak Transaksi per Bulan
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                    role="button" aria-expanded="false">
@@ -168,24 +157,6 @@ use yii\helpers\Url;
                                     <li>
                                         <a href="<?php echo Url::toRoute('/barang'); ?>">
                                             List Barang
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                   role="button" aria-expanded="false">
-                                    Cetak Kuitansi<span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="<?php echo Url::toRoute('/transaksi-simpanan'); ?>">
-                                            Pembayaran Simpanan
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo Url::toRoute('/pembayaran-pinjaman'); ?>">
-                                            Pembayaran Angsuran
                                         </a>
                                     </li>
                                 </ul>
