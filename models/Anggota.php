@@ -121,7 +121,8 @@ class Anggota extends \yii\db\ActiveRecord
     {
         date_default_timezone_set('Asia/Jakarta');
         if ($this->$attribute >= date('Y-m-d', strtotime('-17 years')))
+        {
             $this->addError($attribute,'Minimal 17 tahun untuk daftar di koperasi.');
-
+        }
     }
 }

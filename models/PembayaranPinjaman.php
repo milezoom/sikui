@@ -33,7 +33,7 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
             [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah'], 'required'],
             [['tgl_bayar'], 'safe'],
             [['kode_trans', 'no_angsuran', 'jumlah', 'jasa','denda'], 'integer'],
-            ['jumlah','validateJumlah']
+            [['jumlah'],'validateJumlah']
         ];
     }
 

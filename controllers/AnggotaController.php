@@ -60,7 +60,7 @@ class AnggotaController extends Controller
         if(Authorization::authorize('anggota','create')){
             $model = new Anggota();
             $user = new UserRecord();
-            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) && $model->validate()) {
                 $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);

@@ -46,7 +46,7 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
             [['tgl_pinjam', 'jatuh_tempo'], 'safe'],
             [['kode_pinjaman', 'kode_barang'], 'string', 'max' => 10],
             [['no_anggota'], 'string', 'max' => 20],
-            ['jumlah','validateJumlah']
+            [['jumlah'],'validateJumlah']
         ];
     }
 
