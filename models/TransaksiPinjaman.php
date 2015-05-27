@@ -46,6 +46,7 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
             [['tgl_pinjam', 'jatuh_tempo'], 'safe'],
             [['kode_pinjaman', 'kode_barang'], 'string', 'max' => 10],
             [['no_anggota'], 'string', 'max' => 20],
+            ['jumlah','validateJumlah']
         ];
     }
 
@@ -90,5 +91,15 @@ class TransaksiPinjaman extends \yii\db\ActiveRecord
     public function getAnggota()
     {
         return $this->hasOne(Anggota::className(), ['no_anggota' => 'no_anggota']);
+    }
+    
+    /**
+     * Jumlah harus lebih besar dari 50000
+     */
+    public function validateJumlah($attribute)
+    {
+        if($this->$attribute < 50000){
+            $this->addError($attribute,'Minimal jumlah 50000.');
+        }
     }
 }

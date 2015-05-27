@@ -33,6 +33,7 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
             [['kode_trans', 'tgl_bayar', 'no_angsuran', 'jumlah'], 'required'],
             [['tgl_bayar'], 'safe'],
             [['kode_trans', 'no_angsuran', 'jumlah', 'jasa','denda'], 'integer'],
+            ['jumlah','validateJumlah']
         ];
     }
 
@@ -57,5 +58,15 @@ class PembayaranPinjaman extends \yii\db\ActiveRecord
     public function getKodeTrans()
     {
         return $this->hasOne(TransaksiPinjaman::className(), ['kode_trans' => 'kode_trans']);
+    }
+    
+    /**
+     * Jumlah harus lebih besar dari 50000
+     */
+    public function validateJumlah($attribute)
+    {
+        if($this->$attribute < 50000){
+            $this->addError($attribute,'Minimal jumlah 50000.');
+        }
     }
 }
