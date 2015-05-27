@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Anggota;
 use app\models\UserRecord;
+use app\models\Settingan;
 use app\models\AnggotaSearch;
 use app\controllers\Authorization;
 use yii\base\Model;
@@ -61,6 +62,8 @@ class AnggotaController extends Controller
             $model = new Anggota();
             $user = new UserRecord();
             if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post()) && $model->validate()) {
+                $valSimpananPokok = Settingan::find()->where(['key'=>'SP'])->one();
+                $model->total_simpanan = $valSimpananPokok->value;
                 $model->save(false);
                 $user->no_anggota = $model->no_anggota;
                 $nama = explode(" ",$model->nama);
