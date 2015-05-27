@@ -102,25 +102,19 @@ class SiteAnggotaController extends Controller
                            'November' => 11,
                            'Desember' => 12
                           ];
-            $model = DynamicModel::validateData(compact('bulan','tahun'),[
-                [['bulan','tahun'],'integer'],
-            ]);
-            
-            if($model->load(Yii::$app->request->post())){
-                
-            }
-            
-            
+
             $searchModel = new TransaksiSimpananSearch();
             $id = Yii::$app->user->identity->no_anggota;
-            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id]);
+            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id])
+                ->andWhere('extract(month from tanggal) = :bulan',[':bulan' => date('m')])
+                ->andWhere('extract(year from tanggal) = :tahun',[':tahun' => date('Y')]);
             $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
                 'rangeTahun' => $rangeTahun,
                 'rangeBulan' => $rangeBulan
-            ]);
+            ]);   
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }

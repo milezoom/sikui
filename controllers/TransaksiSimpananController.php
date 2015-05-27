@@ -69,8 +69,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Wajib', [
+                return $this->render('wajib', [
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);
@@ -89,8 +90,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Sukarela',[
+                return $this->render('sukarela',[
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);
@@ -109,8 +111,9 @@ class TransaksiSimpananController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Simpanan berhasil dibuat!');
                 return $this->redirect('index');
             } else {
+                $model->tanggal = date('Y-m-d');
                 $model->no_anggota = $id;
-                return $this->render('Ambil',[
+                return $this->render('ambil',[
                     'model' => $model,
                     'anggota' => $anggota,
                 ]);

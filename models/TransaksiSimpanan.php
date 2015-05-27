@@ -38,7 +38,8 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
             [['jumlah'], 'integer'],
             [['kode_trans', 'kode_simpanan'], 'string', 'max' => 10],
             [['no_anggota'], 'string', 'max' => 20],
-            [['keterangan'], 'string', 'max' => 50]
+            [['keterangan'], 'string', 'max' => 50],
+            [['jumlah'],'validateJumlah']
         ];
     }
 
@@ -71,5 +72,15 @@ class TransaksiSimpanan extends \yii\db\ActiveRecord
     public function getNoAnggota()
     {
         return $this->hasOne(Anggota::className(), ['no_anggota' => 'no_anggota']);
+    }
+    
+    /**
+     * Jumlah harus lebih besar dari 50000
+     */
+    public function validateJumlah($attribute)
+    {
+        if($this->$attribute < 50000){
+            $this->addError($attribute,'Minimal jumlah 50000.');
+        }
     }
 }
