@@ -107,15 +107,16 @@ class TransaksiPinjamanController extends Controller
             $model = new TransaksiPinjaman();
             $anggota = new Anggota();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post())) {
+                $model->kode_pinjaman = 'PJUG';
+                $model->save(false);
                 Yii::$app->getSession()->setFlash('success', 'Pinjaman uang berhasil ditambah!');
                 return $this->redirect(['index', 'id' => $model->kode_trans]);
             } else {
                 date_default_timezone_set('Asia/Jakarta');
-                $tanggal = date('Y-m-d',strtotime('+1 month'));
-                $tanggal = strtotime($tanggal->format('Y').'-'.$tanggal->format('m').'-15');
-                $model->jatuh_tempo = $tanggal;
-                $model->kode_pinjaman = 'PJUG';
+                $jatuh_tempo = date('Y-m-d',strtotime(date('Y').'-'.date('m',strtotime("+1 month", strtotime(date('Y-m-d')))).'-15'));
+                $model->tgl_pinjam = date('Y-m-d');
+                $model->jatuh_tempo = $jatuh_tempo;
                 $model->no_anggota = $id;
                 return $this->render('uang', [
                     'model' => $model,
@@ -133,12 +134,16 @@ class TransaksiPinjamanController extends Controller
             $model = new TransaksiPinjaman();
             $anggota = new Anggota();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post())) {
+                $model->kode_pinjaman = 'PJBG';
+                $model->save(false);
                 Yii::$app->getSession()->setFlash('success', 'Pinjaman barang berhasil ditambah!');
                 return $this->redirect(['index', 'id' => $model->kode_trans]);
             } else {
-
-                $model->kode_pinjaman = 'PJBG';
+                date_default_timezone_set('Asia/Jakarta');
+                $jatuh_tempo = date('Y-m-d',strtotime(date('Y').'-'.date('m',strtotime("+1 month", strtotime(date('Y-m-d')))).'-15'));
+                $model->tgl_pinjam = date('Y-m-d');
+                $model->jatuh_tempo = $jatuh_tempo;
                 $model->no_anggota = $id;
                 return $this->render('barang', [
                     'model' => $model,
