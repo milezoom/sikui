@@ -68,7 +68,6 @@ class AnggotaController extends Controller
                 $password = Yii::$app->getSecurity()->generateRandomString(5);
                 $user->password = $password;
                 $user->save(false);
-                Yii::$app->getSession()->setFlash('success', 'Anggota berhasil ditambah!');
                 return $this->render('credential', [
                     'username'=>$user->username,
                     'password'=>$password

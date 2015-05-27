@@ -102,7 +102,7 @@ class SettinganController extends Controller
 
     public function actionBatal()
     {
-        return $this->redirect(['pokok']);
+        return $this->redirect(['site/index']);
     }
 
     protected function findModel($id)

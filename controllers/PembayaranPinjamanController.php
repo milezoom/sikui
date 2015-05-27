@@ -68,7 +68,7 @@ class PembayaranPinjamanController extends Controller
         }
     }
 
-    public function actionCreate($id)
+    public function actionCreate()
     {
         if(Authorization::authorize('pembayaran-pinjaman','create')){
             $model = new PembayaranPinjaman();
@@ -79,7 +79,6 @@ class PembayaranPinjamanController extends Controller
                 return $this->redirect(['view', 'kode_trans' => $model->kode_trans, 'tgl_bayar' => $model->tgl_bayar]);
             } 
             else {
-				$model->kode_trans = $id;
                 return $this->render('create', [
                     'model' => $model,
 					'transaksi'=> $transaksi,
