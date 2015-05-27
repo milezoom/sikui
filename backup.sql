@@ -10,13 +10,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: postgres; Type: COMMENT; Schema: -; Owner: postgres
---
-
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -33,7 +26,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- Name: kurangi_total_pinjaman(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: kurangi_total_pinjaman(); Type: FUNCTION; Schema: public; Owner: milezoom
 --
 
 CREATE FUNCTION kurangi_total_pinjaman() RETURNS trigger
@@ -55,10 +48,10 @@ end;
 $$;
 
 
-ALTER FUNCTION public.kurangi_total_pinjaman() OWNER TO postgres;
+ALTER FUNCTION public.kurangi_total_pinjaman() OWNER TO milezoom;
 
 --
--- Name: tambah_sisa_piutang(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: tambah_sisa_piutang(); Type: FUNCTION; Schema: public; Owner: milezoom
 --
 
 CREATE FUNCTION tambah_sisa_piutang() RETURNS trigger
@@ -80,10 +73,10 @@ end;
 $$;
 
 
-ALTER FUNCTION public.tambah_sisa_piutang() OWNER TO postgres;
+ALTER FUNCTION public.tambah_sisa_piutang() OWNER TO milezoom;
 
 --
--- Name: tambah_total_pinjaman(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: tambah_total_pinjaman(); Type: FUNCTION; Schema: public; Owner: milezoom
 --
 
 CREATE FUNCTION tambah_total_pinjaman() RETURNS trigger
@@ -98,10 +91,10 @@ end;
 $$;
 
 
-ALTER FUNCTION public.tambah_total_pinjaman() OWNER TO postgres;
+ALTER FUNCTION public.tambah_total_pinjaman() OWNER TO milezoom;
 
 --
--- Name: update_total_simpanan(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: update_total_simpanan(); Type: FUNCTION; Schema: public; Owner: milezoom
 --
 
 CREATE FUNCTION update_total_simpanan() RETURNS trigger
@@ -140,14 +133,14 @@ end;
 $$;
 
 
-ALTER FUNCTION public.update_total_simpanan() OWNER TO postgres;
+ALTER FUNCTION public.update_total_simpanan() OWNER TO milezoom;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: anggota; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: anggota; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE anggota (
@@ -170,10 +163,10 @@ CREATE TABLE anggota (
 );
 
 
-ALTER TABLE public.anggota OWNER TO postgres;
+ALTER TABLE anggota OWNER TO milezoom;
 
 --
--- Name: anggota_no_anggota_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
 --
 
 CREATE SEQUENCE anggota_no_anggota_seq
@@ -184,17 +177,17 @@ CREATE SEQUENCE anggota_no_anggota_seq
     CACHE 1;
 
 
-ALTER TABLE public.anggota_no_anggota_seq OWNER TO postgres;
+ALTER TABLE anggota_no_anggota_seq OWNER TO milezoom;
 
 --
--- Name: anggota_no_anggota_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
 --
 
 ALTER SEQUENCE anggota_no_anggota_seq OWNED BY anggota.no_anggota;
 
 
 --
--- Name: barang_kode_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: barang_kode_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
 --
 
 CREATE SEQUENCE barang_kode_seq
@@ -205,23 +198,24 @@ CREATE SEQUENCE barang_kode_seq
     CACHE 1;
 
 
-ALTER TABLE public.barang_kode_seq OWNER TO postgres;
+ALTER TABLE barang_kode_seq OWNER TO milezoom;
 
 --
--- Name: barang; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: barang; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE barang (
     kode integer DEFAULT nextval('barang_kode_seq'::regclass) NOT NULL,
     nama character varying(30) NOT NULL,
-    harga integer NOT NULL
+    harga integer NOT NULL,
+    img_path character varying(150)
 );
 
 
-ALTER TABLE public.barang OWNER TO postgres;
+ALTER TABLE barang OWNER TO milezoom;
 
 --
--- Name: jenis_pinjaman; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: jenis_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE jenis_pinjaman (
@@ -230,10 +224,10 @@ CREATE TABLE jenis_pinjaman (
 );
 
 
-ALTER TABLE public.jenis_pinjaman OWNER TO postgres;
+ALTER TABLE jenis_pinjaman OWNER TO milezoom;
 
 --
--- Name: jenis_simpanan; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: jenis_simpanan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE jenis_simpanan (
@@ -242,10 +236,10 @@ CREATE TABLE jenis_simpanan (
 );
 
 
-ALTER TABLE public.jenis_simpanan OWNER TO postgres;
+ALTER TABLE jenis_simpanan OWNER TO milezoom;
 
 --
--- Name: pembayaran_pinjaman; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: pembayaran_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE pembayaran_pinjaman (
@@ -258,10 +252,10 @@ CREATE TABLE pembayaran_pinjaman (
 );
 
 
-ALTER TABLE public.pembayaran_pinjaman OWNER TO postgres;
+ALTER TABLE pembayaran_pinjaman OWNER TO milezoom;
 
 --
--- Name: settingan; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: settingan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE settingan (
@@ -270,10 +264,10 @@ CREATE TABLE settingan (
 );
 
 
-ALTER TABLE public.settingan OWNER TO postgres;
+ALTER TABLE settingan OWNER TO milezoom;
 
 --
--- Name: transaksi_pinjaman; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: transaksi_pinjaman; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE transaksi_pinjaman (
@@ -289,10 +283,10 @@ CREATE TABLE transaksi_pinjaman (
 );
 
 
-ALTER TABLE public.transaksi_pinjaman OWNER TO postgres;
+ALTER TABLE transaksi_pinjaman OWNER TO milezoom;
 
 --
--- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
 --
 
 CREATE SEQUENCE transaksi_pinjaman_kode_trans_seq
@@ -303,17 +297,17 @@ CREATE SEQUENCE transaksi_pinjaman_kode_trans_seq
     CACHE 1;
 
 
-ALTER TABLE public.transaksi_pinjaman_kode_trans_seq OWNER TO postgres;
+ALTER TABLE transaksi_pinjaman_kode_trans_seq OWNER TO milezoom;
 
 --
--- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
 --
 
 ALTER SEQUENCE transaksi_pinjaman_kode_trans_seq OWNED BY transaksi_pinjaman.kode_trans;
 
 
 --
--- Name: transaksi_simpanan; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: transaksi_simpanan; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE transaksi_simpanan (
@@ -326,10 +320,10 @@ CREATE TABLE transaksi_simpanan (
 );
 
 
-ALTER TABLE public.transaksi_simpanan OWNER TO postgres;
+ALTER TABLE transaksi_simpanan OWNER TO milezoom;
 
 --
--- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
 --
 
 CREATE SEQUENCE transaksi_simpanan_kode_trans_seq
@@ -340,17 +334,17 @@ CREATE SEQUENCE transaksi_simpanan_kode_trans_seq
     CACHE 1;
 
 
-ALTER TABLE public.transaksi_simpanan_kode_trans_seq OWNER TO postgres;
+ALTER TABLE transaksi_simpanan_kode_trans_seq OWNER TO milezoom;
 
 --
--- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
 --
 
 ALTER SEQUENCE transaksi_simpanan_kode_trans_seq OWNED BY transaksi_simpanan.kode_trans;
 
 
 --
--- Name: unit; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: unit; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE unit (
@@ -359,10 +353,10 @@ CREATE TABLE unit (
 );
 
 
-ALTER TABLE public.unit OWNER TO postgres;
+ALTER TABLE unit OWNER TO milezoom;
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -375,10 +369,10 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO postgres;
+ALTER TABLE "user" OWNER TO milezoom;
 
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: milezoom
 --
 
 CREATE SEQUENCE user_id_seq
@@ -389,77 +383,80 @@ CREATE SEQUENCE user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_id_seq OWNER TO postgres;
+ALTER TABLE user_id_seq OWNER TO milezoom;
 
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: milezoom
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: no_anggota; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: no_anggota; Type: DEFAULT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY anggota ALTER COLUMN no_anggota SET DEFAULT nextval('anggota_no_anggota_seq'::regclass);
 
 
 --
--- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_pinjaman ALTER COLUMN kode_trans SET DEFAULT nextval('transaksi_pinjaman_kode_trans_seq'::regclass);
 
 
 --
--- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: kode_trans; Type: DEFAULT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_simpanan ALTER COLUMN kode_trans SET DEFAULT nextval('transaksi_simpanan_kode_trans_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: id; Type: DEFAULT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Data for Name: anggota; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: anggota; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY anggota (no_anggota, nama, kode_unit, alamat, tgl_lahir, no_telepon, jenis_kelamin, thn_pensiun, status, is_pns, no_ktp, tgl_masuk, total_simpanan, total_pinjaman, total_simpanan_wajib, total_simpanan_sukarela) FROM stdin;
-1	Muslim	0000000017		\N		Laki Laki	2020	Aktif	P-UI	                	\N	10000000	0	10000000	0
-2	Hussein	0000000051		\N		Laki Laki	2030	Aktif	PNS	                	\N	0	200000	0	0
+2	Hussein	0000000015		\N			2030	Aktif	PNS	                	\N	0	200000	0	0
+4	Rizka Meutia	0000000026	Hotel Santika Room 123E	1994-02-01		Perempuan	2016	Aktif	PNS	                	2015-05-26	0	0	0	0
+3	Utari Azzahra Putri	0000000015	Jl Kukel No 21	1995-01-12		Perempuan	2020	Aktif	P-UI	                	2015-05-25	400000	1	200000	200000
+1	Muslim	0000000015		1994-08-13		Laki-laki	2020	Aktif	P-UI	                	\N	9999000	400000	10000000	-1000
+5	oioi	0000000001	oioi	1994-04-28		Laki Laki	2040	Aktif	PNS	                	2015-05-27	200000	0	0	0
 \.
 
 
 --
--- Name: anggota_no_anggota_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: anggota_no_anggota_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
 --
 
-SELECT pg_catalog.setval('anggota_no_anggota_seq', 2, true);
+SELECT pg_catalog.setval('anggota_no_anggota_seq', 5, true);
 
 
 --
--- Data for Name: barang; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: barang; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
-COPY barang (kode, nama, harga) FROM stdin;
+COPY barang (kode, nama, harga, img_path) FROM stdin;
 \.
 
 
 --
--- Name: barang_kode_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: barang_kode_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
 --
 
 SELECT pg_catalog.setval('barang_kode_seq', 1, false);
 
 
 --
--- Data for Name: jenis_pinjaman; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: jenis_pinjaman; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY jenis_pinjaman (kode, jenis) FROM stdin;
@@ -469,7 +466,7 @@ PJBG      	Pinjaman Barang
 
 
 --
--- Data for Name: jenis_simpanan; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: jenis_simpanan; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY jenis_simpanan (kode, jenis) FROM stdin;
@@ -480,7 +477,7 @@ AMSP      	Ambil Simpanan
 
 
 --
--- Data for Name: pembayaran_pinjaman; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: pembayaran_pinjaman; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY pembayaran_pinjaman (kode_trans, tgl_bayar, no_angsuran, jumlah, denda, jasa) FROM stdin;
@@ -488,51 +485,56 @@ COPY pembayaran_pinjaman (kode_trans, tgl_bayar, no_angsuran, jumlah, denda, jas
 
 
 --
--- Data for Name: settingan; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: settingan; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY settingan (key, value) FROM stdin;
-SP	100000
 Bunga	1
 Denda	3
+SP	200000
 \.
 
 
 --
--- Data for Name: transaksi_pinjaman; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: transaksi_pinjaman; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY transaksi_pinjaman (kode_trans, kode_pinjaman, no_anggota, jumlah, sisa_piutang, tgl_pinjam, banyak_angsuran, kode_barang, jatuh_tempo) FROM stdin;
 2	PJUG      	2	100000	100000	2015-05-16	5	\N	2015-06-05
 4	PJUG      	2	100000	100000	2015-05-16	10	\N	2015-06-15
+6	PJUG      	1	200000	200000	2015-05-27	5	\N	2015-06-15
+7	PJUG      	1	200000	200000	2015-05-27	5	\N	2015-06-15
 \.
 
 
 --
--- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
 --
 
-SELECT pg_catalog.setval('transaksi_pinjaman_kode_trans_seq', 4, true);
+SELECT pg_catalog.setval('transaksi_pinjaman_kode_trans_seq', 8, true);
 
 
 --
--- Data for Name: transaksi_simpanan; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: transaksi_simpanan; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY transaksi_simpanan (kode_trans, kode_simpanan, tanggal, no_anggota, jumlah, keterangan) FROM stdin;
 2	SPWJB     	2015-05-23	1	10000000	\N
+3	SPSKRL    	2015-05-27	3	200000	\N
+4	SPWJB     	2015-05-27	3	100000	\N
+5	SPWJB     	2015-04-27	3	100000	\N
 \.
 
 
 --
--- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: transaksi_simpanan_kode_trans_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
 --
 
-SELECT pg_catalog.setval('transaksi_simpanan_kode_trans_seq', 2, true);
+SELECT pg_catalog.setval('transaksi_simpanan_kode_trans_seq', 7, true);
 
 
 --
--- Data for Name: unit; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: unit; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY unit (kode, nama) FROM stdin;
@@ -596,24 +598,26 @@ COPY unit (kode, nama) FROM stdin;
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: milezoom
 --
 
 COPY "user" (id, username, password, auth_key, no_anggota, role) FROM stdin;
 1	muslim1	$2y$13$WvZPs9paNvdxmGgIvVGrnOBaQWAyNNypPehA0EYG58E.cmWABvHvq	tUHP07jstuLP2QWufEviTUy5qy4RmR6gunmrounF68GstYrJjllfjdjoDF4v3p7qmE6uz6mhgDV0uUayOWSwyUAitsq9uA8T8rW8dfr-8F6zkP-Zq4CTKt1fhVhFZaEBgfBqX2kVmgrM-HO3yWSmOLdclWBL-Otfa5ri810TSByL0xSwV3PNnU03igpcVINTQvTyxDyVvzO-3HXSqEAIpy00Y0GO3NPhjcDtr4oyjTd4qV8DUaTL-SyEgI33iiw	1	admin
 2	hussein2	$2y$13$GM0AY.iFROXFfse0hanpeO3UWVuPc.TmayukGxllVGuwjc/lg1Ft6	xy_Pn0Dtxm0uMphEvSHVlHjBi_uotVweTd6gLMhSr4J7n6JszfF9nF2-5zFHLS0PT1xN8yZ2aIfso5YRTkUdJ5foVpQJOkR-0JETf_11oXVXGlk_Qdy3iX42j5NkT9H7u9JSl0tvsWH5wkKS1QQaDHsUrUmGlDZU2610mweH_Y7F13d5FPNqczFz9AnQHJJXeUizAaAttku-0ZnkunUPtGQJ084DblMZ0vZ6Eeh7NwFjLCpUhrFGsczjVy7azDO	2	admin
+4	utari3	$2y$13$nV7/juqLdp5x3pqZ.tWT2OzxnDonXctd2PmVC5A9C.idjiTrRESVi	LXQ24v27EoMG9cblOjqqPt0Ym58qxpl7trd1OgUT8IsZLx9Kg3XnFNExm8wijypSCrxS963nQO1QvqTkag3iSglCM2K0ryF_a4z1qwLCgSn06ZvojFG5rBR7MqCmCD8yn-zIWd-NORE76vy6M5cWyugqu9msora_01svsb22wH3ysckSIFhHXUV4a2mt-gJNn0--LW6Ygd5f0RMrDAAU2jxoYDl8huDV3xUW-LgGFBQjINuMFFvAufeULle6t60	3	anggota
+14	oioi5	$2y$13$nHSJiepxGJvK/tNzxm0bC.WyZeOvwDZMQ2hPC4rrOEO49gUKm9iZ.	FEnJtJNre4zesZ_utnBgYkEzVrYQZ36-ogbx05NdlyyZ6S4WszdKniO2q2r0kfon-YYViTKr3xzfVfn4XYg_cMRrnMwFZ7su1CsyG9MddtZ9e3W9smITU5PYECaKfPoRVsLHhwtOCeQIodp5jcGGmum-s09pyfP0P_TV3rcqjNwH1WQgB-2ss6Uby90Ud32UeFDGxstwZn-DxY2cDbp44bES_5OUGgkW2pg4qJMBI7IjfHTWJ9Nz4tEnzvvQI76	5	anggota
 \.
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: milezoom
 --
 
-SELECT pg_catalog.setval('user_id_seq', 2, true);
+SELECT pg_catalog.setval('user_id_seq', 14, true);
 
 
 --
--- Name: anggota_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: anggota_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY anggota
@@ -621,7 +625,7 @@ ALTER TABLE ONLY anggota
 
 
 --
--- Name: barang_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: barang_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY barang
@@ -629,7 +633,7 @@ ALTER TABLE ONLY barang
 
 
 --
--- Name: jenis_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: jenis_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY jenis_pinjaman
@@ -637,7 +641,7 @@ ALTER TABLE ONLY jenis_pinjaman
 
 
 --
--- Name: pembayaran_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: pembayaran_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY pembayaran_pinjaman
@@ -645,7 +649,7 @@ ALTER TABLE ONLY pembayaran_pinjaman
 
 
 --
--- Name: settingan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: settingan_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY settingan
@@ -653,7 +657,7 @@ ALTER TABLE ONLY settingan
 
 
 --
--- Name: tipe_simpanan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: tipe_simpanan_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY jenis_simpanan
@@ -661,7 +665,7 @@ ALTER TABLE ONLY jenis_simpanan
 
 
 --
--- Name: transaksi_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: transaksi_pinjaman_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY transaksi_pinjaman
@@ -669,7 +673,7 @@ ALTER TABLE ONLY transaksi_pinjaman
 
 
 --
--- Name: transaksi_simpanan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: transaksi_simpanan_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY transaksi_simpanan
@@ -677,7 +681,7 @@ ALTER TABLE ONLY transaksi_simpanan
 
 
 --
--- Name: unit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: unit_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY unit
@@ -685,7 +689,7 @@ ALTER TABLE ONLY unit
 
 
 --
--- Name: user_auth_key_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: user_auth_key_key; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -693,7 +697,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -701,35 +705,43 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: trg_tambah_sisa_piutang; Type: TRIGGER; Schema: public; Owner: postgres
+-- Name: username_key; Type: CONSTRAINT; Schema: public; Owner: milezoom; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT username_key UNIQUE (username);
+
+
+--
+-- Name: trg_tambah_sisa_piutang; Type: TRIGGER; Schema: public; Owner: milezoom
 --
 
 CREATE TRIGGER trg_tambah_sisa_piutang AFTER INSERT ON transaksi_pinjaman FOR EACH ROW EXECUTE PROCEDURE tambah_sisa_piutang();
 
 
 --
--- Name: trg_transaksi_pinjaman_kurangi; Type: TRIGGER; Schema: public; Owner: postgres
+-- Name: trg_transaksi_pinjaman_kurangi; Type: TRIGGER; Schema: public; Owner: milezoom
 --
 
 CREATE TRIGGER trg_transaksi_pinjaman_kurangi AFTER INSERT ON pembayaran_pinjaman FOR EACH ROW EXECUTE PROCEDURE kurangi_total_pinjaman();
 
 
 --
--- Name: trg_transaksi_pinjaman_tambah; Type: TRIGGER; Schema: public; Owner: postgres
+-- Name: trg_transaksi_pinjaman_tambah; Type: TRIGGER; Schema: public; Owner: milezoom
 --
 
 CREATE TRIGGER trg_transaksi_pinjaman_tambah AFTER INSERT ON transaksi_pinjaman FOR EACH ROW EXECUTE PROCEDURE tambah_total_pinjaman();
 
 
 --
--- Name: trg_transaksi_simpanan_insert; Type: TRIGGER; Schema: public; Owner: postgres
+-- Name: trg_transaksi_simpanan_insert; Type: TRIGGER; Schema: public; Owner: milezoom
 --
 
 CREATE TRIGGER trg_transaksi_simpanan_insert AFTER INSERT OR UPDATE ON transaksi_simpanan FOR EACH ROW EXECUTE PROCEDURE update_total_simpanan();
 
 
 --
--- Name: anggota_kode_unit_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: anggota_kode_unit_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY anggota
@@ -737,7 +749,7 @@ ALTER TABLE ONLY anggota
 
 
 --
--- Name: pembayaran_pinjaman_kode_trans_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: pembayaran_pinjaman_kode_trans_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY pembayaran_pinjaman
@@ -745,7 +757,7 @@ ALTER TABLE ONLY pembayaran_pinjaman
 
 
 --
--- Name: transaksi_pinjaman_kode_barang_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_kode_barang_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_pinjaman
@@ -753,7 +765,7 @@ ALTER TABLE ONLY transaksi_pinjaman
 
 
 --
--- Name: transaksi_pinjaman_kode_pinjaman_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_kode_pinjaman_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_pinjaman
@@ -761,7 +773,7 @@ ALTER TABLE ONLY transaksi_pinjaman
 
 
 --
--- Name: transaksi_pinjaman_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: transaksi_pinjaman_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_pinjaman
@@ -769,7 +781,7 @@ ALTER TABLE ONLY transaksi_pinjaman
 
 
 --
--- Name: transaksi_simpanan_kode_simpanan_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: transaksi_simpanan_kode_simpanan_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_simpanan
@@ -777,7 +789,7 @@ ALTER TABLE ONLY transaksi_simpanan
 
 
 --
--- Name: transaksi_simpanan_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: transaksi_simpanan_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY transaksi_simpanan
@@ -785,7 +797,7 @@ ALTER TABLE ONLY transaksi_simpanan
 
 
 --
--- Name: user_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_no_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: milezoom
 --
 
 ALTER TABLE ONLY "user"
