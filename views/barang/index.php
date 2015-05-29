@@ -48,18 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
 							]                            
             ],
 			
-			['class' => 'yii\grid\ActionColumn',
-                          'template'=>'{update}',
-                            'buttons'=>[
-                              'update' => function ($url, $model) {     
-                                return Html::a('<span >Ubah</span>', $url, [
-                                        'title' => Yii::t('yii', 'Ubah Transaksi'),
-										'class' => 'btn btn-success'
-                                ]);                                
-                              }
-							]                            
-            ],
-			
         ],
     ]); ?>
 

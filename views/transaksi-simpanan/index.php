@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tanggal',
             'no_anggota',
             'jumlah',
-            // 'keterangan',
+            'keterangan',
 
             ['class' => 'yii\grid\ActionColumn',
                           'template'=>'{view}',

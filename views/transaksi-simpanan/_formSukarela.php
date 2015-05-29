@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'no_anggota')->textInput(['maxlength' => 20]) ?>
 
     <?= $form->field($model, 'jumlah')->textInput() ?>
+	
+	<?= $form->field($model, 'keterangan')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Tambah' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::a('Batal', ['daftar'], ['class' => 'btn btn-danger']) ?>
     </div>
 

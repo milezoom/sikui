@@ -43,7 +43,8 @@ use app\models\Unit;
     <?= $form->field($model, 'tgl_masuk')->textInput(['type' => 'date'])->label('Tanggal Masuk') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Ubah', ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Batal', ['index'], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
