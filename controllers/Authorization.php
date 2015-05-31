@@ -18,7 +18,7 @@ class Authorization
     );
     private static $anggota = array(
         'barang' => array('index','view','produk'),
-        'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','logout'),
+        'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','ubah-password','logout'),
         'site' => array('login','logout')
     );
     private static $guest = array(

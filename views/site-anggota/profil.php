@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?= Html::a('Ubah Password', ['/site-anggota/ubah-password'], ['class' => 'btn btn-primary']) ?>
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

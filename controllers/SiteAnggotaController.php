@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\Anggota;
 use app\models\AnggotaSearch;
+use app\models\GantiPassword;
 use app\controllers\Authorization;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -83,37 +84,13 @@ class SiteAnggotaController extends Controller
     public function actionSimpananAnggota()
     {
         if(Authorization::authorize('site-anggota','simpanan-anggota')){
-            $rangeTahun = [];
-            $counter = 2015;
-            while($counter<=intval(date('Y'))){
-                array_push($rangeTahun,$counter);
-                $counter=$counter+1;
-            }
-            $rangeBulan = ['Januari' => 1,
-                           'Februari' => 2,
-                           'Maret' => 3,
-                           'April' => 4,
-                           'Mei' => 5,
-                           'Juni' => 6,
-                           'Juli' => 7,
-                           'Agustus' => 8,
-                           'September' => 9,
-                           'Oktober' => 10,
-                           'November' => 11,
-                           'Desember' => 12
-                          ];
-
             $searchModel = new TransaksiSimpananSearch();
             $id = Yii::$app->user->identity->no_anggota;
-            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id])
-                ->andWhere('extract(month from tanggal) = :bulan',[':bulan' => date('m')])
-                ->andWhere('extract(year from tanggal) = :tahun',[':tahun' => date('Y')]);
+            $query = TransaksiSimpanan::find()->where(['no_anggota' => $id]);
             $dataProvider = new ActiveDataProvider(['query' => $query]);
             return $this->render('simpanan-anggota', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'rangeTahun' => $rangeTahun,
-                'rangeBulan' => $rangeBulan
             ]);   
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
@@ -131,6 +108,26 @@ class SiteAnggotaController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
+        } else {
+            throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
+        }
+    }
+
+    public function actionUbahPassword()
+    {
+        if(Authorization::authorize('site-anggota','ubah-password')){
+            $model = new GantiPassword();
+            if($model->load(Yii::$app->request->post()) && $model->validate()){
+                $user = Yii::$app->user->identity;
+                $user->password = $model->passwordBaru;
+                $user->save(false);
+                Yii::$app->getSession()->setFlash('index', 'Passowrd berhasil di ubah !');
+				return $this->redirect(['index']);
+            } else {
+                return $this->render('ubah-password',[
+                    'model' => $model
+                ]);
+            }
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }

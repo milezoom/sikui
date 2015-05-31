@@ -82,6 +82,19 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     {
         return $this->getAuthKey() === $authKey;
     }
+    
+    public function validatePassword($password)
+    {
+        if ($this->isCorrectHash($password,$this->password)){
+            return true;
+        }
+        return false;
+    }
+    
+    private function isCorrectHash($plaintext, $hash)
+    {
+        return Yii::$app->security->validatePassword($plaintext,$hash);
+    }
 
     public static function findIdentityByAccessToken($token, $type = null)
     {

@@ -65,7 +65,9 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if(Authorization::authorize('site','index')){
-            return $this->render('index');
+            return $this->render('index',[
+                'sesuatu' => Yii::$app->user->identity
+            ]);
         } else {
             throw new ForbiddenHttpException('Maaf, halaman tidak dapat diakses');
         }
