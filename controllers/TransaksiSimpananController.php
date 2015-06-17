@@ -148,15 +148,23 @@ class TransaksiSimpananController extends Controller
         $counter = 0; 
         if($filename == "transaksi_simpanan") {
             while(!feof($file)) {
-                if($counter > 1) {
+                if($counter > 2) {
                     $data = fgetcsv($file);
                     $model = new TransaksiSimpanan();
-                    $model->no_anggota = $data[0];
-                    $model->kode_simpanan = $data[1];
-                    $model->jumlah = $data[2];
-                    $model->tanggal = date("Y-m-d");
-                    $model->keterangan = "from CSV";
-                    $model->save();
+                    if(is_numeric($data[0])){
+                        $model->no_anggota = $data[0];
+                        $model->tanggal = date("Y-m-d");
+                        $model->keterangan = "data dari Excel";
+                        if(!empty($data[2])){
+                            $model->kode_simpanan = "SPWJB";
+                            $model->jumlah = $data[2];                            
+                            $model->save();
+                        } elseif(!empty(3)) {
+                            $model->kode_simpanan = "SPSKRL";
+                            $model->jumlah = $data[3];
+                            $model->save();
+                        }
+                    } else { break; }
                 }
                 $counter = $counter + 1;
             }
@@ -240,7 +248,7 @@ class TransaksiSimpananController extends Controller
                     'kode_trans'=>$sesuatu->kode_trans,
                     'jenis'=>$sesuatu->kode_simpanan,
                     'jumlah'=>$sesuatu->jumlah,
-					'tanggal'=>$sesuatu->tanggal,
+                    'tanggal'=>$sesuatu->tanggal,
                     'keterangan'=>$sesuatu->keterangan,
                     'no_anggota'=>$anggota->no_anggota,	
                     'nama_unit'=>$unit->nama,

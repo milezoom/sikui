@@ -17,12 +17,27 @@ class Authorization
         'user' => array('index','view','create','update','delete')
     );
     private static $anggota = array(
+        'anggota' => array(),
         'barang' => array('index','view','produk'),
+        'pembayaran-pinjaman' => array(),
+        'settingan' => array(),
         'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','ubah-password','logout'),
-        'site' => array('login','logout')
+        'site' => array('login','logout'),
+        'transaksi-pinjaman' => array(),
+        'transaksi-simpanan' => array(),
+        'user' => array()
     );
     private static $guest = array(
-        'site' => array('login'),
+        //'site' => array('login'),
+        'anggota' => array(),
+        'barang' => array('index','view','produk'),
+        'pembayaran-pinjaman' => array(),
+        'settingan' => array(),
+        'site-anggota' => array('view','index','simpanan-anggota','pinjaman-anggota','ubah-password','logout'),
+        'site' => array('login','logout'),
+        'transaksi-pinjaman' => array(),
+        'transaksi-simpanan' => array(),
+        'user' => array()
     );
 
     public static function authorize($controller, $action)
