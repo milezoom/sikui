@@ -1,0 +1,30 @@
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "fxp/composer-asset-plugin": "*",
+        "yiisoft/yii2": "^2.0",
+        "bower-asset/semantic-ui": "^2.0"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        },
+        "asset-ignore-files": {
+            "bower-asset/semantic-ui": [
+                "examples",
+                "src",
+                "tasks",
+                "test",
+                ".csscomb.json",
+                ".csslintrc",
+                ".jshintrc",
+                "gulpfile.js",
+                "karma.conf.js",
+                "logo.png",
+                "semantic.json.example"
+            ]
+        }
+    }
+}
