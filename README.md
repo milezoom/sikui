@@ -1,5 +1,4 @@
 #sikui
 
-repo for my student task, a web based application
-
-___setelah clone, tolong baca file "bacadulu" di folder config___
+manajemen simpan pinjam di koperasi berbasis web
+menggunakan Yii version 2
